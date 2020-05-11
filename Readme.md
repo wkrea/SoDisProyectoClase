@@ -71,7 +71,7 @@ git push -f origin master
     > ![fetch upstream normal](./Docs/imgs/8.png)
 
 > **CUANDO, EXISTÍAN ACTUALIZACIONES QUE NO TENIAS**
-    > ![fetch upstream rebasing](./Docs/imgs/8.1png)
+    > ![fetch upstream rebasing](./Docs/imgs/8.1.png)
 
 
 ### Haciendo un Pull Request!!!
