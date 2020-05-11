@@ -95,8 +95,6 @@ Para desarrollar este servicio, necesitamos básicamente dos **endpoints** de la
       ]
     }
 
-Let’s get started writing the application.
-
 ---
 ## Antes de iniciar (Ajustes VsCode - Para NetCore)
 
@@ -156,10 +154,6 @@ dotnet --list-sdks
 ```
 
 ---
-## Step 1 — Creating the API
-
-First of all, we have to create the folders structure for the web service, and then we have to use the [.NET CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x) to scaffold a basic web API. Open the terminal or command prompt (it depends on the operating system you are using) and type the following commands, in sequence:
-
 ## Paso 1 - Creación de la API
 
 En primer lugar, tenemos que crear la estructura de carpetas para el servicio web, y luego tenemos que utilizar las herramientas [.NET CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x) para crear una API web básica. 
@@ -219,11 +213,11 @@ Namespace Supermarket.API
     }
 }
 ```
-  > Si, el servidor web que expone o sirve la aplicación, **va embebido junto con la aplicación**, ya no más dolores de cabeza con **[IIS](https://blog.infranetworking.com/servidor-iis/)** para poder servir aplicaciones .Net.
+  > Si!!!!, el servidor web que expone o sirve la aplicación, **va embebido junto con la aplicación, es un RUNTIME SERVER**, ya no más dolores de cabeza con **[IIS](https://blog.infranetworking.com/servidor-iis/)** para poder servir aplicaciones .Net.
 
 
 * `Startup.cs`
-La configuración del servidor ``kertrel.cs` puede ser manejada por la clase "Startup". Si ya ha trabajado con marcos de trabajo como [Express.js](https://expressjs.com/) antes, este concepto no es nuevo.
+La configuración del servidor `kestrel.cs` puede ser manejada por la clase "Startup". Si ya ha trabajado con marcos de trabajo como [Express.js](https://expressjs.com/) antes, este concepto no es nuevo.
 
 ```csharp
 namespace Supermarket.API
@@ -264,6 +258,8 @@ namespace Supermarket.API
 ```
 
 Cuando la aplicación se inicia, se llama al método "Principal", de la clase "Programa". Crea un host web por defecto usando la configuración de inicio, exponiendo la aplicación vía HTTP a través de un puerto específico (por defecto, el puerto 5000 para HTTP y 5001 para HTTPS).
+
+
 
 
 ### Referencias Para Mantenerse Aprendiendo
