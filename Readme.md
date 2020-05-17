@@ -1,9 +1,12 @@
-Proyecto de Clase
+# Proyecto de Clase
 
 > **Sugerencias**
 > * Creen las cuentas [Github](https://github.com/) con sus correos institucionales
 > * Verificar sus correos institucionales, por si Github les envia confirmación a sus correos
-1. Verificar que si todo está bien uds deben tener acceso a un repositorio que se llama SoDisProyectoClase
+> 
+> **Modelo de Ramas del proyecto**
+> ![https://drive.google.com/file/d/1Jv9G6kSf9m0mtrLpWj0YgQZN19pWV6yY/view?usp=sharing](Docs/imgs/branchModel.png)
+
 
 ---
 ## Para efectos de la nota de segundo corte
@@ -97,4 +100,10 @@ Ahora si todo esta bien, y **SU Repositorio FORK** está al día, debería estar
 
 
 # Referencias
+* [Aprender Git branching Model Tutorial Interactivo español](https://learngitbranching.js.org/?locale=es_ES)
 * [Actualizar el fork de un repositorio de GitHub](https://styde.net/actualizar-el-fork-de-un-repositorio-de-github/)
+* [Descartar cambios de archivos con Git](https://desarrolloweb.com/articulos/descartar-cambios-archivos-git.html)
+* [Draw git flow Graphs with JS](https://www.nicoespeon.com/talk-drawing-git-graphs/#27)
+* [Git workflow branching model](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow)
+* [Building Commit Graphs](https://www.codebasehq.com/blog/building-commit-graphs)
+* [git graphs0](https://livablesoftware.com/tools-to-visualize-the-history-of-a-git-repository/)
