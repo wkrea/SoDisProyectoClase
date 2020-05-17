@@ -1,5 +1,6 @@
 # Proyecto de Clase
 
+
 > **Sugerencias**
 > * Creen las cuentas [Github](https://github.com/) con sus correos institucionales
 > * Verificar sus correos institucionales, por si Github les envia confirmación a sus correos
