@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desktop\\Rest\\src\\Supermarket.API\\Supermarket.API.csproj": {}
+    "D:\\Desktop\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {}
   },
   "projects": {
-    "D:\\Desktop\\Rest\\src\\Supermarket.API\\Supermarket.API.csproj": {
+    "D:\\Desktop\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desktop\\Rest\\src\\Supermarket.API\\Supermarket.API.csproj",
+        "projectUniqueName": "D:\\Desktop\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
         "projectName": "Supermarket.API",
-        "projectPath": "D:\\Desktop\\Rest\\src\\Supermarket.API\\Supermarket.API.csproj",
+        "projectPath": "D:\\Desktop\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
         "packagesPath": "C:\\Users\\zenbook\\.nuget\\packages\\",
-        "outputPath": "D:\\Desktop\\Rest\\src\\Supermarket.API\\obj\\",
+        "outputPath": "D:\\Desktop\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
