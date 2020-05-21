@@ -96,5 +96,8 @@ Ahora si todo esta bien, y **SU Repositorio FORK** está al día, debería estar
   > ![](Docs/imgs/12.png)
 
 
+
+
 # Referencias
 * [Actualizar el fork de un repositorio de GitHub](https://styde.net/actualizar-el-fork-de-un-repositorio-de-github/)
+* [como borrar Braches](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)
