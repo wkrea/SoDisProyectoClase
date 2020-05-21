@@ -1,0 +1,6 @@
+git config --local -e
+
+[credential]
+	interactive = always
+
+git config --local --list
