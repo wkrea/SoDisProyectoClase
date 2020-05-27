@@ -4,7 +4,6 @@ D:\Desktop\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Superm
 D:\Desktop\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.dll
 D:\Desktop\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.pdb
 D:\Desktop\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.csprojAssemblyReference.cache
-D:\Desktop\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.csproj.CoreCompileInputs.cache
 D:\Desktop\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorAssemblyInfo.cache
 D:\Desktop\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorAssemblyInfo.cs
 D:\Desktop\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.AssemblyInfoInputs.cache
