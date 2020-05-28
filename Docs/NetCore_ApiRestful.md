@@ -355,6 +355,63 @@ En el caso particular del framework *.NetCore*, la ruta del recurso a través de
 > ⚠ Con lo anterior, se ha podido dar Claridad acerca del contexto y uso del protocolo http. Adicionalmente se a podido exponer el rol que tienen los controladores dentro de la arquitectura de capas; mediante la cual se definen las responsabilidades de cada componente de software, y el rol que cumplen desde el punto de vista de la arquitectura cliente-servidor; por medio de quien se define la función y  los elementos involucrados en el Intercambio de la información.
 
 
+## El Negocio
+
+Un aspecto fundamental antes de adentrarse en el conjunto de reglas que describen la lógica del negocio de cualquier aplicación, son las etapas posteriores a diseño del software, en las cuales se definen las estructuras de datos que representan de la forma más sencilla y clara datos que serán manejados y procesados por la aplicación.
+
+Teniendo una estructura Clara acerca de la información que procesa la aplicación se tiene un punto De partida para iniciar la fase de codificación y desarrollo del sofá allí empieza a ser importante el tener claro que el código que se escribe debe ser lo más claro y simple posible para garantizar que a medida que cada desarrollador aporta lógica al software ésta sea mantenible.
+.
+
+### Los modelos de dominio
+
+Tomando como Punto de partida el análisis de la fase de requerimientos y posiblemente los primeros resultados de la fase de diseño se puede iniciar la codificación de las estructuras de datos dentro del código esto es a lo que denominamos modelos de dominio.
+
+El nombre modelo de dominio, se atribuye a que se trata de el conjunto de estructuras de datos que permiten representar la información en el lado del dominio; es decir el servidor, y que serán procesadas por la lógica de negocio bien sea para retornar un resultado o, para ser almacenadas por la capa de persistencia.
+
+Para el caso de uso presentadom, se definen dos modelos de dominio que permiten representar la información asociada a productos a las categorías; estas últimas permiten representar la forma en como productos pueden ser agrupados, además de permitir establecer una relación entre clases, muy común en aplicaciones de ambito empresaríal en las que se emplean bases de datos relacionales.
+
+Para tal propósito dentro del proyecto se crea una carpeta denominada `Dominio` y dentro de ella otra a la que se le define `Modelos`. Dentro de esta última, se definen las clases `Dominio/Modelos/Categoria.cs` y `Dominio/Modelos/Producto.cs`; que representan las estructuras de datos asociadas a la información de categorias y productos respectivamente.
+
+```csharp
+public class Categoria
+{
+    public int Id { get; set; }
+    public string Nombre { get; set; }
+    public IList<Producto> Productos { get; set; } = new List<Producto>();
+}
+```
+
+```csharp
+public class Producto
+{
+    public int Id { get; set; }
+    public string Nombre { get; set; }
+    public short CantidadxPaquete { get; set; }
+    public EUnidadDeMedida UnidadDeMedida { get; set; }
+
+    public int CategoriaId { get; set; }
+    public Categoria Categoria { get; set; }
+}
+```
+
+
+
+Además de las clases que permiten representar a los productos y las categorías, es necesario definir un conjunto de clases que permite representar de forma clara y coherente la lógica del negocio manejada por la aplicación.
+
+### El patron de repositorios
+
+Cuando se piensa en una arquitectura de software modular, los patrones de diseño son un elemento clave que permite establecer el contexto y delimitación de cada una de las instancias u objetos, que representan la información de un producto o una categoría.
+
+Para nuestro caso en particular, se hace uso del patrón de diseño de repositorios; el cúal involucra (implica) la definición de interfaces a través de las cuales los controladores podrán invocar la lógica de negocio,Representada por un conjunto de clases a las que se denomina repositorios.
+
+
+
+
+
+
+# Controladores 
+
+En la sección de contexto se abordaron los conceptos básicos detrás del protocolo http y el funcionamiento de los controladores. Ahora es el momento de presentar el diseño y construcción de los controladores de Api Web el caso de uso, y definir los direcciones de recurso (endpoints) que expondrá el servidor para tener acceso a la lógica de negocio.
 
 
 
