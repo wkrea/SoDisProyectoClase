@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desktop\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {}
+    "C:\\Users\\Ricardo\\Documents\\UDI\\UDI 2020-I\\SOD\\ApiRestful\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {}
   },
   "projects": {
-    "D:\\Desktop\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {
+    "C:\\Users\\Ricardo\\Documents\\UDI\\UDI 2020-I\\SOD\\ApiRestful\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desktop\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
+        "projectUniqueName": "C:\\Users\\Ricardo\\Documents\\UDI\\UDI 2020-I\\SOD\\ApiRestful\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
         "projectName": "Supermarket.API",
-        "projectPath": "D:\\Desktop\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
-        "packagesPath": "C:\\Users\\zenbook\\.nuget\\packages\\",
-        "outputPath": "D:\\Desktop\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
+        "projectPath": "C:\\Users\\Ricardo\\Documents\\UDI\\UDI 2020-I\\SOD\\ApiRestful\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
+        "packagesPath": "C:\\Users\\Ricardo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ricardo\\Documents\\UDI\\UDI 2020-I\\SOD\\ApiRestful\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\zenbook\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ricardo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
