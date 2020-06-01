@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Supermarket.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("svargas4/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
@@ -21,13 +21,14 @@ namespace Supermarket.API.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            return String.Format("Get individual {0}", id);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post([FromBody] string value)
         {
+            return String.Format("Post {0}", value);
         }
 
         // PUT api/values/5
