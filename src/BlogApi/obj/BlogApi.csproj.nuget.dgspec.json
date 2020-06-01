@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\UNIVERSIDAD\\programacion\\Distribuidos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {}
+    "E:\\UNIVERSIDAD\\programacion\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj": {}
   },
   "projects": {
-    "E:\\UNIVERSIDAD\\programacion\\Distribuidos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {
+    "E:\\UNIVERSIDAD\\programacion\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\UNIVERSIDAD\\programacion\\Distribuidos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
-        "projectName": "Supermarket.API",
-        "projectPath": "E:\\UNIVERSIDAD\\programacion\\Distribuidos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
+        "projectUniqueName": "E:\\UNIVERSIDAD\\programacion\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj",
+        "projectName": "BlogApi",
+        "projectPath": "E:\\UNIVERSIDAD\\programacion\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj",
         "packagesPath": "C:\\Users\\Sebastian\\.nuget\\packages\\",
-        "outputPath": "E:\\UNIVERSIDAD\\programacion\\Distribuidos\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
+        "outputPath": "E:\\UNIVERSIDAD\\programacion\\SoDisProyectoClase\\src\\BlogApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
