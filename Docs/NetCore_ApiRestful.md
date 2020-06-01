@@ -275,3 +275,7 @@ Cuando la aplicación se inicia, se llama al método "Principal", de la clase "P
 * [JWT Tockens](https://www.syncfusion.com/blogs/post/how-to-build-crud-rest-apis-with-asp-net-core-3-1-and-entity-framework-core-create-jwt-tokens-and-secure-apis.aspx)
 
 * [NetCore Api](https://www.toptal.com/asp-dot-net/asp-net-web-api-tutorial)
+
+* [Building an ASP.NET Web API with ASP.NET Core](https://www.toptal.com/asp-dot-net/asp-net-web-api-tutorial)
+* [Build a Simple CRUD App with Angular 8 and ASP.NET Core 2.2](https://dev.to/dileno/build-a-simple-crud-app-with-angular-8-and-asp-net-core-2-2-part-1-back-end-39e1#setup-migrations-and-create-the-database)
+* [Creating Web API in ASP.NET Core 2.0](https://www.codingame.com/playgrounds/35462/creating-web-api-in-asp-net-core-2-0/part-1---web-api)
