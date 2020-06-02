@@ -4,42 +4,45 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Supermarket.API.Controllers
+namespace Supermarket.eoviedo1.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [Route("eoviedo1/[controller]")]
+    [eoviedo1Controller]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
+        // GET eoviedo1/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET eoviedo1/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            return String.Format("Get individual parametro {0}",id);
         }
 
-        // POST api/values
+        // POST eoviedo1/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post([FromBody] string value)
         {
+            return String.Format("Post crear un registros con los datos {0}",value);
         }
 
-        // PUT api/values/5
+        // PUT eoviedo1/values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE eoviedo1/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string Delete(int id)
         {
+
+            return String.Format("eliminar el valor {0}",id);
         }
     }
 }
