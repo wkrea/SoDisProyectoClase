@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Supermarket.eoviedo1.Controllers
 {
     [Route("eoviedo1/[controller]")]
-    [eoviedo1Controller]
+    [ApiController]
     public class ValuesController : ControllerBase
     {
         // GET eoviedo1/values
