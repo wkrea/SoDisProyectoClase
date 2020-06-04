@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Supermarket.API.Controllers
+namespace BlogApi.Controllers
 {
-    [Route("lgomez9/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
@@ -21,14 +21,13 @@ namespace Supermarket.API.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return String.Format("Get individual con el parametro {0}", id);
+            return "value";
         }
 
         // POST api/values
         [HttpPost]
-        public string Post([FromBody] string value)
+        public void Post([FromBody] string value)
         {
-            return String.Format("Post: se creo un registro con los datos {0}", value);
         }
 
         // PUT api/values/5
