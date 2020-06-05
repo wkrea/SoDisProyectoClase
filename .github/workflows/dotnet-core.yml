@@ -23,6 +23,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore ../../src/Supermarket.API/
+      run: dotnet build --configuration Release --no-restore ../../src/Supermarket.API/Supermarket.API.csproj
     - name: Test
-      run: dotnet test --no-restore --verbosity normal ../../src/Supermarket.API/
+      run: dotnet test --no-restore --verbosity normal
