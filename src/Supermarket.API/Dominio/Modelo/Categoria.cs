@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 
+/// <summary>
+/// Espacio del proyecto
+/// </summary>
 namespace Supermarket.Api.Dominio.Modelos
 {
+    
     /// <summary>
-    /// Espacio del proyecto
+    /// Clase correspondiente a la tabla categoria, definen la propiedades
     /// </summary>
-
+    /// <value>Id, nombre</value>
     public class Categoria
     {
-        /// <summary>
-        /// Clase correspondiente a la tabla categoria, definen la propiedades
-        /// </summary>
-        /// <value>Id, nombre</value>
+        
         public int id { get; set; }
         /// <summary>
         /// Identificador de la categoria

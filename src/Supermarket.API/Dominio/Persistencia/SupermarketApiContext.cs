@@ -3,21 +3,20 @@ using Supermarket.Api.Dominio.Modelos;
 
 namespace Supermarket.API.Dominio.Persistencia
 {
+
+    /// <summary>
+    /// Emula una base de datos
+    /// </summary>
+    /// <param name="Options"></param>
+    /// <returns></returns>
     public class SupermarketApiContext : DbContext
     {
         /// <summary>
-        /// Emula una base de datos
+        /// Contructor de la clase
         /// </summary>
-        /// <param name="Options"></param>
-        /// <returns></returns>
-        
+        /// <value></value>
         public SupermarketApiContext(DbContextOptions<SupermarketApiContext> Options) : base(Options)
         {
-            /// <summary>
-            /// Contructor de la clase
-            /// </summary>
-            /// <value></value>
-            
         }
         //tablas 
         public DbSet<Categoria> categorias {get; set; }

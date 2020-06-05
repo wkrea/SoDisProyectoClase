@@ -22,11 +22,11 @@ namespace Supermarket.API
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            /// <summary>
+            /// Agregar el servicio de la base de datos en memoria
+            /// </summary>
+            /// <returns></returns>
             services.AddDbContext<SupermarketApiContext>(
-                /// <summary>
-                /// Agregar el servicio de la base de datos en memoria
-                /// </summary>
-                /// <returns></returns>
                 op => op.UseInMemoryDatabase("SupermarketApi")
                 );        
         
