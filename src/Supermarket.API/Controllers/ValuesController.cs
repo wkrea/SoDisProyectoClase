@@ -21,14 +21,14 @@ namespace Supermarket.API.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return String.Format("Get individual parametro {0}",id);
+            return string.Format("Get individual parametro {0}",id);
         }
 
         // POST eoviedo1/values
         [HttpPost]
         public string Post([FromBody] string value)
         {
-            return String.Format("Post crear un registros con los datos {0}",value);
+            return string.Format("Post crear un registros con los datos {0}",value);
         }
 
         // PUT eoviedo1/values/5
@@ -42,7 +42,7 @@ namespace Supermarket.API.Controllers
         public string Delete(int id)
         {
 
-            return String.Format("eliminar el valor {0}",id);
+            return string.Format("eliminar el valor {0}",id);
         }
     }
 }
