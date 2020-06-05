@@ -3,20 +3,18 @@ using Supermarket.Api.Dominio.Modelos;
 
 namespace Supermarket.API.Dominio.Repositorios
 {
+    /// <summary>
+    /// clase que retorna una interface
+    /// Obtiene la lista de categorias desde la base
+    /// </summary>
+    /// <returns></returns>
     public interface ICategoriaRepo
     {
-        /// <summary>
-        /// clase que retorna una interface
-        /// Obtiene la lista de categorias desde la base
-        /// </summary>
-        /// <returns></returns>
-
         IEnumerable<Categoria> GetCategorias();
         /// <summary>
-        /// Obtiene la informacion de la cateogira asociada
-        /// al identificador pasado por parametro
+        /// Obtiene la categoria
         /// </summary>
-        /// <param name="id">Identificador de la categoria</param>
+        /// <param name="id"></param>
         /// <returns></returns>
 
         Categoria FindCategoriaById(int id);

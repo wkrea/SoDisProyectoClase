@@ -10,7 +10,6 @@ namespace Supermarket.API.Dominio.Persistencia
         /// </summary>
         /// <param name="Options"></param>
         /// <returns></returns>
-        
         public SupermarketApiContext(DbContextOptions<SupermarketApiContext> Options) : base(Options)
         {
             
