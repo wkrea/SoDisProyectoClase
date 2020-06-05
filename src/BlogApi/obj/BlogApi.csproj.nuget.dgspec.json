@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\UDI\\Operativos distribuidos\\GIT\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj": {}
+    "d:\\UDI\\Operativos distribuidos\\GIT\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj": {}
   },
   "projects": {
-    "D:\\UDI\\Operativos distribuidos\\GIT\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj": {
+    "d:\\UDI\\Operativos distribuidos\\GIT\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\UDI\\Operativos distribuidos\\GIT\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj",
+        "projectUniqueName": "d:\\UDI\\Operativos distribuidos\\GIT\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj",
         "projectName": "BlogApi",
-        "projectPath": "D:\\UDI\\Operativos distribuidos\\GIT\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj",
+        "projectPath": "d:\\UDI\\Operativos distribuidos\\GIT\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "D:\\UDI\\Operativos distribuidos\\GIT\\SoDisProyectoClase\\src\\BlogApi\\obj\\",
+        "outputPath": "d:\\UDI\\Operativos distribuidos\\GIT\\SoDisProyectoClase\\src\\BlogApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
