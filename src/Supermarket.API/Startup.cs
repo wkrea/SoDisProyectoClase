@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Supermarket.API.Dominio.Persistencia;
+using Microsoft.EntityFrameworkCore;
 
 namespace Supermarket.API
 {
@@ -26,6 +28,13 @@ namespace Supermarket.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            /// <summary>
+            /// Gracias a este linea se puede relacionar toda la base para activar o desactivar el sevicio de la base virtual :D
+            /// </summary>
+            /// <typeparam name="SupermarketApiContext"></typeparam>
+            /// <returns></returns>
+            services.AddDbConext<SupermarketApiContext>(op => op.UseInMemoryDatabase("SupermarketApi"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
