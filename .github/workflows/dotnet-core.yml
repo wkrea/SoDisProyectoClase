@@ -47,13 +47,15 @@ jobs:
       run: dotnet build --configuration Release --no-restore ./src/Supermarket.API/Supermarket.API.csproj
     #- name: Test
     #  run: dotnet test --no-restore --verbosity normal
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v1
-      #with:
-      #  name: dist
-      #  path: dist
-    - name: Archive code coverage results
-      uses: actions/upload-artifact@v1
-      with:
-        name: code-coverage-report
-        path: output/test/code-coverage.html
+      
+    # https://help.github.com/es/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts
+    #- name: Archive production artifacts
+    #  uses: actions/upload-artifact@v1
+    #  #with:
+    #  #  name: dist
+    #  #  path: dist
+    #- name: Archive code coverage results
+    #  uses: actions/upload-artifact@v1
+    #  with:
+    #    name: code-coverage-report
+    #    path: output/test/code-coverage.html
