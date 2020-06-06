@@ -1,5 +1,5 @@
 # Proyecto de Clase
-
+![.NET Core](https://github.com/wkrea/SoDisProyectoClase/workflows/.NET%20Core/badge.svg)
 
 > **Sugerencias**
 > * Creen las cuentas [Github](https://github.com/) con sus correos institucionales
