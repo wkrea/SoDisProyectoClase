@@ -35,7 +35,7 @@ namespace Supermarket.API.Controllers
         [HttpPut("{id}")]
         public string Put(int id, [FromBody] string value)
         {
-            return String.Format($"put: Se utiliza para actualizar por completo un registro existente, es decir, es parecido a realizar un UPDATE a la base de datos. {id}  algo enviado en el json {value}");
+            return String.Format($"put: Se utiliza para actualizar por completo un registro existente, es decir, es parecido a realizar un UPDATE a la base de datos. {id}  algo enviado en el json {value}"); 
         }
 
         // DELETE jduran9/values/5
