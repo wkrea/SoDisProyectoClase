@@ -1,3 +1,8 @@
+# https://lautarocarro.blog/github-actions-guia-para-utilizar-con-net-core/
+# https://rajbos.github.io/blog/2019/10/26/Deploy-dotnetcore-webapp-with-GitHub-Actions
+# https://jamesnaylor.dev/Posts/Read?id=github-actions
+# 
+
 name: .NET Core
 
 on:
@@ -10,16 +15,28 @@ on:
       - v2.0
       - v3.0
 
-jobs:
+jobs:    
   build:
+    # https://www.fixedbuffer.com/herramientas-de-desarollo-github-actions-como-ci-para-net-core/
+    #strategy:
+    #  matrix:
+    #    agent: ['windows-latest','ubuntu-latest','macos-latest']
+    
+    #runs-on: ${{matrix.agent}}
     runs-on: ubuntu-latest
-
+    
+    strategy:
+      matrix:
+        dotnet: [ '2.2.207', '3.1.x', '5.0.x' ]    
+    name: Dotnet ${{ matrix.dotnet }} sample
     steps:
+    - uses: actions/checkout@master
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.207 #3.1.101
+        # https://github.com/actions/setup-dotnet
+        dotnet-version: ${{ matrix.dotnet }} #2.2.207 #3.1.101
     - name: Install dependencies
       run: dotnet restore ./src/Supermarket.API/
     - name: Build
