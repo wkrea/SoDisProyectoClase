@@ -34,7 +34,9 @@ namespace Supermarket.API
             /// </summary>
             /// <typeparam name="SupermarketApiContext"></typeparam>
             /// <returns></returns>
-            services.AddDbConext<SupermarketApiContext>(op => op.UseInMemoryDatabase("SupermarketApi"));
+            services.AddDbContext<SupermarketApiContext>(
+                op => op.UseInMemoryDatabase("SupermarketApi")
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
