@@ -21,7 +21,7 @@ jobs:
       with:
         dotnet-version: 2.2.207 #3.1.101
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore ./src/Supermarket.API/
     - name: Build
       run: dotnet build --configuration Release --no-restore ./src/Supermarket.API/Supermarket.API.csproj
     - name: Test
