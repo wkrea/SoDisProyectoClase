@@ -1,59 +1,60 @@
-using System.Linq;
+using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Supermarket.API.Dominio.Modelos;
-using Supermarket.API.Dominio.Repositorios;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+//using Supermarket.API.Models;
 
 namespace Supermarket.API.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class CategoriaController : ControllerBase
     {
         /// <summary>
-        /// Variable privada de la clase/solo lectura
+        /// Constructor del controlador 
+        /// para inicializar la inyección de dependencias ApiContext
         /// </summary>
-        private readonly ICategoriaRepo context;
+        public CategoriaController(){}
+
         /// <summary>
-        /// Metodo contructor de la clase
+        /// GET api/categoria
+        /// Permite obtener lista de categorias desde db
         /// </summary>
-        /// <param name="CategoriaContexto"></param>
-        public CategoriaController(ICategoriaRepo CategoriaContexto)
-        {
-            context = CategoriaContexto;
-        }
-         // GET api/values
+        /// <returns></returns>
         [HttpGet]
-
-        //Secuencial
-        public ActionResult<IEnumerable<Categoria>> Get()
+        public ActionResult<IEnumerable<string>> GetCategorias()
         {
-            //return new string[] { "value1", "value2" };
-            /// <summary>
-            /// Retorna lista de categoria
-            /// </summary>
-            /// <returns></returns>
-            return context.GetCategorias().ToList();
+            return new List<string> { };
         }
 
-        //Asincrona --> Usa paralelismo en el servidor
-        public async Task<IEnumerable<Categoria>> GetAsync()
-        {
-            
-            /// <summary>
-            /// Retorna lista de categoria
-            /// </summary>
-            /// <returns></returns>
-            return await context.GetCategoriasAsync();
-        }
-
-        // GET api/values/5
+        /// <summary>
+        /// GET api/categoria/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
-        public ActionResult<string> FindCategoriaById(int id)
+        public ActionResult<string> GetCategoriaById(int id)
         {
-            return "value";
+            return null;
         }
 
+        // POST api/categoria
+        [HttpPost("")]
+        public void Poststring(string value)
+        {
+        }
+
+        // PUT api/categoria/5
+        [HttpPut("{id}")]
+        public void Putstring(int id, string value)
+        {
+        }
+
+        // DELETE api/categoria/5
+        [HttpDelete("{id}")]
+        public void DeletestringById(int id)
+        {
+        }
     }
 }
