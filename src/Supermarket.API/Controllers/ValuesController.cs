@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Supermarket.API.Controllers
 {
+    /// <summary>
+    /// Ejemplo que demuestra los conceptos básicos de 
+    /// HTTP y controladores
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
