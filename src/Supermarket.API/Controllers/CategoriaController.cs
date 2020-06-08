@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-//using Supermarket.API.Models;
+
+using Supermarket.API.Dominio.Modelos;
+using Supermarket.API.Dominio.Repositorios;
 
 namespace Supermarket.API.Controllers
 {
@@ -11,11 +13,15 @@ namespace Supermarket.API.Controllers
     [ApiController]
     public class CategoriaController : ControllerBase
     {
+        private readonly ICategoriaRepo context;
         /// <summary>
         /// Constructor del controlador 
         /// para inicializar la inyección de dependencias ApiContext
         /// </summary>
-        public CategoriaController(){}
+        public CategoriaController(ICategoriaRepo categoriaContexto)
+        {
+            context = categoriaContexto;
+        }
 
         /// <summary>
         /// GET api/categoria
@@ -23,9 +29,10 @@ namespace Supermarket.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetCategorias()
+        public async Task<IEnumerable<Categoria>> GetCategorias()
         {
-            return new List<string> { };
+            var categorias = await context.ListAsync();
+            return categorias;
         }
 
         /// <summary>

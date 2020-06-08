@@ -18,6 +18,6 @@ namespace Supermarket.API.Dominio.Repositorios
         /// async y await
         /// </summary>
         /// <returns></returns>
-         Task<IEnumerable<Categoria>> GetAsync();
+        Task<IEnumerable<Categoria>> ListAsync();
     }
 }

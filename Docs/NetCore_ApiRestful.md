@@ -276,6 +276,7 @@ En aquel entonces se mencionaba que todo proceso de comunicación depende de tre
 Puede que ahora sea más sencillo hacer alguna analogía, si se recuerda que los elementos que componen una arquitectura cliente-servidor, perfectamente podemos asociar el emisor como un cliente y al receptor como un servidor, y viceversa.
 
 En cuanto al código y el mensaje que se transmite, este estará asociado a los distintos formatos (JSON, XML entre otros) a través de los cuales se intercambia la información a través del Canal (internet). Tan solo hace falta relacionar un elemento, el protocolo.
+<<<<<<< HEAD
 
 Apegado estrictamente al significado de la palabra, protocolo se define como un conjunto de reglas por las cuales se rigen el intercambio de información entre dos personas equipos o cosas conectados entre sí. 
 
@@ -355,6 +356,144 @@ En el caso particular del framework *.NetCore*, la ruta del recurso a través de
 > ⚠ Con lo anterior, se ha podido dar Claridad acerca del contexto y uso del protocolo http. Adicionalmente se a podido exponer el rol que tienen los controladores dentro de la arquitectura de capas; mediante la cual se definen las responsabilidades de cada componente de software, y el rol que cumplen desde el punto de vista de la arquitectura cliente-servidor; por medio de quien se define la función y  los elementos involucrados en el Intercambio de la información.
 
 
+=======
+
+Apegado estrictamente al significado de la palabra, protocolo se define como un conjunto de reglas por las cuales se rigen el intercambio de información entre dos personas equipos o cosas conectados entre sí. 
+
+Para el caso particular de nuestra analogía, el protocolo corresponde con http; el cual es un protocolo de comunicación asíncrono, que define una secuencia de pasos mediante la cual la información debe ser intercambiada para ser coherente. Adicionalmente, http define un conjunto de códigos de error y/o éxito, entre otros; mediante los cuales se puede establecer el estado de la comunicación y la información, intercambiada entre el cliente y el servidor.
+
+En términos generales se puede decir que la información ( el mensaje), está compuesto por un cabecero (header) y un cuerpo (body). El cabecero contiene información relevante para definir la forma en cómo se intercambia la información; mientras que el cuerpo, contiene los datos a ser procesados o presentados; según sea sea su origen o  destino; el cliente o el servidor).
+
+### Aplicando el concepto (los Controladores y su esencia)
+
+Dentro de la arquitectura cliente-servidor los conceptos de ingeniería del sofá se encuentra la definición de la arquitectura por capas.
+
+Si bien la arquitectura cliente-servidor permite Definir la forma en cómo el software se divide desde el punto de vista de la comunicación. Arquitectura de capas permite Definir la forma en como el sofá se divide en su estructura en código.
+
+Existen dos tipos de arquitectura de casas de dos niveles y tres niveles, El caso abordan en este documento se abordan enfoques de tres capas. Las cuales se dividen en capa de presentación (FrontEnd), capa de lógica de negocio (Backend) y Capa de persistencia (almacenamiento).
+
+Los controladores son un elemento especial dentro de las arquitecturas pues se convierten en la puerta de entrada en que las acciones ejecutadas por el usuario en la capa de presentación (Frontend - Lado cliente), acceden a la lógica de negocio (BackEnd) definida del lado del servidor.
+
+La definición anterior es importante dado que catalogamos a los controladores como un componente intermediario, Es decir su única función es la De servir como componente mediador en el intercambio de de la información, Definiendo la puerta de entrada hacia la lógica de negocio; de manera que sobre él o ellos no se deben definir estructuras de control ni lógica de negocio. 
+
+A lo sumo, la lógica definida dentro de los controladores está limitada a servir para validación del estado de la comunicación mediante el protocolo http, o validación en primera instancia de los datos que provienen del cliente.
+
+Es por ello que si miramos detenidamente los métodos definidos dentro de la clase `Controller/ValuesController.cs`, se aprecia que en la parte superior de cada método están definidos los verbos (acciones) a través de las cuales, se define la forma en como se intercambia información con el lado cliente mediante el protocolo http; para el caso puntual los verbos HttpGet, HttpPost, HttpPut y HttpDelete. 
+
+```csharp
+[Route("api/[controller]")]
+[ApiController]
+public class ValuesController : ControllerBase
+{
+    // GET api/values
+    [HttpGet]
+    public ActionResult<IEnumerable<string>> Get()
+    {
+        // obtener información de manera grupal, sin necesidad de un parámetro 
+        return new string[] { "value1", "value2" };
+    }
+
+    // GET api/values/5
+    [HttpGet("{id}")]
+    public ActionResult<string> Get(int id)
+    {
+        // obtener información de manera individual recibiendo un parámetro 
+        return String.Format("HttpGet del elemento {0}", id);
+    }
+
+    // POST api/values
+    [HttpPost]
+    public string Post([FromBody] string value)
+    {
+        // permitir la creación de un elemento apoyado en los parámetros recibidos
+        return String.Format("HttpPost {0}", value);
+    }
+
+    // PUT api/values/5
+    [HttpPut("{id}")]
+    public string Put(int id, [FromBody] string value)
+    {
+        // permitir la modificación de un elemento apoyado en los parámetros recibidos
+        return String.Format("HttpPut modificar elmento {0}, con el valor {1}", id, value);
+    }
+
+    // DELETE api/values/5
+    [HttpDelete("{id}")]
+    public string Delete(int id)
+    {
+        // permitir la eliminación de un elemento apoyado en los parámetros recibidos
+        return String.Format("HttpDelete {0}", id);
+    }
+}
+```
+
+Para el caso particular de las Api web de tipo Restful, el funcionamiento de los controladores se apoya en las direcciones de recurso (endpoints); que son Expuestos por el servidor, y a las cuales se envían solicitudes http para tener acceso a la lógica de negocio disponible detrás de los controladores.
+
+Es importante mencionar que, Si bien los controladores están en capacidad de interpretar el cuerpo del mensaje recibido mediante la solicitud http; también, a partir de la url mediante la cual se hace la solicitud; estos están en capacidad de extraer información adicional, que puede emplearse como parámetro, para la invocación de los métodos definidos dentro de la lógica del controlador.
+
+En el caso particular del framework *.NetCore*, la ruta del recurso a través de la cual se accede al controlador `ValuesController.cs`, está definida por la sentencia `[Route("api/[controller]")]`. La sentencia anterior indica que el acceso a los métodos del controlador, es posible cuando se hacen solicitudes a la dirección url compuesta por `dominio/api/[controller]`, que cono se verá en futuro corresponderá a `http://localhost:5000/api/values` para el caso en que se usa protocolo http para el intercambio de información.
+
+> ⚠ Con lo anterior, se ha podido dar Claridad acerca del contexto y uso del protocolo http. Adicionalmente se a podido exponer el rol que tienen los controladores dentro de la arquitectura de capas; mediante la cual se definen las responsabilidades de cada componente de software, y el rol que cumplen desde el punto de vista de la arquitectura cliente-servidor; por medio de quien se define la función y  los elementos involucrados en el Intercambio de la información.
+
+
+## El Negocio
+
+Un aspecto fundamental antes de adentrarse en el conjunto de reglas que describen la lógica del negocio de cualquier aplicación, son las etapas posteriores a diseño del software, en las cuales se definen las estructuras de datos que representan de la forma más sencilla y clara datos que serán manejados y procesados por la aplicación.
+
+Teniendo una estructura Clara acerca de la información que procesa la aplicación se tiene un punto De partida para iniciar la fase de codificación y desarrollo del sofá allí empieza a ser importante el tener claro que el código que se escribe debe ser lo más claro y simple posible para garantizar que a medida que cada desarrollador aporta lógica al software ésta sea mantenible.
+.
+
+### Los modelos de dominio
+
+Tomando como Punto de partida el análisis de la fase de requerimientos y posiblemente los primeros resultados de la fase de diseño se puede iniciar la codificación de las estructuras de datos dentro del código esto es a lo que denominamos modelos de dominio.
+
+El nombre modelo de dominio, se atribuye a que se trata de el conjunto de estructuras de datos que permiten representar la información en el lado del dominio; es decir el servidor, y que serán procesadas por la lógica de negocio bien sea para retornar un resultado o, para ser almacenadas por la capa de persistencia.
+
+Para el caso de uso presentadom, se definen dos modelos de dominio que permiten representar la información asociada a productos a las categorías; estas últimas permiten representar la forma en como productos pueden ser agrupados, además de permitir establecer una relación entre clases, muy común en aplicaciones de ambito empresaríal en las que se emplean bases de datos relacionales.
+
+Para tal propósito dentro del proyecto se crea una carpeta denominada `Dominio` y dentro de ella otra a la que se le define `Modelos`. Dentro de esta última, se definen las clases `Dominio/Modelos/Categoria.cs` y `Dominio/Modelos/Producto.cs`; que representan las estructuras de datos asociadas a la información de categorias y productos respectivamente.
+
+```csharp
+public class Categoria
+{
+    public int Id { get; set; }
+    public string Nombre { get; set; }
+    public IList<Producto> Productos { get; set; } = new List<Producto>();
+}
+```
+
+```csharp
+public class Producto
+{
+    public int Id { get; set; }
+    public string Nombre { get; set; }
+    public short CantidadxPaquete { get; set; }
+    public EUnidadDeMedida UnidadDeMedida { get; set; }
+
+    public int CategoriaId { get; set; }
+    public Categoria Categoria { get; set; }
+}
+```
+
+
+
+Además de las clases que permiten representar a los productos y las categorías, es necesario definir un conjunto de clases que permite representar de forma clara y coherente la lógica del negocio manejada por la aplicación.
+
+### El patron de repositorios
+
+Cuando se piensa en una arquitectura de software modular, los patrones de diseño son un elemento clave que permite establecer el contexto y delimitación de cada una de las instancias u objetos, que representan la información de un producto o una categoría.
+
+Para nuestro caso en particular, se hace uso del patrón de diseño de repositorios; el cúal involucra (implica) la definición de interfaces a través de las cuales los controladores podrán invocar la lógica de negocio,Representada por un conjunto de clases a las que se denomina repositorios.
+
+
+
+
+
+
+# Controladores 
+
+En la sección de contexto se abordaron los conceptos básicos detrás del protocolo http y el funcionamiento de los controladores. Ahora es el momento de presentar el diseño y construcción de los controladores de Api Web el caso de uso, y definir los direcciones de recurso (endpoints) que expondrá el servidor para tener acceso a la lógica de negocio.
+>>>>>>> 1174433457fd0f3ad11f903fa7b1093a3b4bab01
 
 
 
