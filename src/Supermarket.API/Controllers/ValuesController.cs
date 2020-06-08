@@ -4,7 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Supermarket.API.Controllers
 {
-    [Route("lgomez9/[controller]")]
+    /// <summary>
+    /// Ejemplo que demuestra los conceptos básicos de 
+    /// HTTP y controladores
+    /// </summary>
+    [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
