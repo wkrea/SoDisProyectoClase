@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Supermarket.API.Dominio.Persistencia;
+
 using Microsoft.EntityFrameworkCore;
+using Supermarket.API.Persistencia;
 using Supermarket.API.Dominio.Repositorios;
 
 namespace Supermarket.API
@@ -29,6 +23,7 @@ namespace Supermarket.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+<<<<<<< HEAD
             /// <summary>
             /// Permite asociar el servicio de la BD
             /// </summary>
@@ -39,6 +34,16 @@ namespace Supermarket.API
                 );
 
             services.AddTransient<ICategoriaRepo, CategoriaRepo>();    
+=======
+
+            // emular el comportamiento de una base de datos en memoria con EFCore
+            services.AddDbContext<SupermarketApiContext>(options =>
+                options.UseInMemoryDatabase("SupermarketApi"));
+
+            // agregar el servicio de categorias para que se pueda manejar
+            // inyección de dependencias en el repositorio y el controlador
+            services.AddTransient<ICategoriaRepo, CategoriaRepo>();
+>>>>>>> Actualización:
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
