@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Dominio.Modelos;
 
@@ -17,13 +18,30 @@ namespace Supermarket.API.Dominio.Persistencia
       /// <returns></returns>
       public SupermarketApiContext(DbContextOptions<SupermarketApiContext> options) : base(options)
       {
-
-          
+          PoblarBase();    
+          Database.EnsureCreated();  
       }
       //tablas "propiedades de la clase" conocidas como nombre de dominio
       public DbSset<Categoria> categorias { get; set; }
       public DbSset<Productos> productos { get; set; }
 
+      public void PoblarBase()
+      {
+        this.categorias.Add(
+          new Categoria{
+              id = 1,
+              nombre = "Categoria 1"
+          }
+        );
+
+        this.categorias.Add(
+          new Categoria{
+              id = 2,
+              nombre = "Categoria 2"
+          }
+        );
+        this.SaveChanges();
+      }
       //see de la base --DB memory
     }
 }

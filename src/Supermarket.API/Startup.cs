@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Supermarket.API.Dominio.Persistencia;
 using Microsoft.EntityFrameworkCore;
+using Supermarket.API.Dominio.Repositorio;
 
 namespace Supermarket.API
 {
@@ -37,6 +38,14 @@ namespace Supermarket.API
             services.AddDbContext<SupermarketApiContext>(
                 op => op.UseInMemoryDatabase("SupermarketApi")
             );
+
+            services.AddTransient<ICategoriaRepo, CategoriaRepo>();
+
+            /*
+            services.AddDbContext<SupermarketApiContext>();
+            services.AddScoped<ICategoriaRepo, CategoriaRepo>();
+            services.AddScoped<CategoriaRepo>();
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

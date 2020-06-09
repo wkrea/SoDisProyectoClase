@@ -28,12 +28,13 @@ namespace Supermarket.API.Controllers
 
         // GET dtorres10/values
         [HttpGet]
-        public ActionResult<IEnumerable<Categoria>> Get()
+        public async Task<ActionResult<IEnumerable<Categoria>>> GetAsync()
         {
             //return new string[] { "value1", "value2" };
 
-            return context.GetCategorias().ToList();
+            return await context.GetCategorias().ToListAsync();
         }
+
 
         // GET dtorres10/values/5
         [HttpGet("{id}")]

@@ -10,6 +10,9 @@ namespace Supermarket.API.Dominio.Repositorio
     /// </summary>
     /// <returns></returns>
       IEnumerable<Categoria> GetCategorias();
+
+      Task<IEnumerable<Categoria>> GetCategoriasAsync();
+
     /// <summary>
     /// Obtiene la informacion de la categorida por medio del parametro id
     /// </summary>
