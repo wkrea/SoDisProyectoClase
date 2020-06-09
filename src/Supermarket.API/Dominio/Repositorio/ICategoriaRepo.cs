@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Supermarket.Api.Dominio.Modelos;
 
 namespace Supermarket.API.Dominio.Repositorios
@@ -7,6 +8,7 @@ namespace Supermarket.API.Dominio.Repositorios
     {
         /// <summary>
         /// clase interface 
+        /// Metodo sincrono
         /// permite obtener la lista de categorias desde la base
         /// </summary>
         /// <returns></returns>
@@ -17,6 +19,12 @@ namespace Supermarket.API.Dominio.Repositorios
         /// </summary>
         /// <param name="id">Identificador de la categoria</param>
         /// <returns></returns>
+        
+        /// <summary>
+        /// Metodo asincrono
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<Categoria>> GetCategoriasAsync();
         Categoria FindCategoriaById(int id);
     }
 }
