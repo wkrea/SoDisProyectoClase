@@ -26,6 +26,9 @@ namespace Supermarket.API
             services.AddDbContext<SupermarketApiContext>(
                 op => op.UseInMemoryDatabase("SupermarketApi")
             );
+
+            //Declaración para el manejo del patrón inyección de dependencia DI
+            //de el reporsitorio que maneje la lógica de  negocio de categorías.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

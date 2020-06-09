@@ -2,6 +2,11 @@ using System.Collections.Generic;
 
 namespace Supermarket.API.Dominio.Modelos
 {
+    /// <summary>
+    /// Se crera clase que va a contener el id, nombre de la categoría
+    /// junto con una lista que despliega los productos de la categoría seleccionada
+    /// </summary>
+
     public class Categoria
     {
         //Identificador de la categoria
