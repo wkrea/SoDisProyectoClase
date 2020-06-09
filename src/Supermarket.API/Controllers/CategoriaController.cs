@@ -1,16 +1,25 @@
 using System.Linq;
+using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Supermarket.API.Dominio.Repositorio;
 using Supermarket.API.Dominio.Modelos;
+using Supermarket.API.Dominio.Repositorio;
+
 
 namespace Supermarket.API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    //request api
-    public class CategoriaController : ControllerBase
-    {
-      /// <summary>
+  
+  /*Controlador de aplicaciones que posee una ruta para poder versionar los servicios que agregan funcionalidades a traves de url diferentes*/
+  [Route("api/[controller]")]
+  [ApiController]
+  //request api/categoria
+
+  /// <summary>
+  /// Este controlador me permite obtener los datos de cualquiera de las dos clases Categoria.cs o Producto.cs
+  /// </summary>
+  public class CategoriaController : ControllerBase
+  {
+    /// <summary>
       /// Conexion privada de la DB
       /// </summary>
       private readonly ICategoriaRepo context;
@@ -24,23 +33,23 @@ namespace Supermarket.API.Controllers
             context = CategoriaContexto;
         }
 
-
-
-        // GET dtorres10/values
+    // GET api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Categoria>>> GetAsync()
+        /// <summary>
+        /// Permite manejar respuestas de tipo JSON a traves de ActionResult es el punto de entrada entre las solicitudes del cliente  y retornaran la informacion que pida el cliente
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult<IEnumerable<Categoria>> Get()
         {
-            //return new string[] { "value1", "value2" };
-
-            return await context.GetCategorias().ToListAsync();
+            return context.GetCategorias().ToList();            
         }
 
-
-        // GET dtorres10/values/5
+        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> FindCategoriaById(int id)
         {
             return "value";
         }
-    }
+
+  }
 }

@@ -3,27 +3,28 @@ using System.Collections.Generic;
 namespace Supermarket.API.Dominio.Modelos
 {
   /// <summary>
-  /// En esta clase Categoria es donde se relacionaran los productos que pertenecen a x categoria para poderlos indexar de forma mas facil por grupos que seran las categorias a las que pertenecen
+  /// Esta clase me permite definir las propiedades que llevaran las categorias que tendran dentro sus respectivos productos
   /// </summary>
-    public class Categoria
-    {
-      /// <summary>
-      /// Propiedad que funciona como identificador de cada categoria
-      /// </summary>
-      /// <value></value>
-      public int Id { get; set; }
+  public class Categoria
+  {
+    /// <summary>
+    /// Esta propiedad contiene el identificator de la categoria que facilitara su extracion 
+    /// </summary>
+    /// <value>Id</value>
+    public int Id { get; set; }
+    /// <summary>
+    /// Esta propiedad contiene el nombre de la categoria
+    /// </summary>
+    /// <value></value>
+    public string nombre { get; set; }
+    /// <summary>
+    /// Listado de productos que me permite opbtener los prodcutos que estan dentro de la categoria
+    /// </summary>
+    /// <value></value>
+    public IList<Producto> productos { get; set; }
+    
 
-      /// <summary>
-      /// Esta propiedad me permite asignarle un valor de tipo string que funcionara para dar el nomre a cada categoria
-      /// </summary>
-      /// <value></value>
-      public string nombre { get; set; }
 
-      /// <summary>
-      /// Me permite obtener el listado de los productos que estan dentro de la categoria
-      /// </summary>
-      /// <value></value>
-      public IList<Producto> productos {get; set;} //Relacion entre las categoria y productos
-      
-    }
+
+  }
 }

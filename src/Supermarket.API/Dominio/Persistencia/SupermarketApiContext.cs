@@ -1,47 +1,33 @@
-using System.ComponentModel.DataAnnotations.Schema;
+using System.IO.Compression;
 using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Dominio.Modelos;
-
-
 namespace Supermarket.API.Dominio.Persistencia
 {
   /// <summary>
-  /// Permite simular a la base de datos virtual como un orm para que funciones como una clase gracias a la propiedad DbContext que es de EntityFrameworkCore
+  /// Me permite definir la forma como se manejara la bd el DbContext me sirve como emulador que me da el EntityFrameworkCore
   /// </summary>
-    public class SupermarketApiContext : DbContex
+    public class SupermarketApiContext : DbContext
     {
-      //constructor
       /// <summary>
-      /// Son las opciones que poseen el string de conexion y se implimentan para unir los servicios para correr la aplicacion me lleva la conexion a startup que es lo que mas me pericio interesante por que lo unifica como un solo servicio para no meter mano a todo esto :D
+      /// Creacion del contructor de esta clase que deriva del DbContext
       /// </summary>
-      /// <param name="options"></param>
+      /// <param name="options">Son las que poseen el string de conexion y permiten definirse en startups.cs </param>
       /// <returns></returns>
       public SupermarketApiContext(DbContextOptions<SupermarketApiContext> options) : base(options)
       {
-          PoblarBase();    
-          Database.EnsureCreated();  
+          
       }
-      //tablas "propiedades de la clase" conocidas como nombre de dominio
-      public DbSset<Categoria> categorias { get; set; }
-      public DbSset<Productos> productos { get; set; }
+      /// <summary>
+      /// Tabla que representa la categoria
+      /// </summary>
+      /// <value></value>
+      public DbSet<Categoria> categorias {get; set;}
+      /// <summary>
+      /// Tabla que representa el producto
+      /// </summary>
+      /// <value></value>
+      public DbSet<Producto> productos {get; set;}
 
-      public void PoblarBase()
-      {
-        this.categorias.Add(
-          new Categoria{
-              id = 1,
-              nombre = "Categoria 1"
-          }
-        );
 
-        this.categorias.Add(
-          new Categoria{
-              id = 2,
-              nombre = "Categoria 2"
-          }
-        );
-        this.SaveChanges();
-      }
-      //see de la base --DB memory
     }
 }
