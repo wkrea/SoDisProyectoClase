@@ -21,16 +21,18 @@ namespace Supermarket.API.Dominio.Persistencia
             Database.EnsureCreated(); 
         }
         //tablas 
-        public DbSet<Categoria> categorias {get; set; }
+
         /// <summary>
         /// Dataset de la base de datos que representa Categoria
         /// </summary>
         /// <value></value>
-        public DbSet<Producto> productos {get; set; }
+        public DbSet<Categoria> categorias {get; set; }
+        
         /// <summary>
         /// Dataset de la base de datos que representa Producto
         /// </summary>
         /// <value></value>
+        public DbSet<Producto> productos {get; set; }
         
 
         //seed (DB memoria)

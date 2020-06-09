@@ -9,11 +9,15 @@ namespace Supermarket.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+
+    /// <summary>
+    /// Maneja la informacion de la base
+    /// </summary>
     public class CategoriaController : ControllerBase
     {
         private readonly ICategoriaRepo context;
         /// <summary>
-        /// Maneja la informacion de la base
+        /// constructor
         /// </summary>
         /// <param name="context">Objeto</param>
         public CategoriaController(ICategoriaRepo CategoriaContexto)
