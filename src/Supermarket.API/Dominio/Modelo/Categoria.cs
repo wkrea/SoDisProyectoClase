@@ -8,23 +8,24 @@ namespace Supermarket.Api.Dominio.Modelos
     /// <value></value>
     public class Categoria
     {
-        public int id { get; set; }
         /// <summary>
         /// Id de la categoria
         /// </summary>
         /// <value>id</value>
+        public int id { get; set; }
 
-        public string nombre { get; set; }
         /// <summary>
         /// Nombre de la categoria
         /// </summary>
         /// <value>nombre</value>
-
-        public IList<Producto> productos { get; set;} 
+        public string nombre { get; set; }
+        
         /// <summary>
         /// relacion entre Categoria y productos
         /// </summary>
         /// <value></value>
+        public IList<Producto> productos { get; set;} 
+        
 
     
     }

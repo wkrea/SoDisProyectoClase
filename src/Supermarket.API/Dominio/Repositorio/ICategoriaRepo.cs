@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Supermarket.Api.Dominio.Modelos;
 
 namespace Supermarket.API.Dominio.Repositorios
@@ -10,12 +11,18 @@ namespace Supermarket.API.Dominio.Repositorios
     /// <returns></returns>
     public interface ICategoriaRepo
     {
-        IEnumerable<Categoria> GetCategorias();
         /// <summary>
         /// Obtiene la categoria
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id Categoria</param>
         /// <returns></returns>
+        IEnumerable<Categoria> GetCategorias();
+        
+        /// <summary>
+        /// Secuencial asincrono
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<Categoria>> GetCategoriasAsync();
 
         Categoria FindCategoriaById(int id);
     }

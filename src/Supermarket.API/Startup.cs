@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Supermarket.API.Dominio.Persistencia;
 using Microsoft.EntityFrameworkCore;
+using Supermarket.API.Dominio.Repositorios;
+
 namespace Supermarket.API
 {
     public class Startup
@@ -28,8 +30,16 @@ namespace Supermarket.API
             /// <returns></returns>
             services.AddDbContext<SupermarketApiContext>(
                 op => op.UseInMemoryDatabase("SupermarketApi")
-                );        
-        
+            );
+
+            /// <summary>
+            /// Agregar el servicio 
+            /// </summary>
+            /// <typeparam name="ICategoriaRepo"></typeparam>
+            /// <typeparam name="CategoriaRepo"></typeparam>
+            /// <returns></returns>
+            services.AddTransient<ICategoriaRepo, CategoriaRepo>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

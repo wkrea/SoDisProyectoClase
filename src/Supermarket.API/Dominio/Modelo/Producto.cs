@@ -6,37 +6,38 @@ namespace Supermarket.Api.Dominio.Modelos
     /// <value></value>
     public class Producto
     {
-        
-        public int Id { get; set; }
         /// <summary>
         /// Id producto
         /// </summary>
         /// <value></value>
-
-        public string nombre { get; set; }
+        public int Id { get; set; }
+        
         /// <summary>
         /// Nombre del producto
         /// </summary>
         /// <value></value>
-
-        public int cantidadxpaquete { get; set; }
+        public string nombre { get; set; }
+        
         /// <summary>
         /// Cantidad del producto
         /// </summary>
         /// <value></value>
+        public int cantidadxpaquete { get; set; }
         
         //public EUnidadDeMedida unidadDemedida { get; set; }
-        public int categoriaId { get; set; }
+        
         /// <summary>
         /// relacion con Categoria
         /// </summary>
-        /// <value></value>
-
-        public Categoria categoria { get; set; }
+        /// <value>Id categoria</value>
+        public int categoriaId { get; set; }
+        
         /// <summary>
         /// basado en la propiedad CategoriaId
         /// </summary>
         /// <value></value>
+        public Categoria categoria { get; set; }
+        
         
     
     }
