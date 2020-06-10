@@ -2,6 +2,12 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.API.Dominio.Repositorio;
 using Supermarket.API.Dominio.Modelos;
+using System.Threading;
+using System.Threading.Tasks;
+
+
+
+
 
 namespace Supermarket.API.Controllers
 {
@@ -27,16 +33,23 @@ namespace Supermarket.API.Controllers
 
 
 
-        // GET jduran9/values
-        [HttpGet]
-        public ActionResult<IEnumerable<Categoria>> Get()
-        {
+        // GET jduran9/categoria
+        //[HttpGet]
+        //public ActionResult<IEnumerable<Categoria>> Get()
+        //{
             //return new string[] { "value1", "value2" };
 
-            return context.GetCategorias().ToList();
+          //  return context.GetCategorias().ToList();
+        //}
+         // GET jduran9/categoria
+         //version asincrona --> usoo paralelismo en el servidor 
+        [HttpGet]
+        public async Task<IEnumerable<Categoria>> GetAsync()
+        {
+            return await context.GetCategoriasasAsync();
         }
 
-        // GET jduran9/values/5
+        // GET jduran9/categoria/5
         [HttpGet("{id}")]
         public ActionResult<string> FindCategoriaById(int id)
         {

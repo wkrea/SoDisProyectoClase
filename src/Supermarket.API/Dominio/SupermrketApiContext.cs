@@ -7,7 +7,8 @@ namespace Supermarket.API.Dominio.Persistencia
   /// <summary>
   /// la propiedad Dbcontext permite representar o simular en la base de datos funcionando como una clase 
   /// </summary>
-    public class SupermarketApiContext : DbContex
+    public class SupermarketApiContext : DbContext
+
     {
       //constructor
       /// <summary>
@@ -18,12 +19,32 @@ namespace Supermarket.API.Dominio.Persistencia
       public SupermarketApiContext(DbContextOptions<SupermarketApiContext> options) : base(options)
       {
 
-          
+          PoblarBase();
+          Database.EnsureCreated();
       }
       //tablas "propiedades de la clase" conocidas como nombre de dominio
-      public DbSset<Categoria> categorias { get; set; }
-      public DbSset<Productos> productos { get; set; }
+      public DbSet<Categoria> categorias { get; set; }
 
-      //see de la base --DB memory
+      public DbSet<Producto> productos { get; set; }
+
+      //see de la base (semillas de informacion) --DB memory
+      public void PoblarBase()
+      {
+        this.categorias.add(
+          new Categoria{
+              id = 1,
+              nombre = "Categoria 1"
+          }
+        );
+        this.categorias.add(
+          new Categoria{
+              id = 2,
+              nombre = "Categoria 2"
+          }
+        );
+        //commit 
+        this.SaveChanges();
+
+      }
     }
 }
