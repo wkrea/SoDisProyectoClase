@@ -16,28 +16,24 @@ namespace Supermarket.API.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-
         // GET cortega3/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {           
             return String.Format("Get individual con el parametro {0}", id);
         }
-
         // POST cortega3/values
         [HttpPost]
         public string Post([FromBody] string value)
         {
             return String.Format("Post: se creo un registro con los datos {0}", value); 
         }
-
         // PUT cortega3/values/5
         [HttpPut("{id}")]
         public String Put(int id, [FromBody] string value)
         {
             return String.Format("Put individual con el parametro {0}", id); 
         }
-
         // DELETE cortega3/values/5
         [HttpDelete("{id}")]
         public String Delete(int id)
