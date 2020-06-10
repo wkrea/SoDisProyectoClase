@@ -366,12 +366,13 @@ code {
     });
   </script>
 <h1 id="como-construir-un-web-api-restful-con-aspnet-core">Como Construir un Web Api Restful con ASP.NET Core</h1>
+<p><img src="https://cdn-media-1.freecodecamp.org/images/0*DptwthtMZHQ1fi4x" alt="An awesome guide on how to build RESTful APIs with ASP.NET Core"></p>
 <p>Con este documento, se presenta una guía paso a paso acerca de como poder implementar una <em>Web API RESTful</em> limpia y mantenible.</p>
 <p>A lo largo del desarrollo se introduciran conceptos importantes en el desarrollo de software modular, como es el caso de uso de algunos los patrones de diseño, testeo de aplicaciones web y fundamentos del funcionamiento del protocolo HTTP.</p>
 <hr>
 <h2 id="visi%C3%B3n-general">Visión General</h2>
 <p>El término Restful no es nada nuevo, en realidad este se refiere a un estilo arquitectónico donde los servicios web envian y reciben datos desde y hacia aplicaciones cliente, sean estas aplicaciones web o mobiles. El objetivo de este tipo de aplicaciones es centralizar los datos, para que cualquier aplicación cliente pueda consumirlos o usarlos.</p>
-<p>Elegir las herramientas apropiadas para crear o escribir aplicaciones de tipo Restful es crucial, debido a que ud debería pensar en sesalabilidad, mantenibilidad, documentación y otros aspectos importantes. Por ejemplo, el Framework <a href="https://docs.microsoft.com/en-us/aspnet/">ASP.NET Core</a> se presenta como una herramienta poderosa para crear un API y lograr tales objetivos.</p>
+<p>Elegir las herramientas apropiadas para crear o escribir aplicaciones de tipo Restful es crucial, debido a que ud debería pensar en escalabilidad, mantenibilidad, documentación y otros aspectos importantes. Por ejemplo, el Framework <a href="https://docs.microsoft.com/en-us/aspnet/">ASP.NET Core</a> se presenta como una herramienta poderosa para crear un API y lograr tales objetivos.</p>
 <blockquote>
 <p>Puede que de momento ud sea algo nuevo en el desarrollo web, y quizás desconozca algunos de los términos mencionados con anterioridad o próximos a ser mencionados. El consejo al respecto es, mantengase activo a la lectura pues el desarrollo web es quizás uno de los escenarios en los que el desarrollo de software es muy volatil al respecto de las tecnologías. Sin embargo, no hay necesidad de alarmarse los conceptos y tecnologías que surgen a diario surgen sobre los mismos conceptos, y son producto de mejoras u optimizaciones a los mismos.</p>
 </blockquote>
@@ -457,7 +458,6 @@ Finalmente y no menos importante, el conocimiento de acerca de <a href="https://
   ]
 }
 </code></pre>
-<p>Let’s get started writing the application.</p>
 <hr>
 <h2 id="antes-de-iniciar-ajustes-vscode---para-netcore">Antes de iniciar (Ajustes VsCode - Para NetCore)</h2>
 <p>Considerando que ha optado por trabajar con <strong>VsCode</strong>, es necesario verificar que versión de FrameWork está <strong>Activa</strong> para trabajar.</p>
@@ -503,8 +503,6 @@ Finalmente y no menos importante, el conocimiento de acerca de <a href="https://
 <pre class="hljs"><code><div>dotnet --list-sdks
 </div></code></pre>
 <hr>
-<h2 id="step-1--creating-the-api">Step 1 — Creating the API</h2>
-<p>First of all, we have to create the folders structure for the web service, and then we have to use the <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x">.NET CLI tools</a> to scaffold a basic web API. Open the terminal or command prompt (it depends on the operating system you are using) and type the following commands, in sequence:</p>
 <h2 id="paso-1---creaci%C3%B3n-de-la-api">Paso 1 - Creación de la API</h2>
 <p>En primer lugar, tenemos que crear la estructura de carpetas para el servicio web, y luego tenemos que utilizar las herramientas <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x">.NET CLI</a> para crear una API web básica.</p>
 <p>Abra la terminal o el símbolo del sistema (depende del sistema operativo que esté usando) y escribe los siguientes comandos, en secuencia:</p>
@@ -557,11 +555,11 @@ Al igual que con las aplicaciones de consola en <em>NetFramework</em>, en <em>Ne
 }
 </div></code></pre>
 <blockquote>
-<p>Si, el servidor web que expone o sirve la aplicación, <strong>va embebido junto con la aplicación</strong>, ya no más dolores de cabeza con <strong><a href="https://blog.infranetworking.com/servidor-iis/">IIS</a></strong> para poder servir aplicaciones .Net.</p>
+<p>Si!!!!, el servidor web que expone o sirve la aplicación, <strong>va embebido junto con la aplicación, es un RUNTIME SERVER</strong>, ya no más dolores de cabeza con <strong><a href="https://blog.infranetworking.com/servidor-iis/">IIS</a></strong> para poder servir aplicaciones .Net.</p>
 </blockquote>
 <ul>
 <li><code>Startup.cs</code>
-La configuración del servidor ``kertrel.cs` puede ser manejada por la clase &quot;Startup&quot;. Si ya ha trabajado con marcos de trabajo como <a href="https://expressjs.com/">Express.js</a> antes, este concepto no es nuevo.</li>
+La configuración del servidor <code>kestrel.cs</code> puede ser manejada por la clase &quot;Startup&quot;. Si ya ha trabajado con marcos de trabajo como <a href="https://expressjs.com/">Express.js</a> antes, este concepto no es nuevo.</li>
 </ul>
 <pre class="hljs"><code><div><span class="hljs-keyword">namespace</span> <span class="hljs-title">Supermarket.API</span>
 {
