@@ -1,8 +1,9 @@
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Supermarket.API.Dominio.Repositorio;
+using Supermarket.API.Dominio.Repositorios;
 using Supermarket.API.Dominio.Modelos;
+using System.Threading.Tasks;
 
 namespace Supermarket.API.Controllers
 {
@@ -19,20 +20,28 @@ namespace Supermarket.API.Controllers
         {
             context = CategoriaContexto;
         }
-
+        /// GET api/categoria
+        [HttpGet]
+        /// Secuencial 
          public ActionResult<IEnumerable<Categoria>> Get()
         {
-            //return new string[] { "value1", "value2" };
+            /// Retorna una lista de las categorías en la BD
             return context.GetCategorias().ToList();
-        }
-
-        // GET api/values/5
+        }       
+        /// GET api/categoria
+        [HttpGet]
+        /// Asincronas ->Usa paralelismo en el servidor
+        public async Task<IEnumerable<Categoria>> GetAsync()
+        {
+            /// Retorna una objeto asincrono que se evalua en el repositorio
+            return await context.GetCategoriasAsync();
+        } 
+        /// GET api/categoria/1
         [HttpGet("{id}")]
         public ActionResult<string> FindCategoriaById(int id)
         {
-            // obtener información de manera individual recibiendo un parámetro 
+            /// Obtener la información de la categoria con el id indicado al final del http
             return "Values";
         }
-
     }
 }

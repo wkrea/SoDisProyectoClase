@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Supermarket.API.Dominio.Persistencia;
+using Supermarket.API.Dominio.Repositorios;
 
 namespace Supermarket.API
 {
@@ -14,20 +15,18 @@ namespace Supermarket.API
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
             /// Anclamos el servicio de la base de datos 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            
             services.AddDbContext<SupermarketApiContext>(
                 op => op.UseInMemoryDatabase("SupermarketApi")
-                );
+            );
+            /// Declaración para el manejo del patrón inyección de dependencias 
+            /// del repositorio que maneja la lógica de negoció de categorias
+            services.AddTransient<ICategoriaRepo, CategoriaRepo>();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -36,10 +35,9 @@ namespace Supermarket.API
             }
             else
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                /// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseMvc();
         }
