@@ -10,19 +10,30 @@ namespace Supermarket.API.Persistencia
             DbContextOptions<SupermarketApiContext> options) : base (options) 
             { 
                 PoblarBaseDatos();
+                Database.EnsureCreated();
             }
 
-        public DbSet<Categoria> Categorias { get; set; }
+        // Tablas "props de la clase"
+        public DbSet<Categoria> categorias { get; set; }
+        public DbSet<Producto> productos { get; set; }
 
+        // Seed de la base (semillas de información) -- DB en memoria
         public void PoblarBaseDatos()
         {
-            this.Categorias.Add(
+            this.categorias.Add(
                 new Categoria{
-                    Nombre = "Categoria1"
+                    id = 1,
+                    nombre = "Categoria 1"
                 }
             );
 
-            // Equivale a commit sobre la Db en memoria.
+            this.categorias.Add(
+                new Categoria{
+                    id = 2,
+                    nombre = "Categoria 2"
+                }
+            );
+            // commit
             this.SaveChanges();
         }
     }
