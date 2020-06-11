@@ -4,8 +4,8 @@ namespace Supermarket.API.Dominio.Modelos
 {
     public class Categoria
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public IList<Producto> Productos { get; set; } = new List<Producto>();
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public IList<Producto> productos { get; set; }    //Relación entre tablas (Categoria y productos)
     }
 }
