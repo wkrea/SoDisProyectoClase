@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Supermarket.API.Dominio.Persistencia;
+using Microsoft.EntityFrameworkCore;
+using Supermarket.API.Dominio.Repositorios;
 
 namespace Supermarket.API
 {
@@ -25,7 +21,25 @@ namespace Supermarket.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            /// <summary>
+            /// Agregar el servicio de la base de datos en memoria
+            /// </summary>
+            /// <returns></returns>
+            services.AddDbContext<SupermarketApiContext>(
+                op => op.UseInMemoryDatabase("SupermarketApi")
+            );
+
+            /// <summary>
+            /// Agregar el servicio 
+            /// </summary>
+            /// <typeparam name="ICategoriaRepo"></typeparam>
+            /// <typeparam name="CategoriaRepo"></typeparam>
+            /// <returns></returns>
+            services.AddTransient<ICategoriaRepo, CategoriaRepo>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
