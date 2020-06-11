@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.API.Dominio.Modelos;
 using Supermarket.API.Dominio.Repositorio;
+using System.Threading;
+using System.Threading.Tasks;
 namespace Supermarket.API.Controllers
 {
   /*Controlador de aplicaciones que posee una ruta para poder versionar los servicios que agregan funcionalidades a traves de url diferentes*/
@@ -33,9 +35,9 @@ namespace Supermarket.API.Controllers
         /// Permite manejar respuestas de tipo JSON a traves de ActionResult es el punto de entrada entre las solicitudes del cliente  y retornaran la informacion que pida el cliente
         /// </summary>
         /// <returns></returns>
-        public ActionResult<IEnumerable<Categoria>> Get()
+        public async Task<IEnumerable<Categoria>> GetAsync()
         {
-            return context.GetCategorias().ToList();            
+            return await context.GetCategoriasasAsync();
         }
         // GET api/values/5
         [HttpGet("{id}")]

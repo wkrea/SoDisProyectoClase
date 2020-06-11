@@ -14,7 +14,9 @@ namespace Supermarket.API.Dominio.Persistencia
       /// <param name="options">Son las que poseen el string de conexion y permiten definirse en startups.cs </param>
       /// <returns></returns>
       public SupermarketApiContext(DbContextOptions<SupermarketApiContext> options) : base(options)
-      {          
+      {   
+        PoblarBase();
+        Database.EnsureCreated();       
       }
       /// <summary>
       /// Tabla que representa la categoria
@@ -26,5 +28,25 @@ namespace Supermarket.API.Dominio.Persistencia
       /// </summary>
       /// <value></value>
       public DbSet<Producto> productos {get; set;}
+      
+      public void PoblarBase()
+      {
+        this.categorias.add(
+          new Categoria{
+              id = 1,
+              nombre = "Categoria 1"
+          }
+        );
+        this.categorias.add(
+          new Categoria{
+              id = 2,
+              nombre = "Categoria 2"
+          }
+        );
+        //commit 
+        this.SaveChanges();
+
+      }
+
     }
 }
