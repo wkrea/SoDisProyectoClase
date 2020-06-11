@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Sebastian110\\Documents\\Sistemas operativos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {}
+    "C:\\Users\\Sebastian110\\Documents\\Sistemas operativos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Sebastian110\\Documents\\Sistemas operativos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {
+    "C:\\Users\\Sebastian110\\Documents\\Sistemas operativos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Sebastian110\\Documents\\Sistemas operativos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
+        "projectUniqueName": "C:\\Users\\Sebastian110\\Documents\\Sistemas operativos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
         "projectName": "Supermarket.API",
-        "projectPath": "c:\\Users\\Sebastian110\\Documents\\Sistemas operativos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
+        "projectPath": "C:\\Users\\Sebastian110\\Documents\\Sistemas operativos\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
         "packagesPath": "C:\\Users\\Sebastian110\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Sebastian110\\Documents\\Sistemas operativos\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
+        "outputPath": "C:\\Users\\Sebastian110\\Documents\\Sistemas operativos\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
