@@ -40,8 +40,9 @@ namespace Supermarket.API
             services.AddDbContext<SupermarketApiContext>(options =>
                 options.UseInMemoryDatabase("SupermarketApi"));
 
-            // agregar el servicio de categorias para que se pueda manejar
-            // inyección de dependencias en el repositorio y el controlador
+            // Declaración para el manejo del patrón inyección de dependencia DI
+            // de el repositorio que maneja la lógica de negocio de categorías
+            // que son utilizados en el repositorio y el controlador
             services.AddTransient<ICategoriaRepo, CategoriaRepo>();
 >>>>>>> Actualización:
         }
