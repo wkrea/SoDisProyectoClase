@@ -31,7 +31,5 @@ namespace Supermarket.API.Dominio.Modelos
     /// </summary>
     /// <value></value>
     public Categoria categoria {get; set; }
-
   }
-
 }

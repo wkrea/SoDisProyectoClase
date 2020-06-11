@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 namespace Supermarket.API.Dominio.Modelos
 {
   /// <summary>
@@ -22,9 +21,5 @@ namespace Supermarket.API.Dominio.Modelos
     /// </summary>
     /// <value></value>
     public IList<Producto> productos { get; set; }
-    
-
-
-
   }
 }

@@ -14,8 +14,7 @@ namespace Supermarket.API.Dominio.Persistencia
       /// <param name="options">Son las que poseen el string de conexion y permiten definirse en startups.cs </param>
       /// <returns></returns>
       public SupermarketApiContext(DbContextOptions<SupermarketApiContext> options) : base(options)
-      {
-          
+      {          
       }
       /// <summary>
       /// Tabla que representa la categoria
@@ -27,7 +26,5 @@ namespace Supermarket.API.Dominio.Persistencia
       /// </summary>
       /// <value></value>
       public DbSet<Producto> productos {get; set;}
-
-
     }
 }

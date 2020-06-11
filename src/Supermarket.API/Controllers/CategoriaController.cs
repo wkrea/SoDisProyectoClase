@@ -4,16 +4,12 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.API.Dominio.Modelos;
 using Supermarket.API.Dominio.Repositorio;
-
-
 namespace Supermarket.API.Controllers
 {
-  
   /*Controlador de aplicaciones que posee una ruta para poder versionar los servicios que agregan funcionalidades a traves de url diferentes*/
   [Route("api/[controller]")]
   [ApiController]
   //request api/categoria
-
   /// <summary>
   /// Este controlador me permite obtener los datos de cualquiera de las dos clases Categoria.cs o Producto.cs
   /// </summary>
@@ -23,7 +19,6 @@ namespace Supermarket.API.Controllers
       /// Conexion privada de la DB
       /// </summary>
       private readonly ICategoriaRepo context;
-
         /// <summary>
         /// Permite contener los metodos en el objeto context para su invocacion espero lo entienda david del futuro jajajaja enserio solo es un metodo que me permite llamar lo que esta en ICategoriaRepo fijese bien confio en usted :D
         /// </summary>
@@ -32,7 +27,6 @@ namespace Supermarket.API.Controllers
         {
             context = CategoriaContexto;
         }
-
     // GET api/values
         [HttpGet]
         /// <summary>
@@ -43,13 +37,11 @@ namespace Supermarket.API.Controllers
         {
             return context.GetCategorias().ToList();            
         }
-
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> FindCategoriaById(int id)
         {
             return "value";
         }
-
   }
 }
