@@ -12089,11 +12089,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\xampp\\htdocs\\git\\SoDisProyectoClase\\src\\Supermarket.Api\\Supermarket.API.csproj",
+      "projectUniqueName": "c:\\xampp\\htdocs\\git\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
       "projectName": "Supermarket.API",
-      "projectPath": "C:\\xampp\\htdocs\\git\\SoDisProyectoClase\\src\\Supermarket.Api\\Supermarket.API.csproj",
+      "projectPath": "c:\\xampp\\htdocs\\git\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
       "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\xampp\\htdocs\\git\\SoDisProyectoClase\\src\\Supermarket.Api\\obj\\",
+      "outputPath": "c:\\xampp\\htdocs\\git\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

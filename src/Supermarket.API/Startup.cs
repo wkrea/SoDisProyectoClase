@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Dominio.Persistencia;
+using Supermarket.API.Dominio.Repositorios;
 
 namespace Supermarket.API
 {
@@ -32,6 +33,18 @@ namespace Supermarket.API
             services.AddDbContext<SupermarketApiContext>(
                 op=> op.UseInMemoryDatabase("SupermarketApi")
             );
+            //Declaracion para el manejo del patron  de  inyeccion de dependencias.
+            //de el repositorio que maneja la logica de negocio de Categorias
+            services.AddTransient<ICategoriaRepo,CategoriaRepo>();
+
+        /// <summary>
+        ///Representan el ciclo de vida de las instancias u objetos
+        /// services.AddDbContext<SupermarketApiContext>();
+        /// services.AddScoped<CategoriaRepo>();
+        /// dbcontex se invoca accede y se inhabilita(ejem.utilizar conexion a la base)
+        /// scope mientras el controlador se este ejecutando(ejem.utilizar generador de reportes )
+        /// Transient vive en el momento de la respuesta.(ejem.utilizar controladores)
+        /// </summary>
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

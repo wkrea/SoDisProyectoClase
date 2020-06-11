@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.API.Dominio.Modelos;
 using Supermarket.API.Dominio.Repositorios;
+using System.Threading.Tasks;
 
 namespace Supermarket.API.Controllers
 {   
@@ -12,26 +13,42 @@ namespace Supermarket.API.Controllers
     public class CategoriaController: ControllerBase
     {
         private readonly ICategoriaRepo context;
-        //objeto para ser utilizado en el constructor
+         /// <summary>
+        ///representa  el constructor categoria
+        /// </summary>
         public CategoriaController(ICategoriaRepo CategoriaContexto)
         {
             context= CategoriaContexto;
         }
-        //GET api/values
+
+        //GET api/categoria
+        /// <summary>
+        ///Version Secuencial
+        /*/// </summary>
          public ActionResult<IEnumerable<Categoria>> Get()
         {
             //return new string[] { "value1", "value2" };
-            
             return context.GetCategorias().ToList();
             //esto es refente a un cursor en base de datos
+        }*/
+        /// <summary>
+        ///Version Asincrona-->usa paralelismo en el servidor
+        /// </summary>
+        public async  Task<IEnumerable<Categoria>> GetAsync()
+        {
+            //return new string[] { "value1", "value2" };
+            
+            return  await context.GetCategoriasAsync();
+            //esto es refente a un cursor en base de datos
         }
-        // GET api/values/5
+        // GET api/categoria/1
         [HttpGet("{id}")]
-        public ActionResult<string> FindById(int id)
+        /// <summary>
+        ///representa  un metodo que toma un valor y lo busca en la base de datos
+        /// </summary>
+        public ActionResult<string> FindCategoriaById(int id)
         {
             return ("values");
         }
-
-        
     }
 }

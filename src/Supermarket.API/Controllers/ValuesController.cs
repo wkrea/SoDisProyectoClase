@@ -41,7 +41,6 @@ namespace Supermarket.API.Controllers
         [HttpDelete("{id}")]
         public string Delete(int id)
         {
-
             return string.Format("eliminar el valor {0}",id);
         }
     }
