@@ -20,14 +20,14 @@ namespace Supermarket.API.Controllers
         {
             context = CategoriaContexto;
         }
-        /// GET api/categoria
-        [HttpGet]
-        /// Secuencial 
-         public ActionResult<IEnumerable<Categoria>> Get()
-        {
-            /// Retorna una lista de las categorías en la BD
-            return context.GetCategorias().ToList();
-        }       
+        // /// GET api/categoria
+        // [HttpGet]
+        // /// Secuencial 
+        //  public ActionResult<IEnumerable<Categoria>> Get()
+        // {
+        //     /// Retorna una lista de las categorías en la BD
+        //     return context.GetCategorias().ToList();
+        // }       
         /// GET api/categoria
         [HttpGet]
         /// Asincronas ->Usa paralelismo en el servidor
@@ -36,12 +36,16 @@ namespace Supermarket.API.Controllers
             /// Retorna una objeto asincrono que se evalua en el repositorio
             return await context.GetCategoriasAsync();
         } 
-        /// GET api/categoria/1
+        /// GET api/categoria/1  -> Asincrono
         [HttpGet("{id}")]
-        public ActionResult<string> FindCategoriaById(int id)
+        /// <summary>
+        /// Método que recibe un id:identificador y retorna los datos de esa categoría
+        /// </summary>
+        public async Task<Categoria> HallarCategoriaById(int id)
         {
-            /// Obtener la información de la categoria con el id indicado al final del http
-            return "Values";
+            /// Obtiene la información de la categoria llamando al metodo asincrono en el repositorio
+            Categoria resultado = await context.FindCategoriaById(id);
+            return resultado;
         }
     }
 }
