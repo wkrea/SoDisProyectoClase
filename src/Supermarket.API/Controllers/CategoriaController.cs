@@ -23,11 +23,11 @@ namespace Supermarket.API.Controllers
         }
 
         // Get api/categoria
-        [HttpGet]
+        /* [HttpGet]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
             return context.GetCategorias().ToList();
-        } 
+        }  */
 
         // Get api/categoria
         //asincrono
@@ -38,10 +38,17 @@ namespace Supermarket.API.Controllers
         }
 
         // GET api/categoria/1
+        
+        /// <summary>
+        ///Metodo asincrono 
+        /// </summary>
+        /// <param name="id">Identificador categoria</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
-        public ActionResult<string> FindCategoriaById(int id)
+        public async Task<Categoria> HallarCategoriaById(int id)
         {
-            return "value";
+            Categoria resultado = await context.FindCategoriaById(id);
+            return resultado;
         }
     }
 }
