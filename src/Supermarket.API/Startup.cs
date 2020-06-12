@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Dominio.Persistencia;
 using Supermarket.API.Dominio.Repositorios;
+using Supermarket.API.Dominio.Repositorio;
+
 namespace Supermarket.API
 {
     public class Startup

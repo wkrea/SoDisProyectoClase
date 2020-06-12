@@ -37,7 +37,7 @@ namespace Supermarket.API.Controllers
         /// <returns></returns>
         public async Task<IEnumerable<Categoria>> GetAsync()
         {
-            return await context.GetCategoriasasAsync();
+            return await context.GetCategoriaAsync();
         }
         // GET api/values/5
         [HttpGet("{id}")]

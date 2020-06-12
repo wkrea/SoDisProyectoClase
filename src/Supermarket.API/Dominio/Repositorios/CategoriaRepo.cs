@@ -7,6 +7,8 @@ using Supermarket.API.Dominio.Modelos;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
 namespace Supermarket.API.Dominio.Repositorios
 {
   public class CategoriaRepo : ICategoriaRepo
@@ -26,5 +28,10 @@ namespace Supermarket.API.Dominio.Repositorios
       {
         throw new System.NotImplementedException();
       }
+
+    public Task<IEnumerable<Categoria>> GetCategoriaAsync()
+    {
+      throw new System.NotImplementedException();
+    }
   }
 }

@@ -1,3 +1,5 @@
+using System.Reflection.Emit;
+using System.Reflection;
 using System.IO.Compression;
 using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Dominio.Modelos;
@@ -31,13 +33,13 @@ namespace Supermarket.API.Dominio.Persistencia
       
       public void PoblarBase()
       {
-        this.categorias.add(
+        this.categorias.AddAsync(
           new Categoria{
               id = 1,
               nombre = "Categoria 1"
           }
         );
-        this.categorias.add(
+        this.categorias.AddAsync(
           new Categoria{
               id = 2,
               nombre = "Categoria 2"
@@ -48,5 +50,20 @@ namespace Supermarket.API.Dominio.Persistencia
 
       }
 
+
+    /// <summary>
+    /// Divi context 
+    /// </summary>
+/*
+   protected override void OnModelCreating(ModelBuilder builder)
+    {
+      builder.Entity<Categoria>().ToTable("Categoria");
+      builder.Entity<Categoria>().HasKey(Categoria => Categoria.id);
+      IEnumerable<int> scoreQuery = from score in scores
+                                    where score > 80
+                                    select score;
+
+    }
+*/
     }
 }
