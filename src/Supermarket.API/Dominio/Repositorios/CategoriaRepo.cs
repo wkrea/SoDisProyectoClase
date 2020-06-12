@@ -9,25 +9,26 @@ namespace Supermarket.API.Dominio.Repositorios
 {
    public class CategoriaRepo : ICategoriaRepo
    {
-
        private readonly SupermarketApiContext db;
        public CategoriaRepo(SupermarketApiContext apiContext ){
             db=apiContext;
        }
-        /* <summary>
-        ///Implementacion secuencial sincrona
+    //     ///<summary>
+    //     ///Implementacion secuencial sincrona
+    //     /// </summary> 
+    //    public IEnumerable<Categoria> GetCategorias()
+    //     {
+    //         IEnumerable<Categoria> lista=db.categorias.ToList();
+    //        return lista;
+    //     }
+        ///<summary>
+        ///Implementacion secuencial asincrona metodo FindCategoriaById que encuentra una categoria
         /// </summary> 
-       public IEnumerable<Categoria> GetCategorias()
+        public async Task<Categoria> FindCategoriaById(int id)
         {
-            IEnumerable<Categoria> lista=db.categorias.ToList();
-           return lista;
-        }*/
-        public Categoria FindCategoria(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-
+            Categoria resultado=await db.categorias.FindAsync(id);
+            return resultado;
+        } 
       /// <summary>
         ///Implementacion secuencial Asincrona
         /// </summary> 

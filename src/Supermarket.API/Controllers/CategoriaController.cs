@@ -20,7 +20,6 @@ namespace Supermarket.API.Controllers
         {
             context= CategoriaContexto;
         }
-
         //GET api/categoria
         /// <summary>
         ///Version Secuencial
@@ -44,11 +43,12 @@ namespace Supermarket.API.Controllers
         // GET api/categoria/1
         [HttpGet("{id}")]
         /// <summary>
-        ///representa  un metodo que toma un valor y lo busca en la base de datos
+        ///Representa  un metodo que toma un valor y lo busca en la base de datos
         /// </summary>
-        public ActionResult<string> FindCategoriaById(int id)
+        public async Task<Categoria> HallarCategoria(int id)
         {
-            return ("values");
+            Categoria resultado= await context.FindCategoriaById(id);
+            return resultado;
         }
     }
 }

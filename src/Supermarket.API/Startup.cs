@@ -22,7 +22,6 @@ namespace Supermarket.API
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -36,7 +35,6 @@ namespace Supermarket.API
             //Declaracion para el manejo del patron  de  inyeccion de dependencias.
             //de el repositorio que maneja la logica de negocio de Categorias
             services.AddTransient<ICategoriaRepo,CategoriaRepo>();
-
         /// <summary>
         ///Representan el ciclo de vida de las instancias u objetos
         /// services.AddDbContext<SupermarketApiContext>();
@@ -46,7 +44,6 @@ namespace Supermarket.API
         /// Transient vive en el momento de la respuesta.(ejem.utilizar controladores)
         /// </summary>
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

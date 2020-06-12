@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel.DataAnnotations;
 namespace Supermarket.API.Dominio.Modelos
 {
     public class Producto
@@ -7,6 +9,7 @@ namespace Supermarket.API.Dominio.Modelos
        /// <summary>
         ///representa al identificador unico del producto
         /// </summary> 
+        [Required]
         public string nombre {get; set;}
         /// <summary>
         ///representa al nombre  del producto 

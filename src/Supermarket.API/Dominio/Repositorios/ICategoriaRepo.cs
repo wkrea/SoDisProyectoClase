@@ -11,11 +11,8 @@ namespace Supermarket.API.Dominio.Repositorios
         /// Permite Tener la lista de Categoria desde la Base
         /// </summary>
         /// <returns></returns>
-         IEnumerable<Categoria>  GetCategorias();*/
-
-         
-
-                 /// <summary>
+         IEnumerable<Categoria>  GetCategorias();*/ 
+        /// <summary>
         /// metodo sincrono
         /// Permite Tener la lista de Categoria desde la Base
         /// </summary>
@@ -28,6 +25,6 @@ namespace Supermarket.API.Dominio.Repositorios
          /// </summary>
          /// <param name="id"> identificador de la categoria</param>
          /// <returns></returns>
-          Categoria  FindCategoria( int id);
+          Task<Categoria>  FindCategoriaById( int id);
     }
 }
