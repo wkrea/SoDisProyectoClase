@@ -27,9 +27,17 @@ namespace Supermarket.API.Dominio.Repositorios
             IEnumerable<Categoria> lista = db.categorias.ToList();
             return lista;
         }
-        public Categoria FindCategoriaById(int id)
+
+        /// <summary>
+        /// Metodo secuencial asincrono
+        /// busca categorias segun id
+        /// </summary>
+        /// <param name="id">identificador categoria</param>
+        /// <returns></returns>
+        public async Task<Categoria> FindCategoriaById(int id)
         {
-            throw new System.NotImplementedException();
+            Categoria resultado = await db.categorias.FindAsync(id);
+            return resultado;
         }
 
         /// <summary>

@@ -16,6 +16,7 @@ namespace Supermarket.API.Controllers
     public class CategoriaController : ControllerBase
     {
         private readonly ICategoriaRepo context;
+        
         /// <summary>
         /// constructor
         /// </summary>
@@ -29,7 +30,6 @@ namespace Supermarket.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
-            //return new string[] { "value1", "value2" };
             return context.GetCategorias().ToList();
         } 
         
@@ -41,11 +41,13 @@ namespace Supermarket.API.Controllers
             
         }
 
-        // GET api/categoria/1
+        // GET api/categoria/1 
+        //metodo asincrono
         [HttpGet("{id}")]
-        public ActionResult<string> FindCategoriaById(int id)
+        public async Task<Categoria> HallarCategoriaById(int id)
         {
-            return "value";
+            Categoria resultado = await context.FindCategoriaById(id);
+            return resultado;
         }
     }
 }

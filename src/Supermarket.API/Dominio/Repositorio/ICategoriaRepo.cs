@@ -22,7 +22,12 @@ namespace Supermarket.API.Dominio.Repositorios
         /// <returns></returns>
         Task<IEnumerable<Categoria>> GetCategoriasAsync();
 
-        
-        Categoria FindCategoriaById(int id);
+        /// <summary>
+        /// Permite obtener la informacion de la categoria
+        /// asociada al identificador (asincrono)
+        /// </summary>
+        /// <param name="id">identificador de categoria</param>
+        /// <returns></returns>
+        Task<Categoria> FindCategoriaById(int id);
     }
 }
