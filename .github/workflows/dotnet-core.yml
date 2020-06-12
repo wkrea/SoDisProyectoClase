@@ -10,6 +10,7 @@ on:
     branches: [ master, wkrea-CICD, BackEnd, FrontEnd, malliwi88]
   pull_request:
     branches: [ master, malliwi88, wkrea-CICD, cortega3, dblanco7, dtorres10, eoviedo1, fsequeda1, hdaza1, hfigueroa1, jduran9, lgomez9, mtarazona5, nmaldonado1, rcarrillo1, svargas4, yaponte] # Eventos de Pull Request sobre el branch
+    types: [opened, synchronize, reopened]
     tags: 
       - v1.0
       - v2.0
@@ -42,8 +43,16 @@ jobs:
         dotnet-version: ${{ matrix.dotnet }} #2.2.207 #3.1.101
     - name: Install dependencies
       run: dotnet restore ./src/Supermarket.API/
+
     - name: Build
       run: dotnet build --configuration Release --no-restore ./src/Supermarket.API/Supermarket.API.csproj
+
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ accbe0162d5272e8586db570c1696fd540765549 }}
+
     #- name: Test
     #  run: dotnet test --no-restore --verbosity normal
       

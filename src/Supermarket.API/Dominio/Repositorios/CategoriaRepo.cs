@@ -26,6 +26,7 @@ namespace Supermarket.API.Dominio.Repositorios
         }
 
         /// <summary>
+        /// obtener categorías
         /// Implementación secuencial sincrónica
         /// </summary>
         /// <returns></returns>
@@ -36,6 +37,7 @@ namespace Supermarket.API.Dominio.Repositorios
         }
 
         /// <summary>
+        /// obtener categorías
         /// Implementación secuencial asíncrona (no bloqueante)
         /// </summary>
         /// <returns></returns>
@@ -50,13 +52,73 @@ namespace Supermarket.API.Dominio.Repositorios
             lista = await db.categorias.AsNoTracking().ToListAsync();
             return lista;
         }
+
         /// <summary>
-        /// Implementación secuencial sincrónica
+        /// obtener categoría por identificador
+        /// Implementación Asincrónica
         /// </summary>
         /// <returns></returns>
-        public Categoria GetCategoriasAsyncById(int id)
+        public async Task<Categoria> GetCategoriasAsyncById(int id)
         {
-            throw new System.NotImplementedException();
+            var categoria = await db.categorias.FindAsync(id);
+            return categoria;
+        }
+
+        /// <summary>
+        /// crear categoría
+        /// Implementación Asincrónica
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Categoria> CrearCategoria(int id)
+        {
+            var categoria = await db.categorias.FindAsync(id);
+            return categoria;
+        }
+        
+        /// <summary>
+        /// modificar categoría por identificador
+        /// Implementación Asincrónica
+        /// </summary>
+        /// <returns></returns>
+        public async Task CrearAsync(Categoria categoria)
+        {
+            try{
+                await db.categorias.AddAsync(categoria);
+            }
+            catch
+            {
+                // registrar en log
+            }
+        }
+
+        public async Task ModificarAsync(int id, Categoria categoria)
+        {
+            // try
+            // {
+                var existe =  await db.categorias.FindAsync(id);
+
+                if (!existe)
+                {
+                }
+
+                db.Entry(categoria).State = EntityState.Modified;
+            // }
+            // catch
+            // {
+            //     // registrar en log
+            // }
+        }
+
+        public async Task EliminarAsync(Categoria categoriaExiste)
+        {
+            db.Set<Categoria>().Remove(categoriaExiste);
+            await db.SaveChangesAsync();
+        }
+
+        public async Task<Categoria> GuardarAsync(Categoria categoria)
+        {
+            await db.SaveChangesAsync();
+            return categoria;
         }
     }
 }

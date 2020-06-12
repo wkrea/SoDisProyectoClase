@@ -32,7 +32,7 @@ namespace Supermarket.API.Controllers
         }
 
         /// <summary>
-        // GET api/values
+        /// GET api/values
         /// Version sincrónica
         /// Obtener categorías desde la base de datos
         /// </summary>
@@ -45,8 +45,9 @@ namespace Supermarket.API.Controllers
             return categorias;
 
         }
+       
         /// <summary>
-        // GET api/values
+        /// GET api/values
         /// Version asíncrona
         /// Obtener categorías desde la base de datos (usa paralelismo en el servidor)
         /// </summary>
@@ -68,15 +69,24 @@ namespace Supermarket.API.Controllers
         /// <param name="id">identificador de categoría como</param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public ActionResult<string> GetCategoriaById(int id)
+        public async Task<Categoria> GetCategoriaById(int id)
         {
-            return null;
+            var categoria = await context.GetCategoriasAsyncById(id);
+            return categoria;
         }
 
         // POST api/categoria
         [HttpPost("")]
-        public void Poststring(string value)
+        public async Task<IActionResult> CrearCategoria([FromBody] Categoria resource)
         {
+            if (!ModelState.IsValid)
+		        return BadRequest(ModelState);
+            
+            await context.CrearAsync(resource);
+
+            await context.GuardarAsync(resource);
+
+            return CreatedAtAction("GetCategoriaById", new { id = resource.id }, resource);
         }
 
         // PUT api/categoria/5
@@ -87,8 +97,22 @@ namespace Supermarket.API.Controllers
 
         // DELETE api/categoria/5
         [HttpDelete("{id}")]
-        public void DeletestringById(int id)
+        public async Task<IActionResult> DeletestringById(int id)
         {
+             if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var categoria = await context.GetCategoriasAsyncById(id);
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+
+            await context.EliminarAsync(categoria);
+
+            return Redirect("GetCategoriasAsync");
         }
     }
 }
