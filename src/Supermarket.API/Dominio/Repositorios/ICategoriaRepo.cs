@@ -26,11 +26,24 @@ namespace Supermarket.API.Dominio.Repositorios
         Task<IEnumerable<Categoria>> GetCategoriasAsync();
 
         /// <summary>
+        /// Método Asíncrono
         /// Permite obtener la información de la categoría asociada al 
         /// identificador pasado por parametro
         /// </summary>
         /// <param name="id">Identificador de la categoría</param>
         /// <returns></returns>
-        Categoria GetCategoriasAsyncById(int id);
+        Task<Categoria> GetCategoriasAsyncById(int id);
+
+        /// <summary>
+        /// Método Asíncrono
+        /// Permite obtener la información de la categoría asociada al 
+        /// identificador pasado por parametro
+        /// </summary>
+        /// <param name="id">Identificador de la categoría</param>
+        /// <returns></returns>
+        Task CrearAsync(Categoria categoria);
+        Task ModificarAsync(int id, Categoria categoria);
+        Task EliminarAsync(Categoria categoriaExiste);
+        Task GuardarAsync(Categoria categoria);
     }
 }
