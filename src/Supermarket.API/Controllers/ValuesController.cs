@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Supermarket.API.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("hdaza1/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase

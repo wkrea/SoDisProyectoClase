@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Supermarket.API.Dominio.Persistencia;
+using Microsoft.EntityFrameworkCore;
 
 namespace Supermarket.API
 {
@@ -26,8 +28,17 @@ namespace Supermarket.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-        }
 
+            /// <summary>
+            /// metodo definir la estructura de la base de datos para contruirla en memoria  
+            /// </summary>
+            /// <typeparam name="SupermarketApiContext"></typeparam>
+            /// <returns></returns>
+            services.AddDbContext<SupermarketApiContext>( 
+                op => op.UseInMemoryDatabase("SupermarketApi")
+            );
+        }
+  
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
