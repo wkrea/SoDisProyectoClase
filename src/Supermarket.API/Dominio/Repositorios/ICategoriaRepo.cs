@@ -6,9 +6,9 @@ namespace Supermarket.API.Dominio.repositorios
     public interface ICategoriaRepo
     {
         /// <summary>
-        /// Interface que nos permite optener la lista de las categorias de la base de datos 
+        /// Interface que nos permite optener la lista de las categorias de la base de datos
         /// </summary>
-        /// <returns>Retorna una lista de catagorias</returns>
+        /// <returns>Retorna una lista de catagorias de la base de datos</returns>
         IEnumerable<Categoria> GetCategorias();
 
         /// <summary>
