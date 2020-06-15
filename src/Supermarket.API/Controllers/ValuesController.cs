@@ -21,7 +21,7 @@ namespace Supermarket.API.Controllers
         public ActionResult<string> Get(int id)
         {
             // obtener información de manera individual recibiendo un parámetro 
-            return String.Format("HttpGet del elemento {0}", id);
+            return String.Format("HttpGet  del elemento {0}", id);
         }
 
         // POST hdaza1/values
