@@ -14,12 +14,20 @@ namespace Supermarket.API.Dominio.Repositorios
         {
             db = apiContext;
         }
-
+        /// <summary>
+        /// Implementacion secuencial sincrona
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Categoria> GetCategorias()
         {
             IEnumerable<Categoria> lista = db.categorias.ToList();
             return lista;
         }
+
+        /// <summary>
+        /// Implementacion secuencial asincrona
+        /// </summary>
+        /// <returns></returns>
 
         public async Task<IEnumerable<Categoria>> GetCategoriasAsync()
         {
@@ -27,9 +35,10 @@ namespace Supermarket.API.Dominio.Repositorios
             return lista;
         }
 
-        public Categoria FindCategoriaById(int id)
+        public async Task<Categoria> FindCategoriaById(int id)
         {
-            throw new System.NotImplementedException();
+            Categoria resultado = await db.categorias.FindAsync(id);
+            return resultado;
         }
 
 

@@ -30,7 +30,7 @@ namespace Supermarket.API.Dominio.Repositorios
         /// <returns></returns>
 
 
-        Categoria FindCategoriaById(int id);
+        Task<Categoria> FindCategoriaById(int id);
     }
 }
 
