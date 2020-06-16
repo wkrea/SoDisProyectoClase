@@ -32,6 +32,6 @@ namespace  Supermarket.API.Dominio.Repositorios
         /// </summary>
         /// <param name="id">Identificador de la categoría</param>
         /// <returns></returns>
-        Categoria FindCategoriaById(int id);
+        Task<Categoria> FindCategoriaById(int id);
     }
 }
