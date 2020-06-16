@@ -1,12 +1,16 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
 namespace Supermarket.API.Dominio.Modelos
 {
+    /// <summary>
+    /// definician de las propiedades y estructuras de datos del modelo de la producto
+    /// </summary>
     public class Producto
     {
-        /// <summary>
-        /// definician de las propiedades y estructuras de datos del modelo de la producto
-        /// </summary>
-        /// <value></value>
+        [Key]
         public int id { get; set; }
+        [Required]
         public string  nombre { get; set; }
         public int CantidadxPaquete { get; set; }
          //public EUnidadDeMedida UnidadDeMedida { get; set; }

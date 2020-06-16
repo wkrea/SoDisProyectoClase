@@ -52,16 +52,17 @@ namespace Supermarket.API.Controllers
             return await context.GetCategoriasAsync();
         }
         
-        // GET api/categoria/
+        // GET api/categoria/1
         /// <summary>
         /// nos permiter optener informacion de una categoria especifica
         /// </summary>
         /// <param name="id"> parametro de la cataegoria</param>
         /// <returns> categoria consultada</returns>
         [HttpGet("{id}")]
-        public ActionResult<string> FindCategoriaById(int id)
+        public async Task<Categoria> HallarCategoriaById(int id)
         {
-            return "categoria";
+            Categoria resultado = await context.FindCategoriasById(id);
+            return resultado;
         }
     }
 } 
