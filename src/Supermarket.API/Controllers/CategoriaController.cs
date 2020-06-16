@@ -1,8 +1,9 @@
+using System.Threading.Tasks;
 using System.Linq;
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Supermarket.API.Dominio.repositorios;
+using Supermarket.API.Dominio.Repositorios;
 using Supermarket.API.Dominio.Modelos;
 
 namespace Supermarket.API.Controllers
@@ -27,18 +28,31 @@ namespace Supermarket.API.Controllers
             context = CategoriaContexto;
         }
 
-         // GET api/values
+         // GET api/categoria
          /// <summary>
          /// permite otener respuestas tipo jason de listas de categorias 
+         /// metodo secuencial
+         /// </summary>
+         /// <returns> listas de las categorias </returns>
+        // [HttpGet]
+        // public ActionResult<IEnumerable<Categoria>> Get()
+        // {
+        //    return context.GetCategorias().ToList();
+        // }
+
+        // GET api/categoria
+         /// <summary>
+         /// permite otener respuestas tipo jason de listas de categorias 
+         /// metodo Asincrono --> usa paralelismo en el servidor
          /// </summary>
          /// <returns> listas de las categorias </returns>
         [HttpGet]
-        public ActionResult<IEnumerable<Categoria>> Get()
+        public async Task<IEnumerable<Categoria>> GetAsync()
         {
-            return context.GetCategorias().ToList();
+            return await context.GetCategoriasAsync();
         }
         
-        // GET api/values/
+        // GET api/categoria/
         /// <summary>
         /// nos permiter optener informacion de una categoria especifica
         /// </summary>
