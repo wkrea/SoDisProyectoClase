@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # https://lautarocarro.blog/github-actions-guia-para-utilizar-con-net-core/
 # https://rajbos.github.io/blog/2019/10/26/Deploy-dotnetcore-webapp-with-GitHub-Actions
 # https://jamesnaylor.dev/Posts/Read?id=github-actions
@@ -67,3 +68,31 @@ jobs:
     #  with:
     #    name: code-coverage-report
     #    path: output/test/code-coverage.html
+=======
+name: Aprendiendo con un web API .NET Core
+
+on:
+  push:
+    branches: [ master, wkrea-CICD, BackEnd, FrontEnd, malliwi88 ]
+  pull_request:
+    branches: [ master, malliwi88, wkrea-CICD, cortega3, dblanco7, dtorres10, eoviedo1, fsequeda1, hdaza1, hfigueroa1, jduran9, lgomez9, mtarazona5, nmaldonado1, rcarrillo1, svargas4, yaponte ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+    - name: Instalar .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.207
+    - name: Restauración de dependencias
+      run: dotnet restore ./src/Supermarket.API/
+    - name: Compilar
+      run: dotnet build --configuration Release --no-restore ./src/Supermarket.API/Supermarket.API.csproj
+    
+>>>>>>> master
