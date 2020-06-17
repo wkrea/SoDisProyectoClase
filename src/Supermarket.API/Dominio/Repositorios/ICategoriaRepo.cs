@@ -44,6 +44,6 @@ namespace Supermarket.API.Dominio.Repositorios
         Task CrearAsync(Categoria categoria);
         Task ModificarAsync(int id, Categoria categoria);
         Task EliminarAsync(Categoria categoriaExiste);
-        Task GuardarAsync(Categoria categoria);
+        Task<Categoria> GuardarAsync(Categoria categoria);
     }
 }

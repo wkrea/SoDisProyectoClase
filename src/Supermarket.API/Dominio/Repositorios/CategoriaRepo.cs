@@ -97,9 +97,9 @@ namespace Supermarket.API.Dominio.Repositorios
             // {
                 var existe =  await db.categorias.FindAsync(id);
 
-                if (!existe)
-                {
-                }
+                // if (!existe)
+                // {
+                // }
 
                 db.Entry(categoria).State = EntityState.Modified;
             // }
