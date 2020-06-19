@@ -1,3 +1,5 @@
+using System.Reflection.Emit;
+using System.Reflection;
 using System.IO.Compression;
 using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Dominio.Modelos;
@@ -14,8 +16,9 @@ namespace Supermarket.API.Dominio.Persistencia
       /// <param name="options">Son las que poseen el string de conexion y permiten definirse en startups.cs </param>
       /// <returns></returns>
       public SupermarketApiContext(DbContextOptions<SupermarketApiContext> options) : base(options)
-      {
-          
+      {   
+        PoblarBase();
+        Database.EnsureCreated();       
       }
       /// <summary>
       /// Tabla que representa la categoria
@@ -27,7 +30,40 @@ namespace Supermarket.API.Dominio.Persistencia
       /// </summary>
       /// <value></value>
       public DbSet<Producto> productos {get; set;}
+      
+      public void PoblarBase()
+      {
+        this.categorias.AddAsync(
+          new Categoria{
+              id = 1,
+              nombre = "Categoria 1"
+          }
+        );
+        this.categorias.AddAsync(
+          new Categoria{
+              id = 2,
+              nombre = "Categoria 2"
+          }
+        );
+        //commit 
+        this.SaveChanges();
+
+      }
 
 
+    /// <summary>
+    /// Divi context 
+    /// </summary>
+/*
+   protected override void OnModelCreating(ModelBuilder builder)
+    {
+      builder.Entity<Categoria>().ToTable("Categoria");
+      builder.Entity<Categoria>().HasKey(Categoria => Categoria.id);
+      IEnumerable<int> scoreQuery = from score in scores
+                                    where score > 80
+                                    select score;
+
+    }
+*/
     }
 }

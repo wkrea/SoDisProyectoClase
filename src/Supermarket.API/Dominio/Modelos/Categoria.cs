@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 namespace Supermarket.API.Dominio.Modelos
 {
   /// <summary>
@@ -7,6 +6,8 @@ namespace Supermarket.API.Dominio.Modelos
   /// </summary>
   public class Categoria
   {
+    internal int id;
+
     /// <summary>
     /// Esta propiedad contiene el identificator de la categoria que facilitara su extracion 
     /// </summary>
@@ -22,9 +23,5 @@ namespace Supermarket.API.Dominio.Modelos
     /// </summary>
     /// <value></value>
     public IList<Producto> productos { get; set; }
-    
-
-
-
   }
 }
