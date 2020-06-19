@@ -15,6 +15,29 @@ namespace Supermarket.API.Dominio.Repositorios
             db = apiContext;
         }
 
+        public void crearCategoria(Categoria categoria)
+        {
+            db.categorias.AddAsync(categoria);
+        }
+
+        public void editarCategoria(int id, Categoria categoria)
+        {
+            db.Entry(categoria).State = EntityState.Modified;
+            db.categorias.Update(categoria);
+        }
+
+        public void eliminarCategoria(Categoria categoria)
+        {
+            db.categorias.Remove(categoria);
+        }
+
+        public async Task<Categoria> guardarCategoria(Categoria categoria)
+        {
+            await db.SaveChangesAsync(); // commit
+            return categoria;
+        }
+
+
         // /// <summary>
         // /// Implementación secuencial Sincrona
         // /// </summary>
@@ -34,10 +57,11 @@ namespace Supermarket.API.Dominio.Repositorios
             IEnumerable<Categoria> lista = await db.categorias.ToListAsync();
             return lista;
         }
-        public async Task<Categoria> FindCategoriaById(int id)
+        public async Task<Categoria> GetCategoriasAsyncById(int id)
         {
             Categoria resultado = await db.categorias.FindAsync(id);
             return resultado;
         }
+
     }
 }

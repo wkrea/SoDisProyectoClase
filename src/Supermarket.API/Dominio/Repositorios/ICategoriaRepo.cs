@@ -32,6 +32,11 @@ namespace  Supermarket.API.Dominio.Repositorios
         /// </summary>
         /// <param name="id">Identificador de la categoría</param>
         /// <returns></returns>
-        Task<Categoria> FindCategoriaById(int id);
+        Task<Categoria> GetCategoriasAsyncById(int id);
+
+        void crearCategoria(Categoria categoria);
+        void editarCategoria(int id, Categoria categoria);
+        void eliminarCategoria(Categoria categoria);
+        Task<Categoria> guardarCategoria(Categoria categoria);
     }
 }

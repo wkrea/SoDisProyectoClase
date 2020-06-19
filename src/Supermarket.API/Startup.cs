@@ -30,7 +30,7 @@ namespace Supermarket.API
 
             // Declaración para el manejo del patrón inyección de dependencia DI
             // de el repositorio que maneja la lógica de negocio de categorías
-            services.AddTrancient<ICategoriaRepo, CategoriaRepo>();
+            services.AddTransient<ICategoriaRepo, CategoriaRepo>();
 
         }
 
