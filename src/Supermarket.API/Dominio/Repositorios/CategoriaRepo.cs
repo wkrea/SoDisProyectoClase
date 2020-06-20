@@ -5,39 +5,51 @@ using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Dominio.Modelos;
 using Supermarket.API.Dominio.Persistencia;
 
-namespace Supermarket.API.Dominio.Repositorios 
+namespace Supermarket.API.Dominio.Repositorios
 {
     public class CategoriaRepo : ICategoriaRepo
     {
         private readonly SupermarketApiContext db;
-
-        /// <summary>
-        /// Constructor de la clase CategoriaRepo
-        /// </summary>
-        public CategoriaRepo(SupermarketApiContext apicontext)
+        public CategoriaRepo(SupermarketApiContext apiContext)
         {
-            db = apicontext;
+            db = apiContext;
         }
 
-        /// <summary>
-        /// Excepcion de FinsCategoriaById
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-
-        /// <summary>
-        /// Devuelve lista de Categorias
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Categoria> GetCategorias()
+        public void crearCategoria(Categoria categoria)
         {
-            IEnumerable<Categoria> lista = db.categorias.ToList();
-            return lista;
+            db.categorias.AddAsync(categoria);
         }
 
+        public void editarCategoria(int id, Categoria categoria)
+        {
+            db.Entry(categoria).State = EntityState.Modified;
+            db.categorias.Update(categoria);
+        }
+
+        public void eliminarCategoria(Categoria categoria)
+        {
+            db.categorias.Remove(categoria);
+        }
+
+        public async Task<Categoria> guardarCategoria(Categoria categoria)
+        {
+            await db.SaveChangesAsync(); // commit
+            return categoria;
+        }
+
+
+        // /// <summary>
+        // /// Implementación secuencial Sincrona
+        // /// </summary>
+        // /// <returns></returns>
+        // public IEnumerable<Categoria> GetCategorias()
+        // {
+        //     IEnumerable<Categoria> lista = db.categorias.ToList();
+        //     return lista;
+        // }
+
         /// <summary>
-        /// Metodo Asincrono
-        /// Devuelve lista de Categorias
+        /// Implementación secuencial Asíncrona
         /// </summary>
         /// <returns></returns>
         public async Task<IEnumerable<Categoria>> GetCategoriasAsync()
@@ -45,10 +57,11 @@ namespace Supermarket.API.Dominio.Repositorios
             IEnumerable<Categoria> lista = await db.categorias.ToListAsync();
             return lista;
         }
-
-        public Categoria FindCategoriaById(int id)
+        public async Task<Categoria> GetCategoriasAsyncById(int id)
         {
-            throw new System.NotImplementedException();
+            Categoria resultado = await db.categorias.FindAsync(id);
+            return resultado;
         }
+
     }
 }

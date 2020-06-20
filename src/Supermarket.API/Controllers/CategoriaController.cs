@@ -1,59 +1,75 @@
-using System.Linq;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.API.Dominio.Modelos;
 using Supermarket.API.Dominio.Repositorios;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace Supermarket.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    // request api/categoria (Get, Put, Delete)
     public class CategoriaController : ControllerBase
     {
-        /// <summary>
-        /// Variable privada de la clase/solo lectura
-        /// </summary>
         private readonly ICategoriaRepo context;
-        /// <summary>
-        /// Metodo contructor de la clase
-        /// </summary>
-        /// <param name="CategoriaContexto"></param>
         public CategoriaController(ICategoriaRepo CategoriaContexto)
         {
             context = CategoriaContexto;
         }
-         // GET api/values
+
+        // // GET api/categoria
+        // // Secuencial
+        // [HttpGet]
+        // public ActionResult<IEnumerable<Categoria>> Get()
+        // {
+        //     return context.GetCategorias().ToList();
+        // }
+
+        // GET api/categoria
+        // Asíncronas --> Usa paralelismo en el servidor
         [HttpGet]
-
-        //Secuencial
-        public ActionResult<IEnumerable<Categoria>> Get()
-        {
-            //return new string[] { "value1", "value2" };
-            /// <summary>
-            /// Retorna lista de categoria
-            /// </summary>
-            /// <returns></returns>
-            return context.GetCategorias().ToList();
-        }
-
-        //Asincrona --> Usa paralelismo en el servidor
         public async Task<IEnumerable<Categoria>> GetAsync()
         {
-            
-            /// <summary>
-            /// Retorna lista de categoria
-            /// </summary>
-            /// <returns></returns>
             return await context.GetCategoriasAsync();
         }
 
-        // GET api/values/5
+
+        // GET api/categoria/1
         [HttpGet("{id}")]
-        public ActionResult<string> FindCategoriaById(int id)
+        public async Task<Categoria> HallarCategoriaById(int id)
         {
-            return "value";
+            Categoria resultado = await context.GetCategoriasAsyncById(id);
+            return resultado;
         }
+
+        [HttpPost]
+        public async Task<ActionResult> crearCategoria([FromBody] Categoria categoria)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            context.crearCategoria(categoria);
+            var guardadoOk = await context.guardarCategoria(categoria); // commit
+            return Ok();
+        }
+
+        // DELETE api/categoria/1
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> eliminarCategoria(int id)
+        {
+            Categoria existe = await context.GetCategoriasAsyncById(id);
+            if(existe == null)
+            {
+                return NotFound();
+            }
+
+            context.eliminarCategoria(existe);
+            var guardadoOk = await context.guardarCategoria(existe); // commit // P. CQRS, UnitofWork (P. Repositorio)
+            return Ok();
+        }
+
 
     }
 }

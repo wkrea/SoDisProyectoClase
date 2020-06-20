@@ -23,4 +23,3 @@ jobs:
       run: dotnet restore ./src/Supermarket.API/
     - name: Compilar
       run: dotnet build --configuration Release --no-restore ./src/Supermarket.API/Supermarket.API.csproj
-    
