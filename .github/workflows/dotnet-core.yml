@@ -1,69 +1,25 @@
-# https://lautarocarro.blog/github-actions-guia-para-utilizar-con-net-core/
-# https://rajbos.github.io/blog/2019/10/26/Deploy-dotnetcore-webapp-with-GitHub-Actions
-# https://jamesnaylor.dev/Posts/Read?id=github-actions
-# 
-
-name: .NET Core
+name: Aprendiendo con un web API .NET Core
 
 on:
   push:
-    branches: [ master, wkrea-CICD, BackEnd, FrontEnd, malliwi88]
+    branches: [ master, wkrea-CICD, BackEnd, FrontEnd, malliwi88 ]
   pull_request:
-    branches: [ master, malliwi88, wkrea-CICD, cortega3, dblanco7, dtorres10, eoviedo1, fsequeda1, hdaza1, hfigueroa1, jduran9, lgomez9, mtarazona5, nmaldonado1, rcarrillo1, svargas4, yaponte] # Eventos de Pull Request sobre el branch
-    types: [opened, synchronize, reopened]
-    tags: 
-      - v1.0
-      - v2.0
-      - v3.0
+    branches: [ master, malliwi88, wkrea-CICD, cortega3, dblanco7, dtorres10, eoviedo1, fsequeda1, hdaza1, hfigueroa1, jduran9, lgomez9, mtarazona5, nmaldonado1, rcarrillo1, svargas4, yaponte ]
 
-jobs:    
+jobs:
   build:
-    # https://www.fixedbuffer.com/herramientas-de-desarollo-github-actions-como-ci-para-net-core/
-    #strategy:
-    #  matrix:
-    #    agent: ['windows-latest','ubuntu-latest','macos-latest']
-    
-    #runs-on: ${{matrix.agent}}
+
     runs-on: ubuntu-latest
-    
-    # https://github.com/actions/setup-dotnet
-    strategy:
-      matrix:
-        dotnet: [ '2.2.207'] #, '3.1.x'] #, '5.0.x' ]    
-    name: Dotnet ${{ matrix.dotnet }} sample
+
     steps:
     - uses: actions/checkout@v2
       with:
-        # https://github.com/actions/checkout
         ref: ${{ github.event.pull_request.head.sha }}
-    - name: Setup .NET Core
+    - name: Instalar .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        # https://github.com/actions/setup-dotnet
-        dotnet-version: ${{ matrix.dotnet }} #2.2.207 #3.1.101
-    - name: Install dependencies
+        dotnet-version: 2.2.207
+    - name: Restauración de dependencias
       run: dotnet restore ./src/Supermarket.API/
-
-    - name: Build
+    - name: Compilar
       run: dotnet build --configuration Release --no-restore ./src/Supermarket.API/Supermarket.API.csproj
-
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ accbe0162d5272e8586db570c1696fd540765549 }}
-
-    #- name: Test
-    #  run: dotnet test --no-restore --verbosity normal
-      
-    # https://help.github.com/es/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts
-    #- name: Archive production artifacts
-    #  uses: actions/upload-artifact@v1
-    #  #with:
-    #  #  name: dist
-    #  #  path: dist
-    #- name: Archive code coverage results
-    #  uses: actions/upload-artifact@v1
-    #  with:
-    #    name: code-coverage-report
-    #    path: output/test/code-coverage.html
