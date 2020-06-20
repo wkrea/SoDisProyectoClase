@@ -46,9 +46,10 @@ namespace Supermarket.API.Dominio.Repositorios
             return lista;
         }
 
-        public Categoria FindCategoriaById(int id)
+        public async Task<Categoria> FindCategoriaById(int id)
         {
-            throw new System.NotImplementedException();
+            Categoria resultado = await db.categorias.FindAsync(id);
+            return resultado;
         }
     }
 }

@@ -50,9 +50,10 @@ namespace Supermarket.API.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> FindCategoriaById(int id)
+        public async Task<Categoria> HallarCategoriaById(int id)
         {
-            return "value";
+            Categoria resultado = await context.FindCategoriaById(id);
+            return resultado;
         }
 
     }
