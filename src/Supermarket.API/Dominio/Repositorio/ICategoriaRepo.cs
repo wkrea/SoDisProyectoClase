@@ -13,7 +13,7 @@ namespace Supermarket.API.Dominio.Repositorios
     public interface ICategoriaRepo
     {
         
-        IEnumerable<Categoria> GetCategorias();
+        /* IEnumerable<Categoria> GetCategorias(); */
         
         
         /// <summary>
@@ -29,5 +29,32 @@ namespace Supermarket.API.Dominio.Repositorios
         /// <param name="id">identificador de categoria</param>
         /// <returns></returns>
         Task<Categoria> FindCategoriaById(int id);
+
+
+        /// <summary>
+        /// crear categoria
+        /// </summary>
+        /// <param name="categoria">categoria nueva</param>
+        void crearCategoria(Categoria categoria);
+
+        /// <summary>
+        /// edita la categoria
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="categoria">id de la categoria</param>
+        void editarCategoria(int id, Categoria categoria);
+
+        /// <summary>
+        /// Elimina categoria
+        /// </summary>
+        /// <param name="categoria">Categoria</param>
+        void eliminarCategoria(Categoria categoria);
+
+        /// <summary>
+        /// Guarda categoria
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
+        Task<Categoria> guardarCategoria(Categoria categoria);
     }
 }

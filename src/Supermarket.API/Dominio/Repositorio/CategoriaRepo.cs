@@ -49,6 +49,28 @@ namespace Supermarket.API.Dominio.Repositorios
             IEnumerable<Categoria> lista = await db.categorias.ToListAsync();
             return lista;
         }
+
+        public  void crearCategoria(Categoria categoria)
+        {
+             db.categorias.AddAsync(categoria);
+        }
+
+        public void editarCategoria(int id, Categoria categoria)
+        {
+            db.Entry(categoria).State = EntityState.Modified;
+            db.categorias.Update(categoria);
+        }
+
+        public void eliminarCategoria(Categoria categoria)
+        {
+            db.categorias.Remove(categoria);
+        }
+
+        public async Task<Categoria> guardarCategoria(Categoria categoria)
+        {
+            await db.SaveChangesAsync();
+            return categoria;
+        }
     }
 
 }
