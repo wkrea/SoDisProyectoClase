@@ -50,22 +50,40 @@ namespace Supermarket.API.Dominio.Repositorios
             return lista;
         }
 
+        /// <summary>
+        /// crear categoria
+        /// </summary>
+        /// <param name="categoria"></param>
         public  void crearCategoria(Categoria categoria)
         {
              db.categorias.AddAsync(categoria);
         }
 
+        /// <summary>
+        /// Edita las categorias
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="categoria">id categoria</param>
         public void editarCategoria(int id, Categoria categoria)
         {
             db.Entry(categoria).State = EntityState.Modified;
             db.categorias.Update(categoria);
         }
 
+        /// <summary>
+        /// Elimina categoria
+        /// </summary>
+        /// <param name="categoria"></param>
         public void eliminarCategoria(Categoria categoria)
         {
             db.categorias.Remove(categoria);
         }
 
+        /// <summary>
+        /// Guarda la categoria creada
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
         public async Task<Categoria> guardarCategoria(Categoria categoria)
         {
             await db.SaveChangesAsync();
