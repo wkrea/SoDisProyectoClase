@@ -1,10 +1,10 @@
-name: .NET Core
+name: Aprendiendo con un web API .NET Core
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, wkrea-CICD, BackEnd, FrontEnd, malliwi88 ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, malliwi88, wkrea-CICD, cortega3, dblanco7, dtorres10, eoviedo1, fsequeda1, hdaza1, hfigueroa1, jduran9, lgomez9, mtarazona5, nmaldonado1, rcarrillo1, svargas4, yaponte ]
 
 jobs:
   build:
@@ -13,13 +13,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+    - name: Instalar .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.101
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+        dotnet-version: 2.2.207
+    - name: Restauración de dependencias
+      run: dotnet restore ./src/Supermarket.API/
+    - name: Compilar
+      run: dotnet build --configuration Release --no-restore ./src/Supermarket.API/Supermarket.API.csproj
+    
