@@ -11,7 +11,7 @@ namespace Supermarket.API.Dominio.Repositorios
     public class CategoriaRepo : ICategoriaRepo
     {
         /// <summary>
-        /// MOdelo para la definicion y descripcion de la base de datos 
+        /// MOdelo para la definicion y descripcion de la base de datos.. 
         /// </summary>
         private readonly SupermarketApiContext db;
 
