@@ -5,7 +5,7 @@ using Supermarket.API.Dominio.Modelos;
 namespace Supermarket.API.Dominio.Repositorios
 {
     /// <summary>
-    /// Interface para el repositorio de categorias, son los puntos de conexión desde donde extraigo o inyecto datos
+    /// Interface de conexión para el repositorio de categorias, son los puntos de conexión desde donde extraigo o inyecto datos
     /// sólo se encarga de entregar los datos crudos que requiere el controlador para que él los devuelva en el formato que corresponda
     /// IcategoriaRepo permite obtener la lista de categorias desde la base
     /// </summary>
@@ -25,9 +25,9 @@ namespace Supermarket.API.Dominio.Repositorios
             /// <returns></returns>
             Task<IEnumerable<Categoria>> GetCategoriasAsync();
             /// <summary>
-            /// Permite obtener la información de la categoría asociada al id=identificador pasado por parametro
-            /// Identificador pasado por parametro
+            /// Permite buscar la información de la categoría asociada al id:Identificador pasado por parametro
             /// </summary>
-            Categoria FindCategoriaById(int id);
+            /// Debo recordar que como es la interface de conexión los cambios asincronos se deben hacer tambien en el repo
+            Task<Categoria> FindCategoriaById(int id);
     }
 }

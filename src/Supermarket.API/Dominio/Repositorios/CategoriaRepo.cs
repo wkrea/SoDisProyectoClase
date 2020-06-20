@@ -29,15 +29,18 @@ namespace Supermarket.API.Dominio.Repositorios
         /// <summary>
         /// Implementación secuencial Asincrona
         /// </summary>
-        /// <returns></returns>
         public async Task<IEnumerable<Categoria>> GetCategoriasAsync()
         {
             IEnumerable<Categoria> lista = await db.categorias.ToListAsync();
             return lista;
         }
-        public Categoria FindCategoriaById(int id)
+        /// <summary>
+        /// Metodo que encuentrala categiróa dado un Id, la tarea se hace de forma asincrona 
+        /// </summary>
+        public async Task<Categoria> FindCategoriaById(int id)
         {
-            throw new System.NotImplementedException();
+            /// utilizo el metodo del apiContext DbSet, le pasamos el id y él lo busca en la BD
+            return await db.categorias.FindAsync(id);
         }
     }
 }
