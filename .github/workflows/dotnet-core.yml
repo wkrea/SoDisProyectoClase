@@ -4,12 +4,7 @@ on:
   push:
     branches: [ master, wkrea-CICD, BackEnd, FrontEnd, malliwi88 ]
   pull_request:
-    branches: [ master, malliwi88, wkrea-CICD, cortega3, dblanco7, dtorres10, eoviedo1, fsequeda1, hdaza1, hfigueroa1, jduran9, lgomez9, mtarazona5, nmaldonado1, rcarrillo1, svargas4, yaponte] # Eventos de Pull Request sobre el branch
-    types: [opened, synchronize, reopened]
-    tags: 
-      - v1.0
-      - v2.0
-      - v3.0
+    branches: [ master, malliwi88, wkrea-CICD, cortega3, dblanco7, dtorres10, eoviedo1, fsequeda1, hdaza1, hfigueroa1, jduran9, lgomez9, mtarazona5, nmaldonado1, rcarrillo1, svargas4, yaponte ]
 
 jobs:
   build:
