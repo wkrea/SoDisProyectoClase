@@ -23,7 +23,7 @@ namespace Supermarket.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-<<<<<<< HEAD
+
             /// <summary>
             /// Permite asociar el servicio de la BD
             /// </summary>
@@ -33,18 +33,10 @@ namespace Supermarket.API
                 op => op.UseInMemoryDatabase("SupermarketApi")
                 );
 
-            services.AddTransient<ICategoriaRepo, CategoriaRepo>();    
-=======
-
-            // emular el comportamiento de una base de datos en memoria con EFCore
-            services.AddDbContext<SupermarketApiContext>(options =>
-                options.UseInMemoryDatabase("SupermarketApi"));
-
             // Declaración para el manejo del patrón inyección de dependencia DI
             // de el repositorio que maneja la lógica de negocio de categorías
             // que son utilizados en el repositorio y el controlador
             services.AddTransient<ICategoriaRepo, CategoriaRepo>();
->>>>>>> Actualización:
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
