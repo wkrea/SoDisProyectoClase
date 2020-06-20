@@ -17,9 +17,6 @@ namespace Supermarket.API.Dominio.Persistencia
         {
             builder.Entity<Categoria>().ToTable("categorias");
             builder.Entity<Categoria>().HasKey(Categoria => Categoria.id);
-            
-            
-            
             builder.Entity<Categoria>().Property(Categoria => Categoria.id).ValueGeneratedOnAdd();
             builder.Entity<Categoria>().Property(Categoria => Categoria.nombre).HasColumnName("NombreCompleto");
             builder.Entity<Categoria>()
@@ -48,24 +45,24 @@ namespace Supermarket.API.Dominio.Persistencia
 
 
         // seed de la base (Semillas)
-         //public void poblarBase()
-        //{
-            //this.categorias.Add(
-                //new Categoria {
-                    //id = 1,
-                   // nombre = "categoria 1"
-                //}
-            //);
-            //this.categorias.Add(
-               // new Categoria {
-                   // id = 2,
-                   // nombre = "categoria 2"
-                //}
-           // );
+         public void poblarBase()
+        {
+            this.categorias.Add(
+                new Categoria {
+                    id = 1,
+                    nombre = "categoria 1"
+                }
+            );
+            this.categorias.Add(
+                new Categoria {
+                    id = 2,
+                    nombre = "categoria 2"
+                }
+            );
             // con esto se tiene una base de datos poblada
-            //this.SaveChanges();
+            this.SaveChanges();
 
-        //}
+        }
 
 
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Supermarket.API.Controllers
 {
     [ApiController]
-    [Route("api/controller")]
+    [Route("api/[controller]")]
     //request api/categoria de algun tipo manejando la logiaca
     public class CategoriaController : ControllerBase
     {
