@@ -40,14 +40,14 @@ namespace Supermarket.API.Dominio.Persistencia
         {
             // Fluent Api
 
-            /* builder.Entity<Categoria>().ToTable("categorias");
+            builder.Entity<Categoria>().ToTable("categorias");
             builder.Entity<Categoria>().HasKey(categoria => categoria.id);
             builder.Entity<Categoria>().Property(categoria => categoria.id).ValueGeneratedOnAdd();
             builder.Entity<Categoria>().Property(categoria => categoria.nombre).HasColumnName("NumbreCompleto");
             builder.Entity<Categoria>()
                     .Property(categoria => categoria.nombre)
                     .IsRequired()
-                    .HasMaxLength(30); */
+                    .HasMaxLength(30);
             
             builder.Entity<Categoria>().HasData(
                 new Categoria(){ id = 1, nombre = "categoria 1"},

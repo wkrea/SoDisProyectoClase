@@ -16,7 +16,7 @@ namespace Supermarket.API.Dominio.Repositorios
         /// </summary>
         /// <param name="id">Id Categoria</param>
         /// <returns></returns>
-        IEnumerable<Categoria> GetCategorias();
+        /* IEnumerable<Categoria> GetCategorias(); */
         
         /// <summary>
         /// Secuencial asincrono
@@ -30,5 +30,13 @@ namespace Supermarket.API.Dominio.Repositorios
         /// <param name="id">id categoria</param>
         /// <returns></returns>
         Task<Categoria> FindCategoriaById(int id);
+
+        void crearCategoria(Categoria categoria);
+
+        void editarCategoria(int id, Categoria categoria);
+
+        void eliminarCategoria(Categoria categoria);
+
+        Task<Categoria> guardarCategoria(Categoria categoria);
     }
 }
