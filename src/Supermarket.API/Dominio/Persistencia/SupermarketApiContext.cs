@@ -12,7 +12,7 @@ namespace Supermarket.API.Dominio.Persistencia
         /// <returns></returns>
         public SupermarketApiContext(DbContextOptions<SupermarketApiContext> options) : base(options)
         {
-            Poblarbase();
+           // Poblarbase();
             Database.EnsureCreated();
         }
         /// <summary>
@@ -22,30 +22,61 @@ namespace Supermarket.API.Dominio.Persistencia
         public DbSet<Categoria> categorias { get; set; }
         public DbSet<Producto> productos { get; set; }
         /// <summary>
-        /// Seed de la base (semillas de informacion) -- DB en memoria
+        /// CONSTRUCTOR asignacion de propiedades y nombres de tablas para definir la estructura de la
+        /// base de datos
         /// </summary>
-        public void Poblarbase()
+        /// <param name="builder"></param>
+        protected override void OnModelCreating(ModelBuilder builder)
         {
             /// <summary>
-            /// Se crean valores para el metodo Poblarbase para ejecutar pruebas de ejecucion del proyecto
+            /// Definicion de caracteristicas para las tablas donde seran almacenados los datos
             /// </summary>
-            /// <value></value>
-            this.categorias.Add(
-                new Categoria{
-                    id = 1,
-                    nombre = "Categoria 1"
-                }
-            );
+            /// <param name="options"></param>
+            /// <returns></returns>
+            builder.Entity<Categoria>().ToTable("Categorias");
+            builder.Entity<Categoria>().HasKey(categoria => categoria.id);
+            builder.Entity<Categoria>().Property(categoria => categoria.id).ValueGeneratedOnAdd();
+            builder.Entity<Categoria>().Property(categoria => categoria.nombre).HasColumnName("NombreCompleto");
+            builder.Entity<Categoria>()
+                    .Property(Categoria => Categoria.nombre)
+                    .IsRequired()
+                    .HasMaxLength(30);
             /// <summary>
-            /// Segundo registro de valores para Poblarbase para pruebas de ejecucion
+            /// Definicion del metodo de llenado de las tablas para la base de datos
             /// </summary>
-            /// <value></value>
-            this.categorias.Add(
-                new Categoria{
-                    id = 2,
-                    nombre = "Categoria 2"
-                }
-            ); 
+            /// <typeparam name="Categoria"></typeparam>
+            /// <returns></returns>
+            builder.Entity<Categoria>().HasData(
+                new Categoria(){ id =1, nombre = "Categoria 1"},
+                new Categoria(){ id =2, nombre = "Categoria 2"},
+                new Categoria(){ id =3, nombre = "Categoria 3"}
+            );
         }
+        // /// <summary>
+        // /// Seed de la base (semillas de informacion) -- DB en memoria
+        // /// </summary>
+        // public void Poblarbase()
+        // {
+        // /// <summary>
+        // /// Se crean valores para el metodo Poblarbase para ejecutar pruebas de ejecucion del proyecto
+        // /// </summary>
+        // /// <value></value>
+        // this.categorias.Add(
+        //     new Categoria{
+        //         id = 1,
+        //         nombre = "Categoria 1"
+        //     }
+        // );
+        // /// <summary>
+        // /// Segundo registro de valores para Poblarbase para pruebas de ejecucion
+        // /// </summary>
+        // /// <value></value>
+        // this.categorias.Add(
+        //     new Categoria{
+        //         id = 2,
+        //         nombre = "Categoria 2"
+        //     }
+        // ); 
+        // } 
     }
 }

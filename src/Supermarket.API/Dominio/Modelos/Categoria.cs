@@ -8,18 +8,16 @@ namespace Supermarket.API.Dominio.Modelos
     /// </summary>
     public class Categoria
     {
-        internal int id;
-        internal string nombre;
         /// <summary>
         /// Propiedad de identificador con sus metodos de acceso para las categorias
         /// </summary>
         /// <value></value>
-        public int Id {get; set;}
+        public int id {get; set;}
         /// <summary>
         /// Propiedad Nombre con sus metodos de acceso para las categorias
         /// </summary>
         /// <value></value>
-        public string Nombre {get; set;}
+        public string nombre {get; set;}
         /// <summary>
         /// Relacion entre categoria y productos 
         /// </summary>

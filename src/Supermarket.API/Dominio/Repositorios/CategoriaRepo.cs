@@ -32,9 +32,15 @@ namespace Supermarket.API.Dominio.Repositorios
             IEnumerable<Categoria> lista = await db.categorias.ToListAsync();
             return lista;
         }
-        public Categoria FindCategoriaById(int id)
+        /// <summary>
+        /// Implementacion del metodo de manera secuencial asincrona
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<Categoria> FindCategoriaById(int id)
         {
-            throw new System.NotImplementedException();
+            Categoria resultado = await db.categorias.FindAsync(id);
+            return resultado;
         }
     }
 }
