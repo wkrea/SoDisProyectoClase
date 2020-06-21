@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
@@ -61,8 +62,46 @@ namespace Supermarket.API.Controllers
         [HttpGet("{id}")]
         public async Task<Categoria> HallarCategoriaById(int id)
         {
-            Categoria resultado = await context.FindCategoriasById(id);
+            Categoria resultado = await context.GetCategoriasAsyncById(id);
             return resultado;
         }
+
+        // POST api/categoria
+        /// <summary>
+        /// Permite crear las categorias y las validaciones 
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> crearCategoria([FromBody] Categoria categoria)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            context.crearCategoria(categoria);
+            var guardadoOk = await context.guardarCategoria(categoria); // commit // P. CORS. unitofwork (P. Repositorio)
+            return Ok();
+        }
+
+
+        // DELETE api/categoria/1
+        /// <summary>
+        /// permite eliminar las categorias y sus validaciones 
+        /// </summary>
+        /// <param name="id">id de la categoria que se quiere eliminar </param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> eliminarCategoria(int id)
+        {
+            Categoria existe = await context.GetCategoriasAsyncById(id);
+            if(existe == null)
+            {
+                return NotFound();
+            }
+            context.eliminarCategoria(existe);
+            var guardadoOk = await context.guardarCategoria(existe); // commit
+            return Ok();
+        } 
     }
 } 
