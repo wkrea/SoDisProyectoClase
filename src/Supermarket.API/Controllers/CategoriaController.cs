@@ -1,7 +1,9 @@
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.API.Dominio.Modelos;
-using Supermarket.API.Dominio.Modelos.Repositorios;
+using Supermarket.API.Dominio.Repositorios;
 using System.Linq;
 
 namespace Supermarket.API.Controllers
@@ -17,7 +19,6 @@ namespace Supermarket.API.Controllers
     /// <summary>
     /// El controlador permite obtener los datos de cualquiera de las dos clases Categoria o Producto
     /// </summary>
-
     public class categoriaController : ControllerBase
     {
         private readonly ICategoriaRepo context;
@@ -25,19 +26,48 @@ namespace Supermarket.API.Controllers
         {
             context = CategoriaContexto;
         }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Categoria>> Get()
+        public async Task<IEnumerable<Categoria>> Get()
         {
             //return new string[] { "value1", "value2" };
-            return context.GetCategorias().ToList();
+            return await context.GetCategorias();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> FindCategoriaById(int id)
+        public async Task<Categoria> FindCategoriaById(int id)
         {
-            return "value";
+            return await context.HallarCategoriaById(id);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> crearCategoria([FromBody] Categoria categoria)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            context.crearCategoria(categoria);
+            var guardadoOk = await context.guardarCategoriaById(categoria);
+            return Ok();
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> eliminarCategoria(int id)
+        {
+            Categoria existe = await context.HallarCategoriaById(id);
+
+            if(existe == null)
+            {
+                return NotFound();
+            }
+
+            context.eliminarCategoria(existe);
+            var guardadoOk = await context.guardarCategoriaById(existe);
+            return Ok();
         }
     }
 }

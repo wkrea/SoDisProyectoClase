@@ -6,7 +6,6 @@ namespace Supermarket.API.Dominio.Modelos
     /// Se crera clase que va a contener el id, nombre del producto
     /// que se listarán dentro de categoría
     /// </summary>
-
     public class Producto
     {
         //Identificador del producto

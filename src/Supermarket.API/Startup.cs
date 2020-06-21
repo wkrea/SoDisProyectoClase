@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Supermarket.API.Dominio.Repositorios;
 using Supermarket.API.Dominio.Persistencia;
 
 namespace Supermarket.API
@@ -29,6 +30,7 @@ namespace Supermarket.API
 
             //Declaración para el manejo del patrón inyección de dependencia DI
             //de el reporsitorio que maneje la lógica de  negocio de categorías.
+            services.AddTransient<ICategoriaRepo, CategoriaRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
