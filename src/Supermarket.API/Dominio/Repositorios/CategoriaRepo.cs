@@ -54,10 +54,11 @@ namespace Supermarket.API.Dominio.Repositorios
             db.categorias.Remove(categoria);
         }
 
-        public async Task<Categoria> guardarCategoriaById(Categoria categoria)
+        public async Task<Categoria> guardarCategoria(Categoria categoria)
         {
             await db.SaveChangesAsync();
             return categoria;
         }
+
     }
 }

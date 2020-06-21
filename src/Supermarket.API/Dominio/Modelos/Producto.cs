@@ -1,3 +1,8 @@
+using System;
+using System.Net.Http.Headers;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
 using System.Collections.Generic;
 
 namespace Supermarket.API.Dominio.Modelos
@@ -8,19 +13,34 @@ namespace Supermarket.API.Dominio.Modelos
     /// </summary>
     public class Producto
     {
-        //Identificador del producto
-        public int id { get; set; }
+        [Key]
+        /// <summary>
+        /// Contiene el id del producto
+        /// </summary>
+        /// <value></value>
+        public int id { get; set;}
 
-        //Nombre del producto
-        public string nombre { get; set; }
-
-        //Cantidad de productos
-        public int cantidadPaquete { get; set; }
-
-        //Identificador de la categoria
-        public int categoriaId { get; set; }
-
-        //Nombre de la categoria
-        public int categoria { get; set; }
+        [Required]
+        /// <summary>
+        /// Contiene el nombre del producto
+        /// </summary>
+        /// <value></value>
+        public string nombre {get; set;}
+        /// <summary>
+        /// Contiene la cantidad de producto
+        /// </summary>
+        /// <value></value>
+        public int cantidadxPaquete {get; set;}
+        //public EUnidadDeMedida unidadDeMedida {get; set;}
+        /// <summary>
+        /// Contiene el Id de la categoria a la que pertenece el producto
+        /// </summary>
+        /// <value></value>
+        public int categoriaId {get; set;}
+        /// <summary>
+        /// Contiene la Categoria del producto
+        /// </summary>
+        /// <value></value>
+        public Categoria categoria {get; set;}
     }
 }

@@ -11,23 +11,36 @@ namespace Supermarket.API.Dominio.Repositorios
     /// </sumary>
     public interface ICategoriaRepo
     {
-        /// <sumary>
-        //Permite obtener la lista de categorías desde la base
-        /// </sumary>
-        /// <returns> </returns>
-        Task<IEnumerable<Categoria>> GetCategorias();
+        /// <summary>
+        /// Permite obtener lista categorias/Metodo Asincrono
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<Categoria>> GetCategoriasAsync();
+        /// <summary>
+        /// Devuelve al info de la categoria asociada al identificador
+        /// pasado por el parametro
+        /// </summary>
+        /// <param name="id">Identificador de la categoria</param>
+        /// <returns></returns>
+        Task<Categoria> GetCategoriasAsyncById(int id);
 
-        /// <sumary>
-        //Permite obtener la información de la categoría asociada 
-        ///al identificador pasado por parámetro
-        /// </sumary>
-        /// <param name="id"> Identificador de la categoría </param>
-        /// <returns> </returns>
-        Task<Categoria> HallarCategoriaById(int id);
-
+        /// <summary>
+        /// Metodo que permite la creacion de una categoria, recibe como parametro una instancia de tipo Categoria
+        /// </summary>
+        /// <param name="categoria"></param>
         void crearCategoria(Categoria categoria);
-        void editarCategoria(int id, Categoria categoria);
+        /// <summary>
+        /// Metodo para editar una categoria, recibe una Categoria como parametro
+        /// </summary>
+        /// <param name="categoria"></param>
+        void editarCategoria(Categoria categoria);
+        /// <summary>
+        /// Metodo de eliminacion de una categoria, Recibe una instancia de
+        /// tipo Categoria como parametro
+        /// </summary>
+        /// <param name="categoria"></param>
         void eliminarCategoria(Categoria categoria);
-        Task<Categoria> guardarCategoriaById(Categoria categoria);
+
+        Task<Categoria> guardarCategoria(Categoria categoria);
     }
 }

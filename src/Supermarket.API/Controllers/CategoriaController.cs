@@ -42,17 +42,38 @@ namespace Supermarket.API.Controllers
             return await context.HallarCategoriaById(id);
         }
 
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public async Task<Categoria> HallarCategoriaById(int id)
+        {
+            Categoria resultado = await context.GetCategoriasAsyncById(id);
+            return resultado;
+        }
+
         [HttpPost]
         public async Task<ActionResult> crearCategoria([FromBody] Categoria categoria)
         {
-            if(!ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             context.crearCategoria(categoria);
-            var guardadoOk = await context.guardarCategoriaById(categoria);
+            var guardadoOk = await context.guardarCategoria(categoria);
             return Ok();
+        }
 
+        //DELETE api/categoria/1
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> eliminarCategoria(int id)
+        {
+            Categoria existe = await context.GetCategoriasAsyncById(id);
+            if(existe == null)
+            {
+                return NotFound();
+            }
+            context.eliminarCategoria(existe);
+            var guardadoOk = await context.guardarCategoria(existe); 
+            return Ok();
         }
 
         [HttpDelete("{id}")]

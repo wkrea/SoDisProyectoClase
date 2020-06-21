@@ -24,26 +24,47 @@ namespace Supermarket.API.Dominio.Persistencia
         /// </summary>
         /// <value></value>
         public DbSet<Categoria> categorias {get; set;}
+        public DbSet<Producto> productos {get;  set;}
+        
         /// <summary>
-        /// Tabla que representa el producto
+        /// Metodo indicado para definir la estructura de la BD
         /// </summary>
-        /// <value></value>
-        public DbSet<Producto> productos {get; set;}
-
-        protected override void OnModelCreating(ModelBuilder builder){
-            // Crear la base de Datos
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            //Fluent API
             builder.Entity<Categoria>().ToTable("Categorias");
-            builder.Entity<Categoria>().HasKey(c => c.id);
+            builder.Entity<Categoria>().HasKey(categoria => categoria.id);
+            builder.Entity<Categoria>().Property(categoria => categoria.id).ValueGeneratedOnAdd();
+            builder.Entity<Categoria>().Property(categoria => categoria.nombre).HasColumnName("NombreCompleto");
             builder.Entity<Categoria>()
-                        .Property(c => c.nombre)
-                        .IsRequired()
-                        .HasMaxLength(30);
+                    .Property(categorias => categorias.nombre)
+                    .IsRequired()
+                    .HasMaxLength(30);
 
             builder.Entity<Categoria>().HasData(
-                new Categoria(){id=1, nombre="Categoria 1"},
-                new Categoria(){id=2, nombre="Categoria 2"},
-                new Categoria(){id=3, nombre="Categoria 3"}
+              new Categoria(){ id =1, nombre = "Categoria 1" },
+              new Categoria(){ id =2, nombre = "Categoria 2" },
+              new Categoria(){ id =3, nombre = "Categoria 3" }
             );
         }
+        //Seed de la base(semillas de informacion) -- BD en memoria
+        //public void PoblarBase()
+        //{
+          //  this.categorias.Add(
+            //    new Categoria{
+              //      id = 1,
+                //    nombre = "Categoria 1",
+                //}
+            //);
+
+            //this.categorias.Add(
+            //new Categoria{
+              //      id = 2,
+                //    nombre = "Categoria 2",
+                //}
+            //);
+            //commit
+            //this.SaveChanges();
+        //}
     }
 }
