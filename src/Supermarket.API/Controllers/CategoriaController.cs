@@ -44,8 +44,37 @@ namespace Supermarket.API.Controllers
         public async Task<Categoria> HallarCategoriaById(int id)
         {
             /// Obtiene la información de la categoria llamando al metodo asincrono en el repositorio
-            Categoria resultado = await context.FindCategoriaById(id);
+            Categoria resultado = await context.GetCategoriasAsyncById(id);
             return resultado;
+        }
+        /// Crear categoría
+        /// En el cuerpo del mensaje en postman  se envían el id y el nombre de la categoría en formato JSON
+        [HttpPost]
+        public async Task<ActionResult> crearCategoria([FromBody] Categoria categoria)
+        {
+            /// El ModelState verifica si la información ingresada es correcta y completa, lo usamos en un if para validar los datos
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            context.crearCategoria(categoria);
+            var guardadoOk = await context.guardarCategoria(categoria); // commit
+            return Ok();
+        }
+        /// Borrar categoría
+        /// DELETE api/categoria/1 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> eliminarCategoria(int id)
+        {
+            /// Validamos si la categoría con el id indicado existe, si no existe retornamos un 404NotFound.
+            Categoria existe = await context.GetCategoriasAsyncById(id);
+            if(existe==null)
+            {
+                return NotFound();
+            }
+            context.eliminarCategoria(existe);
+            var guardadoOk = await context.guardarCategoria(existe); // commit // P. CQRS, UnitOfWork (P. Repositorio)
+            return Ok();
         }
     }
 }

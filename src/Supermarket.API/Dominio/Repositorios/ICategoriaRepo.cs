@@ -28,6 +28,14 @@ namespace Supermarket.API.Dominio.Repositorios
             /// Permite buscar la información de la categoría asociada al id:Identificador pasado por parametro
             /// </summary>
             /// Debo recordar que como es la interface de conexión los cambios asincronos se deben hacer tambien en el repo
-            Task<Categoria> FindCategoriaById(int id);
+            Task<Categoria> GetCategoriasAsyncById(int id);
+            /// Metodo que permite crear una nueva categoría en la BD enviando la información de la categoría a crear
+            void crearCategoria(Categoria categoria);
+            /// Metodo que permite editar la información de una categoría dado su id, le enviamos la categoría modificada y el id de la misma
+            void editarCategoria(int id, Categoria categoria);
+            /// Metodo que permite eliminar una categoría, le enviamos la categoría completa para validaciones importantes en la BD
+            void eliminarCategoria(Categoria categoria);
+            /// Metodo que permite guardar los cambios realizados en la categoria dado el id
+            Task<Categoria> guardarCategoria(Categoria categoria);
     }
 }
