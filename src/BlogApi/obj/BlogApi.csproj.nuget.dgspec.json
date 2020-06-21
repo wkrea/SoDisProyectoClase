@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\FABIAN\\Desktop\\Sistemas_O_D\\SoDisProyectoClase2020-06-18\\src\\Supermarket.API\\Supermarket.API.csproj": {}
+    "C:\\Users\\FABIAN\\Desktop\\Sistemas_O_D\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\FABIAN\\Desktop\\Sistemas_O_D\\SoDisProyectoClase2020-06-18\\src\\Supermarket.API\\Supermarket.API.csproj": {
+    "C:\\Users\\FABIAN\\Desktop\\Sistemas_O_D\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\FABIAN\\Desktop\\Sistemas_O_D\\SoDisProyectoClase2020-06-18\\src\\Supermarket.API\\Supermarket.API.csproj",
-        "projectName": "Supermarket.API",
-        "projectPath": "C:\\Users\\FABIAN\\Desktop\\Sistemas_O_D\\SoDisProyectoClase2020-06-18\\src\\Supermarket.API\\Supermarket.API.csproj",
+        "projectUniqueName": "C:\\Users\\FABIAN\\Desktop\\Sistemas_O_D\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj",
+        "projectName": "BlogApi",
+        "projectPath": "C:\\Users\\FABIAN\\Desktop\\Sistemas_O_D\\SoDisProyectoClase\\src\\BlogApi\\BlogApi.csproj",
         "packagesPath": "C:\\Users\\FABIAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\FABIAN\\Desktop\\Sistemas_O_D\\SoDisProyectoClase2020-06-18\\src\\Supermarket.API\\obj\\",
+        "outputPath": "C:\\Users\\FABIAN\\Desktop\\Sistemas_O_D\\SoDisProyectoClase\\src\\BlogApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

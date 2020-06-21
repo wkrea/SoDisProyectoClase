@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Supermarket.API.Dominio.Persistencia;
+using Microsoft.EntityFrameworkCore;
+using Supermarket.API.Dominio.Repositorios;
 
 namespace Supermarket.API
 {
@@ -23,9 +19,42 @@ namespace Supermarket.API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Añade el servicio al contenedor
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            //AddTransient-AddDbContext-AddScoped-indica la forma del su ciclo de vida en la app
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            /// <summary>
+            /// Servicio de la DB  toma arg el nombre de la clase que maneja en contexto
+            /// </summary>
+            /// <typeparam name="SupermarketApiContext">DBService</typeparam>
+            /// <returns></returns>
+            
+            services.AddDbContext<SupermarketApiContext>(
+                op => op.UseInMemoryDatabase("SupermarketApi")
+                );
+                //Declaracion para el manejo del patron inyeccion de dependencis DI
+                //del repositorio que maneja la logica de negocio de categorias
+                //AddTransient-tiene vida hasta que  de respuesta- controladores responden a solicitudes del cliente
+                //                     Estructura      Implementacion
+            services.AddTransient<ICategoriaRepo, CategoriaRepo>();
+
+                /*
+                    AddDbContext tiene vide mientras es invocado-singleton
+                    services.AddDbContext<SupermarketApiContext>();
+                */
+           
+                /*
+                    AddScoped has life mientras el controlador este vivo-se usa mucho, 
+                    generador de reportes o controlador de mucho uso
+                    services.AddScoped<ICategoriaRepo, CategoriaRepo>();
+                    services.AddScoped<CategoriaRepo>();
+           
+                */
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,3 +75,4 @@ namespace Supermarket.API
         }
     }
 }
+    
