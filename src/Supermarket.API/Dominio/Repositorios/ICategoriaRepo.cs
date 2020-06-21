@@ -11,7 +11,7 @@ namespace Supermarket.API.Dominio.Repositorios
         /// Permite obtener la lista de categorias desde la base
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Categoria> GetCategorias();
+        //IEnumerable<Categoria> GetCategorias();
         /// <summary>
         /// Metodo Asincrono
         /// Permite obtener la lista de categorias desde la base
@@ -24,6 +24,29 @@ namespace Supermarket.API.Dominio.Repositorios
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<Categoria> FindCategoriaById(int id);
+        Task<Categoria> GetCategoriasAsyncById(int id);
+        /// <summary>
+        /// Metodo para ejecutar la creacion de categorias en el CRUD
+        /// </summary>
+        /// <param name="categoria"></param>
+        void crearCategoria(Categoria categoria);
+        /// <summary>
+        /// Metodo para ejecutar la modificacion de categorias en el CRUD
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="categoria"></param>
+        void editarCategoria(int id, Categoria categoria);
+        /// <summary>
+        /// Metodo para ejecutar la eliminacion de categorias en el CRUD
+        /// </summary>
+        /// <param name="categoria"></param>
+        void eliminarCategoria(Categoria categoria);
+        /// <summary>
+        /// Metodo para ejecutar el guardado de los cambios aplicados a categorias en el CRUD
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
+        Task<Categoria> guardarCategoria(Categoria categoria);
+
     }
 }
