@@ -45,7 +45,7 @@ namespace Supermarket.API.Controllers
         [HttpPost]
         public async Task<ActionResult> crearCategoria([FromBody] Categoria categoria)
         {
-            if(ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
