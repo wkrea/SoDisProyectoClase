@@ -1,59 +1,73 @@
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.API.Dominio.Modelos;
 using Supermarket.API.Dominio.Repositorios;
-using System.Threading.Tasks;
 
 namespace Supermarket.API.Controllers
 {
+    /*Controlador de aplicaciones que posee una ruta para 
+    poder versionar los servicios que agregan funcionalidades 
+    a traves de url diferentes*/
+
     [ApiController]
     [Route("api/[controller]")]
-    public class CategoriaController : ControllerBase
+    //requuest api/categorias (Get, Put, Delete)
+
+    /// <summary>
+    /// El controlador permite obtener los datos de cualquiera de las dos clases Categoria o Producto
+    /// </summary>
+    public class categoriaController : ControllerBase
     {
-        /// <summary>
-        /// Variable privada de la clase/solo lectura
-        /// </summary>
         private readonly ICategoriaRepo context;
-        /// <summary>
-        /// Metodo contructor de la clase
-        /// </summary>
-        /// <param name="CategoriaContexto"></param>
-        public CategoriaController(ICategoriaRepo CategoriaContexto)
+        public categoriaController(ICategoriaRepo CategoriaContexto)
         {
             context = CategoriaContexto;
         }
-         // GET api/values
-        [HttpGet]
 
-        //Secuencial
-        public ActionResult<IEnumerable<Categoria>> Get()
+        // GET api/values
+        [HttpGet]
+        public async Task<IEnumerable<Categoria>> Get()
         {
             //return new string[] { "value1", "value2" };
-            /// <summary>
-            /// Retorna lista de categoria
-            /// </summary>
-            /// <returns></returns>
-            return context.GetCategorias().ToList();
-        }
-
-        //Asincrona --> Usa paralelismo en el servidor
-        public async Task<IEnumerable<Categoria>> GetAsync()
-        {
-            
-            /// <summary>
-            /// Retorna lista de categoria
-            /// </summary>
-            /// <returns></returns>
-            return await context.GetCategoriasAsync();
+            return await context.GetCategorias();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> FindCategoriaById(int id)
+        public async Task<Categoria> FindCategoriaById(int id)
         {
-            return "value";
+            return await context.HallarCategoriaById(id);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> crearCategoria([FromBody] Categoria categoria)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            context.crearCategoria(categoria);
+            var guardadoOk = await context.guardarCategoriaById(categoria);
+            return Ok();
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> eliminarCategoria(int id)
+        {
+            Categoria existe = await context.HallarCategoriaById(id);
+
+            if(existe == null)
+            {
+                return NotFound();
+            }
+
+            context.eliminarCategoria(existe);
+            var guardadoOk = await context.guardarCategoriaById(existe);
+            return Ok();
+        }
     }
 }
