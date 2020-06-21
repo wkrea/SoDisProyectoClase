@@ -42,16 +42,16 @@ namespace Supermarket.API.Dominio.Persistencia
         
         builder.Entity<Categoria>().ToTable("Categorias");
         //categoria es un objeto de esta clase, de la instancia categoria tome lo que hy en categoria y luego tome el id y eso se convertira en llave (key)
-        builder.Entity<Categoria>().HasKey(categorias =>  categorias.id);
-        builder.Entity<Categoria>().Property(categorias => categorias.id).ValueGeneratedOnAdd();
-        builder.Entity<Categoria>().Property(categorias => categorias.nombre).HasColumnName("NombreCompleto");
-        builder.Entity<Categoria>().Property(categorias => categorias.nombre).IsRequired().HasMaxLength(30);
+        builder.Entity<Categoria>().HasKey(categoria =>  categoria.id);
+        builder.Entity<Categoria>().Property(categoria => categoria.id).ValueGeneratedOnAdd();
+        builder.Entity<Categoria>().Property(categoria => categoria.nombre).HasColumnName("NombreCompleto");
+        builder.Entity<Categoria>().Property(categoria => categoria.nombre).IsRequired().HasMaxLength(30);
       
 
         builder.Entity<Categoria>().HasData(
             new Categoria(){ id = 1, nombre = "Categoria 1"},
             new Categoria(){ id = 2, nombre = "Categoria 2"},
-            new Categoria(){ id = 2, nombre = "Categoria 3"}
+            new Categoria(){ id = 3, nombre = "Categoria 3"}
         );
         
 

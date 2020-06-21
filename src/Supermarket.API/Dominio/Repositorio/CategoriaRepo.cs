@@ -5,6 +5,7 @@ using Supermarket.API.Dominio.Repositorios;
 using System.Collections.Generic;
 using Supermarket.API.Dominio.Modelos;
 using System.Linq;
+using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -25,26 +26,68 @@ namespace Supermarket.API.Dominio.Repositorios
       /// </summary>
       ///<returns></returns>
 
-      //public IEnumerable<Categoria> GetCategorias()
-      //{
-       // IEnumerable<Categoria> lista = db.categorias.ToList();
-        //return lista;
-      //}
+      public IEnumerable<Categoria> GetCategorias()
+      {
+        IEnumerable<Categoria> lista = db.categorias.ToList();
+        return lista;
+      }
       
       /// <summary>
       ///implementacion secuecial asincrona 
       /// </summary>
       ///<returns></returns>
-
+      public async Task<Categoria> FindCategoriaById(int id)
+      {
+        Categoria resultado = await db.categorias.FindAsync(id);
+        return resultado;
+      }
+      
       public async Task<IEnumerable<Categoria>> GetCategoriasAsync()
       {
         IEnumerable<Categoria> lista = await db.categorias.ToListAsync();
         return lista;
       }
-      public async Task<Categoria> FindCategoriaById(int id)
+
+
+      ///<summary>
+      /// crear categoria
+      /// </summary>
+      ///<param name = "categoria"></param>
+      public void crearCategoria(Categoria categoria)
       {
-        Categoria resultado = await db.categorias.FindAsync(id);
-        return resultado;
+        db.categorias.AddAsync(categoria);
+      }
+
+      /// <summary>
+      /// editar las categorias
+      /// </summary>
+      /// <param name = "id"></param>
+      /// <param name = "categoria">id categoria</param>
+      public void editarCategoria(int id, Categoria categoria)
+      {
+        db.Entry(categoria).State = EntityState.Modified;
+        db.categorias.Update(categoria);
+      }
+
+      /// <summary>
+      /// editar las categorias
+      /// </summary>
+      /// <param name = "id"></param>
+      /// <param name = "categoria">id categoria</param>
+      public void eliminarCategoria(Categoria categoria)
+      {
+        db.categorias.Remove(categoria);
+      }
+
+       /// <summary>
+      /// editar las categorias
+      /// </summary>
+      /// <param name = "categorias"></param>
+      /// <returns></returns>
+      public async Task<Categoria> guardarCategoria(Categoria categoria)
+      {
+        await db.SaveChangesAsync();
+        return categoria;
       }
 
     // public Task<IEnumerable<Categoria>> GetCategoriaAsync()

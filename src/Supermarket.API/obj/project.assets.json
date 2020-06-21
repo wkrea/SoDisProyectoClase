@@ -12152,11 +12152,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\david\\Desktop\\corte_tres\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
+      "projectUniqueName": "C:\\Users\\david\\Desktop\\corte_tres_(V.1)\\corte_tres\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
       "projectName": "Supermarket.API",
-      "projectPath": "C:\\Users\\david\\Desktop\\corte_tres\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
+      "projectPath": "C:\\Users\\david\\Desktop\\corte_tres_(V.1)\\corte_tres\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
       "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\david\\Desktop\\corte_tres\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
+      "outputPath": "C:\\Users\\david\\Desktop\\corte_tres_(V.1)\\corte_tres\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

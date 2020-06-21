@@ -35,5 +35,32 @@ namespace Supermarket.API.Dominio.Repositorio
 
       Task<Categoria> FindCategoriaById(int id);
     //Task<IEnumerable<Categoria>> GetCategoriaAsync();
+
+    /// <summary>
+    /// crear una categoria
+    /// </summary>
+    /// <param name="categoria">identificador de la categoria </param>
+    void crearCategoria( Categoria categoria);
+
+    /// <summary>
+    /// editar una categoria
+    /// </summary>
+    /// <param name = "id"></param>
+    /// <param name="categoria">identificador de la categoria </param>
+    void editarCategoria(int id, Categoria categoria);
+
+    /// <summary>
+    /// eliminar una categoria
+    /// </summary>
+    /// <param name="categoria">identificador de la categoria </param>
+    void eliminarCategoria(Categoria categoria);
+
+    /// <summary>
+    /// guardar una categoria
+    /// </summary>
+    /// <param name="categoria">identificador de la categoria </param>
+    ///<returns></returns>
+    Task<Categoria> guardarCategoria(Categoria categoria);
+
   }
 }
