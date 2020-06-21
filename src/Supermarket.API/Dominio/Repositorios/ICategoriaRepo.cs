@@ -7,13 +7,6 @@ namespace Supermarket.API.Dominio.Repositorios
     public interface ICategoriaRepo
     {
         /// <summary>
-        ///Metodo Sincrono
-        ///  Devuelve la lista de categorias desde la base de datos
-        /// </summary>
-        /// <returns></returns>
-        IEnumerable<Categoria> GetCategorias();
-
-        /// <summary>
         /// Permite obtener lista categorias/Metodo Asincrono
         /// </summary>
         /// <returns></returns>
@@ -24,6 +17,25 @@ namespace Supermarket.API.Dominio.Repositorios
         /// </summary>
         /// <param name="id">Identificador de la categoria</param>
         /// <returns></returns>
-        Task<Categoria> FindCategoriaById(int id);
+        Task<Categoria> GetCategoriasAsyncById(int id);
+
+        /// <summary>
+        /// Metodo que permite la creacion de una categoria, recibe como parametro una instancia de tipo Categoria
+        /// </summary>
+        /// <param name="categoria"></param>
+        void crearCategoria(Categoria categoria);
+        /// <summary>
+        /// Metodo para editar una categoria, recibe una Categoria como parametro
+        /// </summary>
+        /// <param name="categoria"></param>
+        void editarCategoria(Categoria categoria);
+        /// <summary>
+        /// Metodo de eliminacion de una categoria, Recibe una instancia de
+        /// tipo Categoria como parametro
+        /// </summary>
+        /// <param name="categoria"></param>
+        void eliminarCategoria(Categoria categoria);
+
+        Task<Categoria> guardarCategoria(Categoria categoria);
     }
 }

@@ -19,21 +19,28 @@ namespace Supermarket.API.Dominio.Repositorios
             db = apicontext;
         }
 
-        /// <summary>
-        /// Excepcion de FinsCategoriaById
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-
-        /// <summary>
-        /// Devuelve lista de Categorias
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Categoria> GetCategorias()
+        public void crearCategoria(Categoria categoria)
         {
-            IEnumerable<Categoria> lista = db.categorias.ToList();
-            return lista;
+            db.categorias.AddAsync(categoria);
         }
+
+        public void editarCategoria(Categoria categoria)
+        {
+            db.Entry(categoria).State = EntityState.Modified;
+            db.categorias.Update(categoria);
+        }
+
+        public void eliminarCategoria(Categoria categoria)
+        {
+            db.categorias.Remove(categoria);
+        }
+
+        public async Task<Categoria> guardarCategoria(Categoria categoria)
+        {
+            await db.SaveChangesAsync();
+            return categoria;
+        }
+
 
         /// <summary>
         /// Metodo Asincrono
@@ -46,10 +53,11 @@ namespace Supermarket.API.Dominio.Repositorios
             return lista;
         }
 
-        public async Task<Categoria> FindCategoriaById(int id)
+        public async Task<Categoria> GetCategoriasAsyncById(int id)
         {
             Categoria resultado = await db.categorias.FindAsync(id);
             return resultado;
         }
+
     }
 }

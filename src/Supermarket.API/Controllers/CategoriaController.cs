@@ -23,20 +23,6 @@ namespace Supermarket.API.Controllers
         {
             context = CategoriaContexto;
         }
-         // GET api/values
-        [HttpGet]
-
-        //Secuencial
-        public ActionResult<IEnumerable<Categoria>> Get()
-        {
-            //return new string[] { "value1", "value2" };
-            /// <summary>
-            /// Retorna lista de categoria
-            /// </summary>
-            /// <returns></returns>
-            return context.GetCategorias().ToList();
-        }
-
         //Asincrona --> Usa paralelismo en el servidor
         public async Task<IEnumerable<Categoria>> GetAsync()
         {
@@ -52,8 +38,34 @@ namespace Supermarket.API.Controllers
         [HttpGet("{id}")]
         public async Task<Categoria> HallarCategoriaById(int id)
         {
-            Categoria resultado = await context.FindCategoriaById(id);
+            Categoria resultado = await context.GetCategoriasAsyncById(id);
             return resultado;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> crearCategoria([FromBody] Categoria categoria)
+        {
+            if(ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            context.crearCategoria(categoria);
+            var guardadoOk = await context.guardarCategoria(categoria);
+            return Ok();
+        }
+
+        //DELETE api/categoria/1
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> eliminarCategoria(int id)
+        {
+            Categoria existe = await context.GetCategoriasAsyncById(id);
+            if(existe == null)
+            {
+                return NotFound();
+            }
+            context.eliminarCategoria(existe);
+            var guardadoOk = await context.guardarCategoria(existe); 
+            return Ok();
         }
 
     }
