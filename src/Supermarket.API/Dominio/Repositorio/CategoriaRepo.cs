@@ -27,9 +27,17 @@ namespace Supermarket.API.Dominio.Repositorios
             IEnumerable<Categoria> lista = db.categorias.ToList();
             return lista;
         }
-        public Categoria FindCategoriaById(int id)
+
+        /// <summary>
+        /// Metodo secuencial asincrono
+        /// busca categorias segun id
+        /// </summary>
+        /// <param name="id">identificador categoria</param>
+        /// <returns></returns>
+        public async Task<Categoria> FindCategoriaById(int id)
         {
-            throw new System.NotImplementedException();
+            Categoria resultado = await db.categorias.FindAsync(id);
+            return resultado;
         }
 
         /// <summary>
@@ -40,6 +48,46 @@ namespace Supermarket.API.Dominio.Repositorios
         {
             IEnumerable<Categoria> lista = await db.categorias.ToListAsync();
             return lista;
+        }
+
+        /// <summary>
+        /// crear categoria
+        /// </summary>
+        /// <param name="categoria"></param>
+        public  void crearCategoria(Categoria categoria)
+        {
+             db.categorias.AddAsync(categoria);
+        }
+
+        /// <summary>
+        /// Edita las categorias
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="categoria">id categoria</param>
+        public void editarCategoria(int id, Categoria categoria)
+        {
+            db.Entry(categoria).State = EntityState.Modified;
+            db.categorias.Update(categoria);
+        }
+
+        /// <summary>
+        /// Elimina categoria
+        /// </summary>
+        /// <param name="categoria"></param>
+        public void eliminarCategoria(Categoria categoria)
+        {
+            db.categorias.Remove(categoria);
+        }
+
+        /// <summary>
+        /// Guarda la categoria creada
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
+        public async Task<Categoria> guardarCategoria(Categoria categoria)
+        {
+            await db.SaveChangesAsync();
+            return categoria;
         }
     }
 
