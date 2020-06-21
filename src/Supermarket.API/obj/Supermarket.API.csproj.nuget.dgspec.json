@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Platzi\\Arquitectura Frontend\\SoDisProyectoClase\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {}
+    "C:\\Users\\davidypaola\\Desktop\\Sync\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {}
   },
   "projects": {
-    "D:\\Platzi\\Arquitectura Frontend\\SoDisProyectoClase\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {
+    "C:\\Users\\davidypaola\\Desktop\\Sync\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Platzi\\Arquitectura Frontend\\SoDisProyectoClase\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
+        "projectUniqueName": "C:\\Users\\davidypaola\\Desktop\\Sync\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
         "projectName": "Supermarket.API",
-        "projectPath": "D:\\Platzi\\Arquitectura Frontend\\SoDisProyectoClase\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
+        "projectPath": "C:\\Users\\davidypaola\\Desktop\\Sync\\SoDisProyectoClase\\src\\Supermarket.API\\Supermarket.API.csproj",
         "packagesPath": "C:\\Users\\davidypaola\\.nuget\\packages\\",
-        "outputPath": "D:\\Platzi\\Arquitectura Frontend\\SoDisProyectoClase\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
+        "outputPath": "C:\\Users\\davidypaola\\Desktop\\Sync\\SoDisProyectoClase\\src\\Supermarket.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
