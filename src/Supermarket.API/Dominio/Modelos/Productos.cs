@@ -17,7 +17,7 @@ namespace Supermarket.API.Dominio.Modelos
       ///identificador de cada producto 
       /// </summary>
       /// <value></value>
-    public int id { get; set; }
+    public int Id { get; set; }
 
     [Required]
     /// <summary>

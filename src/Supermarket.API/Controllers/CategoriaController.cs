@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.API.Dominio.Modelos;
 using Supermarket.API.Dominio.Repositorio;
+using Supermarket.API.Dominio.Persistencia;
 using System.Threading;
 using System.Threading.Tasks;
+
 namespace Supermarket.API.Controllers
 {
   /*Controlador de aplicaciones que posee una ruta para poder versionar los servicios que agregan funcionalidades a traves de url diferentes*/
@@ -69,7 +71,7 @@ namespace Supermarket.API.Controllers
           }
           context.crearCategoria(categoria);
           var guardadoOk = await context.guardarCategoria(categoria);
-          return ok();
+          return Ok();
         }
 
         //Delete api/categoria/5
@@ -82,8 +84,8 @@ namespace Supermarket.API.Controllers
             return NotFound();
           }
           context.eliminarCategoria(existe);
-          var guardadoOk =await context.guardadCategoria(existe);
-          return ok();
+          var guardadoOk =await context.guardarCategoria(existe);
+          return Ok();
         }
   }
 }
