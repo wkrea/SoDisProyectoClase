@@ -32,7 +32,7 @@ namespace Supermarket.API.Controllers
         {
             context = CategoriaContexto;
         }
-    // GET jduran9/categoria
+    // GET api/categoria
         //[HttpGet]
         //public ActionResult<IEnumerable<Categoria>> Get()
         //{
@@ -40,7 +40,7 @@ namespace Supermarket.API.Controllers
 
           //  return context.GetCategorias().ToList();
         //}
-         // GET jduran9/categoria
+         // GET api/categoria
          //version asincrona --> usoo paralelismo en el servidor 
 
         [HttpGet]
@@ -52,12 +52,38 @@ namespace Supermarket.API.Controllers
         {
             return await context.GetCategoriasAsync();
         }
-        // GET jduran9/categoria/5
+        // GET api/categoria/5
+        //metodo asincrono 
         [HttpGet("{id}")]
         public async Task<Categoria> HallarCategoriaById(int id)
         {
             Categoria resultado = await context.FindCategoriaById(id);
             return resultado;
+        }
+        [HttpPost]
+        public async Task<ActionResult> crearCategoria([FromBody] Categoria categoria )
+        {
+          if (!ModelState.IsValid)
+          {
+            return BadRequest(ModelState);
+          }
+          context.crearCategoria(categoria);
+          var guardadoOk = await context.guardarCategoria(categoria);
+          return ok();
+        }
+
+        //Delete api/categoria/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> eliminarCategoria (int id)
+        {
+          Categoria existe = await context.FindCategoriaById(id);
+          if(existe ==null)
+          {
+            return NotFound();
+          }
+          context.eliminarCategoria(existe);
+          var guardadoOk =await context.guardadCategoria(existe);
+          return ok();
         }
   }
 }
