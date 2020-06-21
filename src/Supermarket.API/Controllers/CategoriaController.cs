@@ -14,7 +14,7 @@ namespace Supermarket.API.Controllers
         private readonly ICategoriaRepo context;
         
         /// <summary>
-        /// Controla la informacion de la base
+        /// Contructor de la clase
         /// </summary>
         /// <param name="context">Context</param>
         public CategoriaController(ICategoriaRepo CategoriaContexto)
@@ -24,10 +24,10 @@ namespace Supermarket.API.Controllers
 
         // Get api/categoria
         [HttpGet]
-        public ActionResult<IEnumerable<Categoria>> Get()
+        /* public ActionResult<IEnumerable<Categoria>> Get()
         {
             return context.GetCategorias().ToList();
-        } 
+        }  */
 
         // Get api/categoria
         //asincrono
@@ -38,10 +38,43 @@ namespace Supermarket.API.Controllers
         }
 
         // GET api/categoria/1
+        
+        /// <summary>
+        ///Metodo asincrono 
+        /// </summary>
+        /// <param name="id">Identificador categoria</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
-        public ActionResult<string> FindCategoriaById(int id)
+        public async Task<Categoria> HallarCategoriaById(int id)
         {
-            return "value";
+            Categoria resultado = await context.FindCategoriaById(id);
+            return resultado;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> crearCategoria([FromBody] Categoria categoria)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            context.crearCategoria(categoria);
+            var guardadoOk = await context.guardarCategoria(categoria);
+            return Ok();
+        }
+
+        // DELETE api/categoria/1
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> eliminarCategoria( int id)
+        {
+            Categoria existe = await context.FindCategoriaById(id);
+            if(existe == null)
+            {
+                return NotFound();
+            }
+            context.eliminarCategoria(existe);
+            var guardadoOk = await context.guardarCategoria(existe);
+            return Ok();
         }
     }
 }

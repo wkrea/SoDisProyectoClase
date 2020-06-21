@@ -18,7 +18,7 @@ namespace Supermarket.API.Dominio.Persistencia
         /// <returns></returns>
         public SupermarketApiContext(DbContextOptions<SupermarketApiContext> Options) : base(Options)
         {
-            PoblarBase();
+            /* PoblarBase(); */
             Database.EnsureCreated(); 
         }
         //tablas 
@@ -36,11 +36,33 @@ namespace Supermarket.API.Dominio.Persistencia
         public DbSet<Producto> productos {get; set; }
 
         //seed (DB memoria) Semillas
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            // Fluent Api
+
+            builder.Entity<Categoria>().ToTable("categorias");
+            builder.Entity<Categoria>().HasKey(categoria => categoria.id);
+            builder.Entity<Categoria>().Property(categoria => categoria.id).ValueGeneratedOnAdd();
+            builder.Entity<Categoria>().Property(categoria => categoria.nombre).HasColumnName("NumbreCompleto");
+            builder.Entity<Categoria>()
+                    .Property(categoria => categoria.nombre)
+                    .IsRequired()
+                    .HasMaxLength(30);
+            
+            builder.Entity<Categoria>().HasData(
+                new Categoria(){ id = 1, nombre = "categoria 1"},
+                new Categoria(){ id = 2, nombre = "categoria 2"},
+                new Categoria(){ id = 3, nombre = "categoria 3"}
+            );
+            
+             
+        }
+
 
         /// <summary>
         /// Semillas de la base de datos
         /// </summary>
-        public void PoblarBase()
+        /* public void PoblarBase()
         {
             this.categorias.Add(
                 new Categoria{
@@ -59,6 +81,6 @@ namespace Supermarket.API.Dominio.Persistencia
             );
             //guarda en la base de datos, los cambios
             this.SaveChanges();
-        }
+        } */
     }
 }

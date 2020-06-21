@@ -31,9 +31,10 @@ namespace Supermarket.API.Dominio.Repositorios
         /// Busqueda de Categoria por ID
         /// </summary>
         /// <returns></returns>
-        public Categoria FindCategoriaById(int id)
+        public async Task<Categoria> FindCategoriaById(int id)
         {
-            throw new System.NotImplementedException();
+            Categoria resultado = await db.categorias.FindAsync(id);
+            return resultado;
         }
 
         /// <summary>
@@ -45,6 +46,48 @@ namespace Supermarket.API.Dominio.Repositorios
             IEnumerable<Categoria> lista = await db.categorias.ToListAsync();
             return lista;
         }
+
+        /// <summary>
+        /// Crear categoria, no retorna nada
+        /// </summary>
+        /// <param name="categoria">categoria</param>
+        public  void crearCategoria(Categoria categoria)
+        {
+             db.categorias.AddAsync(categoria);
+        }
+
+        /// <summary>
+        /// Edita categoria
+        /// </summary>
+        /// <param name="id">id categoria, categoria</param>
+        /// <param name="categoria"></param>
+        public void editarCategoria(int id, Categoria categoria)
+        {
+            db.Entry(categoria).State = EntityState.Modified;
+            db.categorias.Update(categoria);
+        }
+
+        /// <summary>
+        /// Eliminar categoria
+        /// </summary>
+        /// <param name="categoria">categoria</param>
+        public void eliminarCategoria(Categoria categoria)
+        {
+            db.categorias.Remove(categoria);
+        }
+
+        /// <summary>
+        /// Asincrono guardar categoria
+        /// </summary>
+        /// <param name="categoria">categoria</param>
+        /// <returns></returns>
+        public async Task<Categoria> guardarCategoria(Categoria categoria)
+        {
+            await db.SaveChangesAsync();
+            return categoria;
+        }
+
+        
     }
 
 }

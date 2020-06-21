@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Supermarket.Api.Dominio.Modelos
 {
     /// <summary>
@@ -6,12 +9,16 @@ namespace Supermarket.Api.Dominio.Modelos
     /// <value></value>
     public class Producto
     {
+        [Key]
+
         /// <summary>
         /// Id producto
         /// </summary>
         /// <value></value>
         public int Id { get; set; }
         
+        [Required]
+
         /// <summary>
         /// Nombre del producto
         /// </summary>
