@@ -31,12 +31,30 @@ namespace Supermarket.API.Dominio.Repositorios
         /// <returns></returns>
         Task<Categoria> FindCategoriaById(int id);
 
+        /// <summary>
+        /// Crear categoria
+        /// </summary>
+        /// <param name="categoria"></param>
         void crearCategoria(Categoria categoria);
 
+        /// <summary>
+        /// Edita categoria
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="categoria"></param>
         void editarCategoria(int id, Categoria categoria);
 
+        /// <summary>
+        /// Elimina la categoria
+        /// </summary>
+        /// <param name="categoria"></param>
         void eliminarCategoria(Categoria categoria);
 
+        /// <summary>
+        /// Guarda la categoria
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
         Task<Categoria> guardarCategoria(Categoria categoria);
     }
 }

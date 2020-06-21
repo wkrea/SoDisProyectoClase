@@ -14,7 +14,7 @@ namespace Supermarket.API.Controllers
         private readonly ICategoriaRepo context;
         
         /// <summary>
-        /// Controla la informacion de la base
+        /// Contructor de la clase
         /// </summary>
         /// <param name="context">Context</param>
         public CategoriaController(ICategoriaRepo CategoriaContexto)
