@@ -25,5 +25,6 @@ namespace Supermarket.API.Dominio.Modelos
         /// </summary>
         /// <value></value>
         public IList<Producto> producto { get; set; }
+
     }
 }

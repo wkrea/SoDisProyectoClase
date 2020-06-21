@@ -1,10 +1,10 @@
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.API.Dominio.Modelos;
 using Supermarket.API.Dominio.Repositorios;
-using System.Linq;
 
 namespace Supermarket.API.Controllers
 {
