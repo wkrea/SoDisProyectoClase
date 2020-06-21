@@ -1,14 +1,28 @@
-D:\Desktop\Rest\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.deps.json
-D:\Desktop\Rest\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.runtimeconfig.json
-D:\Desktop\Rest\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.runtimeconfig.dev.json
-D:\Desktop\Rest\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.dll
-D:\Desktop\Rest\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.pdb
-D:\Desktop\Rest\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.csprojAssemblyReference.cache
-D:\Desktop\Rest\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.csproj.CoreCompileInputs.cache
-D:\Desktop\Rest\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorAssemblyInfo.cache
-D:\Desktop\Rest\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorAssemblyInfo.cs
-D:\Desktop\Rest\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.AssemblyInfoInputs.cache
-D:\Desktop\Rest\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.AssemblyInfo.cs
-D:\Desktop\Rest\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorTargetAssemblyInfo.cache
-D:\Desktop\Rest\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.dll
-D:\Desktop\Rest\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.pdb
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.deps.json
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.runtimeconfig.json
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.runtimeconfig.dev.json
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.dll
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.pdb
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.csprojAssemblyReference.cache
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.csproj.CoreCompileInputs.cache
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorAssemblyInfo.cache
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorAssemblyInfo.cs
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.AssemblyInfoInputs.cache
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.AssemblyInfo.cs
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorTargetAssemblyInfo.cache
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.dll
+E:\UNIVERSIDAD\programacion\Distribuidos\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.pdb
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.deps.json
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.runtimeconfig.json
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.runtimeconfig.dev.json
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.dll
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\bin\Debug\netcoreapp2.2\Supermarket.API.pdb
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.csprojAssemblyReference.cache
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.csproj.CoreCompileInputs.cache
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorAssemblyInfo.cache
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorAssemblyInfo.cs
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.AssemblyInfoInputs.cache
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.AssemblyInfo.cs
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.RazorTargetAssemblyInfo.cache
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.dll
+D:\Platzi\Arquitectura Frontend\SoDisProyectoClase\SoDisProyectoClase\src\Supermarket.API\obj\Debug\netcoreapp2.2\Supermarket.API.pdb
