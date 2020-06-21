@@ -2,9 +2,16 @@ using System;
 using System.Net.Http.Headers;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+
+using System.Collections.Generic;
+
 namespace Supermarket.API.Dominio.Modelos
 {
-    public class Producto 
+    /// <summary>
+    /// Se crera clase que va a contener el id, nombre del producto
+    /// que se listarán dentro de categoría
+    /// </summary>
+    public class Producto
     {
         [Key]
         /// <summary>

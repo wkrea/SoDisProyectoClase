@@ -1,17 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-using Supermarket.API.Dominio.Repositorios;
-using Supermarket.API.Dominio.Persistencia;
-
-namespace Supermarket.API
+namespace BlogApi
 {
     public class Startup
     {
@@ -26,19 +26,6 @@ namespace Supermarket.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            /// <summary>
-            /// Permite asociar el servicio de la BD
-            /// </summary>
-            /// <typeparam name="SupermarketApiContext"></typeparam>
-            /// <returns></returns>
-            services.AddDbContext<SupermarketApiContext>(
-                op => op.UseInMemoryDatabase("SupermarketApi")
-                );
-
-            //Declaración para el manejo del patrón inyección de dependencia DI
-            //de el reporsitorio que maneje la lógica de  negocio de categorías.
-            services.AddTransient<ICategoriaRepo, CategoriaRepo>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

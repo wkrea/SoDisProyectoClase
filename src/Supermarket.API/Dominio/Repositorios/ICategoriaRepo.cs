@@ -1,9 +1,14 @@
-using System.Collections.Generic;
+
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Supermarket.API.Dominio.Modelos;
 
 namespace Supermarket.API.Dominio.Repositorios
 {
+    /// <sumary>
+    ///Permire definir los métodos que permitirán acceder la lógica de negocio
+    ///aislando la capa de acceso a datos de los demás módulos con consuman los datos.
+    /// </sumary>
     public interface ICategoriaRepo
     {
         /// <summary>

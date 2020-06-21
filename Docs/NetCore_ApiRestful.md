@@ -259,23 +259,112 @@ namespace Supermarket.API
 
 Cuando la aplicación se inicia, se llama al método "Principal", de la clase "Programa". Crea un host web por defecto usando la configuración de inicio, exponiendo la aplicación vía HTTP a través de un puerto específico (por defecto, el puerto 5000 para HTTP y 5001 para HTTPS).
 
+### El controlador
+
+Si se da un vistazo al archivo `Controller/ValuesController.cs`, se puede ver que es una clase que define una serie de métodos.
+
+Para comprender mejor el propósito de este archivo y comprender la utilidad que tienen los métodos definidos se considera importante introducir algunos conceptos básicos acerca del funcionamiento del protocolo http, a la par que verificamos la definición de cada método.
+
+### El Contexto HTTP
+
+El conocido protocolo de hipertexto - Http, es un conjunto de reglas y procesos, que definen la forma en cómo se puede establecer la comunicación entre distintas máquinas que acceden a internet para poder intercambiar información.
+
+La palabra protocolo no compete sólo al ámbito de las tecnologías y las comunicaciones. Si se hace memoria, acerca de los conocimientos adquiridos sobre gramática y lenguaje en época de la escuela o el colegio, quizá le sea familiar el término proceso de comunicación, el cual explica los factores y/o elementos claves, que permite definir la forma en que nos comunicamos, bien sea de forma oral o escrita.
+
+En aquel entonces se mencionaba que todo proceso de comunicación depende de tres factores fundamentales para poder llevarse a cabo. El primero de ellos era la existencia de un emisor, Que podría ser o no una persona el segundo el receptor, que era un elemento o persona encargado de recibir la información. El tercer factor el mensaje el cual contenía la información que se desea va a transmitir. Finalmente los factores más importantes el código y el protocolo, Los cuales Mediante los cuales se definió una serie de símbolos y reglas con las cuales se podían perfectamente interpretar el mensaje y garantizar que la conversación se desarrollará de forma clara, correcta y coherente.
+
+Puede que ahora sea más sencillo hacer alguna analogía, si se recuerda que los elementos que componen una arquitectura cliente-servidor, perfectamente podemos asociar el emisor como un cliente y al receptor como un servidor, y viceversa.
+
+En cuanto al código y el mensaje que se transmite, este estará asociado a los distintos formatos (JSON, XML entre otros) a través de los cuales se intercambia la información a través del Canal (internet). Tan solo hace falta relacionar un elemento, el protocolo.
+
+Apegado estrictamente al significado de la palabra, protocolo se define como un conjunto de reglas por las cuales se rigen el intercambio de información entre dos personas equipos o cosas conectados entre sí. 
+
+Para el caso particular de nuestra analogía, el protocolo corresponde con http; el cual es un protocolo de comunicación asíncrono, que define una secuencia de pasos mediante la cual la información debe ser intercambiada para ser coherente. Adicionalmente, http define un conjunto de códigos de error y/o éxito, entre otros; mediante los cuales se puede establecer el estado de la comunicación y la información, intercambiada entre el cliente y el servidor.
+
+En términos generales se puede decir que la información ( el mensaje), está compuesto por un cabecero (header) y un cuerpo (body). El cabecero contiene información relevante para definir la forma en cómo se intercambia la información; mientras que el cuerpo, contiene los datos a ser procesados o presentados; según sea sea su origen o  destino; el cliente o el servidor).
+
+### Aplicando el concepto (los Controladores y su esencia)
+
+Dentro de la arquitectura cliente-servidor los conceptos de ingeniería del sofá se encuentra la definición de la arquitectura por capas.
+
+Si bien la arquitectura cliente-servidor permite Definir la forma en cómo el software se divide desde el punto de vista de la comunicación. Arquitectura de capas permite Definir la forma en como el sofá se divide en su estructura en código.
+
+Existen dos tipos de arquitectura de casas de dos niveles y tres niveles, El caso abordan en este documento se abordan enfoques de tres capas. Las cuales se dividen en capa de presentación (FrontEnd), capa de lógica de negocio (Backend) y Capa de persistencia (almacenamiento).
+
+Los controladores son un elemento especial dentro de las arquitecturas pues se convierten en la puerta de entrada en que las acciones ejecutadas por el usuario en la capa de presentación (Frontend - Lado cliente), acceden a la lógica de negocio (BackEnd) definida del lado del servidor.
+
+La definición anterior es importante dado que catalogamos a los controladores como un componente intermediario, Es decir su única función es la De servir como componente mediador en el intercambio de de la información, Definiendo la puerta de entrada hacia la lógica de negocio; de manera que sobre él o ellos no se deben definir estructuras de control ni lógica de negocio. 
+
+A lo sumo, la lógica definida dentro de los controladores está limitada a servir para validación del estado de la comunicación mediante el protocolo http, o validación en primera instancia de los datos que provienen del cliente.
+
+Es por ello que si miramos detenidamente los métodos definidos dentro de la clase `Controller/ValuesController.cs`, se aprecia que en la parte superior de cada método están definidos los verbos (acciones) a través de las cuales, se define la forma en como se intercambia información con el lado cliente mediante el protocolo http; para el caso puntual los verbos HttpGet, HttpPost, HttpPut y HttpDelete. 
+
+```csharp
+[Route("api/[controller]")]
+[ApiController]
+public class ValuesController : ControllerBase
+{
+    // GET api/values
+    [HttpGet]
+    public ActionResult<IEnumerable<string>> Get()
+    {
+        // obtener información de manera grupal, sin necesidad de un parámetro 
+        return new string[] { "value1", "value2" };
+    }
+
+    // GET api/values/5
+    [HttpGet("{id}")]
+    public ActionResult<string> Get(int id)
+    {
+        // obtener información de manera individual recibiendo un parámetro 
+        return String.Format("HttpGet del elemento {0}", id);
+    }
+
+    // POST api/values
+    [HttpPost]
+    public string Post([FromBody] string value)
+    {
+        // permitir la creación de un elemento apoyado en los parámetros recibidos
+        return String.Format("HttpPost {0}", value);
+    }
+
+    // PUT api/values/5
+    [HttpPut("{id}")]
+    public string Put(int id, [FromBody] string value)
+    {
+        // permitir la modificación de un elemento apoyado en los parámetros recibidos
+        return String.Format("HttpPut modificar elmento {0}, con el valor {1}", id, value);
+    }
+
+    // DELETE api/values/5
+    [HttpDelete("{id}")]
+    public string Delete(int id)
+    {
+        // permitir la eliminación de un elemento apoyado en los parámetros recibidos
+        return String.Format("HttpDelete {0}", id);
+    }
+}
+```
+
+Para el caso particular de las Api web de tipo Restful, el funcionamiento de los controladores se apoya en las direcciones de recurso (endpoints); que son Expuestos por el servidor, y a las cuales se envían solicitudes http para tener acceso a la lógica de negocio disponible detrás de los controladores.
+
+Es importante mencionar que, Si bien los controladores están en capacidad de interpretar el cuerpo del mensaje recibido mediante la solicitud http; también, a partir de la url mediante la cual se hace la solicitud; estos están en capacidad de extraer información adicional, que puede emplearse como parámetro, para la invocación de los métodos definidos dentro de la lógica del controlador.
+
+En el caso particular del framework *.NetCore*, la ruta del recurso a través de la cual se accede al controlador `ValuesController.cs`, está definida por la sentencia `[Route("api/[controller]")]`. La sentencia anterior indica que el acceso a los métodos del controlador, es posible cuando se hacen solicitudes a la dirección url compuesta por `dominio/api/[controller]`, que cono se verá en futuro corresponderá a `http://localhost:5000/api/values` para el caso en que se usa protocolo http para el intercambio de información.
+
+> ⚠ Con lo anterior, se ha podido dar Claridad acerca del contexto y uso del protocolo http. Adicionalmente se a podido exponer el rol que tienen los controladores dentro de la arquitectura de capas; mediante la cual se definen las responsabilidades de cada componente de software, y el rol que cumplen desde el punto de vista de la arquitectura cliente-servidor; por medio de quien se define la función y  los elementos involucrados en el Intercambio de la información.
+
+
 
 
 
 ### Referencias Para Mantenerse Aprendiendo
-
 * [.NET Core Tutorials — Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/core/tutorials/)
-
 * [ASP.NET Core Documentation — Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/#pivot=core&panel=core_tutorials)
-
 * [how to build RESTful APIs with ASP.NET Core](https://www.freecodecamp.org/news/an-awesome-guide-on-how-to-build-restful-apis-with-asp-net-core-87b818123e28/)
-
 * [Glosary Api](https://auth0.com/blog/how-to-build-and-secure-web-apis-with-aspnet-core-3/)
-
 * [JWT Tockens](https://www.syncfusion.com/blogs/post/how-to-build-crud-rest-apis-with-asp-net-core-3-1-and-entity-framework-core-create-jwt-tokens-and-secure-apis.aspx)
-
 * [NetCore Api](https://www.toptal.com/asp-dot-net/asp-net-web-api-tutorial)
-
 * [Building an ASP.NET Web API with ASP.NET Core](https://www.toptal.com/asp-dot-net/asp-net-web-api-tutorial)
 * [Build a Simple CRUD App with Angular 8 and ASP.NET Core 2.2](https://dev.to/dileno/build-a-simple-crud-app-with-angular-8-and-asp-net-core-2-2-part-1-back-end-39e1#setup-migrations-and-create-the-database)
 * [Creating Web API in ASP.NET Core 2.0](https://www.codingame.com/playgrounds/35462/creating-web-api-in-asp-net-core-2-0/part-1---web-api)

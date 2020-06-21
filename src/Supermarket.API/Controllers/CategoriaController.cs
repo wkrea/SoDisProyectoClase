@@ -1,37 +1,45 @@
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.API.Dominio.Modelos;
 using Supermarket.API.Dominio.Repositorios;
-using System.Threading.Tasks;
 
 namespace Supermarket.API.Controllers
 {
+    /*Controlador de aplicaciones que posee una ruta para 
+    poder versionar los servicios que agregan funcionalidades 
+    a traves de url diferentes*/
+
     [ApiController]
     [Route("api/[controller]")]
-    public class CategoriaController : ControllerBase
+    //requuest api/categorias (Get, Put, Delete)
+
+    /// <summary>
+    /// El controlador permite obtener los datos de cualquiera de las dos clases Categoria o Producto
+    /// </summary>
+    public class categoriaController : ControllerBase
     {
-        /// <summary>
-        /// Variable privada de la clase/solo lectura
-        /// </summary>
         private readonly ICategoriaRepo context;
-        /// <summary>
-        /// Metodo contructor de la clase
-        /// </summary>
-        /// <param name="CategoriaContexto"></param>
-        public CategoriaController(ICategoriaRepo CategoriaContexto)
+        public categoriaController(ICategoriaRepo CategoriaContexto)
         {
             context = CategoriaContexto;
         }
-        //Asincrona --> Usa paralelismo en el servidor
-        public async Task<IEnumerable<Categoria>> GetAsync()
+
+        // GET api/values
+        [HttpGet]
+        public async Task<IEnumerable<Categoria>> Get()
         {
-            
-            /// <summary>
-            /// Retorna lista de categoria
-            /// </summary>
-            /// <returns></returns>
-            return await context.GetCategoriasAsync();
+            //return new string[] { "value1", "value2" };
+            return await context.GetCategorias();
+        }
+
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public async Task<Categoria> FindCategoriaById(int id)
+        {
+            return await context.HallarCategoriaById(id);
         }
 
         // GET api/values/5
@@ -68,5 +76,19 @@ namespace Supermarket.API.Controllers
             return Ok();
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> eliminarCategoria(int id)
+        {
+            Categoria existe = await context.HallarCategoriaById(id);
+
+            if(existe == null)
+            {
+                return NotFound();
+            }
+
+            context.eliminarCategoria(existe);
+            var guardadoOk = await context.guardarCategoriaById(existe);
+            return Ok();
+        }
     }
 }

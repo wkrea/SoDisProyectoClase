@@ -3,16 +3,26 @@ using Supermarket.API.Dominio.Modelos;
 
 namespace Supermarket.API.Dominio.Persistencia
 {
+    /// <summary>
+    /// Permite definir la forma como se manejara la bd 
+    /// el DbContext me sirve como emulador que me da el EntityFrameworkCore
+    /// </summary>
     public class SupermarketApiContext : DbContext
     {
-        ///constructor
+        /// <summary>
+        /// Creacion del contructor de esta clase que deriva del DbContext
+        /// </summary>
+        /// <param name="options">Son las que poseen el string de conexion y permiten definirse en startups.cs </param>
+        /// <returns></returns>
         public SupermarketApiContext(DbContextOptions<SupermarketApiContext> options) : base(options)
         {
-            //PoblarBase();
-            Database.EnsureCreated();
+            Database.EnsureCreated(); // Asegura que la base esta creada antes arrancar
         }
-        //Tablas "props de la clase"
 
+        /// <summary>
+        /// Tabla que representa la categoria
+        /// </summary>
+        /// <value></value>
         public DbSet<Categoria> categorias {get; set;}
         public DbSet<Producto> productos {get;  set;}
         
