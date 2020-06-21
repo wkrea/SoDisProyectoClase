@@ -24,7 +24,7 @@ namespace Supermarket.API.Dominio.Repositorios
             db.categorias.AddAsync(categoria);
         }
 
-        public void editarCategoria(Categoria categoria)
+        public void editarCategoria(int id, Categoria categoria)
         {
             db.Entry(categoria).State = EntityState.Modified;
             db.categorias.Update(categoria);

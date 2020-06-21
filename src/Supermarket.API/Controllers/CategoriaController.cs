@@ -19,11 +19,12 @@ namespace Supermarket.API.Controllers
         /// Metodo contructor de la clase
         /// </summary>
         /// <param name="CategoriaContexto"></param>
-        public CategoriaController(ICategoriaRepo CategoriaContexto)
+        public CategoriaController(ICategoriaRepo CategoriaContext)
         {
-            context = CategoriaContexto;
+            context = CategoriaContext;
         }
         //Asincrona --> Usa paralelismo en el servidor
+        [HttpGet]
         public async Task<IEnumerable<Categoria>> GetAsync()
         {
             

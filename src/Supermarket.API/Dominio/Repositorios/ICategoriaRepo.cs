@@ -28,7 +28,7 @@ namespace Supermarket.API.Dominio.Repositorios
         /// Metodo para editar una categoria, recibe una Categoria como parametro
         /// </summary>
         /// <param name="categoria"></param>
-        void editarCategoria(Categoria categoria);
+        void editarCategoria(int id, Categoria categoria);
         /// <summary>
         /// Metodo de eliminacion de una categoria, Recibe una instancia de
         /// tipo Categoria como parametro

@@ -27,7 +27,7 @@ namespace Supermarket.API.Dominio.Persistencia
             builder.Entity<Categoria>().Property(categoria => categoria.id).ValueGeneratedOnAdd();
             builder.Entity<Categoria>().Property(categoria => categoria.nombre).HasColumnName("NombreCompleto");
             builder.Entity<Categoria>()
-                    .Property(categorias => categorias.nombre)
+                    .Property(categoria => categoria.nombre)
                     .IsRequired()
                     .HasMaxLength(30);
 
