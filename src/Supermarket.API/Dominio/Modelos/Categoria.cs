@@ -7,13 +7,13 @@ namespace Supermarket.API.Dominio.Modelos
 
   public class Categoria
   {
-    internal int id;
+    //internal int id;
 /// <summary>
       ///  identificador de cada categoria
       /// </summary>
       /// <value></value>
 
-    public int Id { get; set; }
+    public int id { get; set; }
     /// <summary>
       /// se asigna un valor de tipo string que funciona para nombrar cada categoria
       /// </summary>

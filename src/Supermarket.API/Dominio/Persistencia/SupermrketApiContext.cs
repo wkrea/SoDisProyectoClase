@@ -51,7 +51,7 @@ namespace Supermarket.API.Dominio.Persistencia
         builder.Entity<Categoria>().HasData(
             new Categoria(){ id = 1, nombre = "Categoria 1"},
             new Categoria(){ id = 2, nombre = "Categoria 2"},
-            new Categoria(){ id = 2, nombre = "Categoria 3"}
+            new Categoria(){ id = 3, nombre = "Categoria 3"}
         );
         
 
