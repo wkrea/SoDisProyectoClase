@@ -1,0 +1,401 @@
+= GitLab Asciidoc Cheat Sheet{solutions-text}{mysubtitle}
+:description: Example document to show best practices for use on gitlab and on pdf output
+:keywords: gitlab, asciidoc
+:ex_number: 0
+:current_dir_prefix: CheatSheet/
+include::../ADocMeta.asc[]
+include::../ADocGitlabVars.asc[]
+
+See this document as a collection of best practices on how to write
+AsciiDoc files being nicely rendered on GitLab and producing good
+looking PDF docs generated using asciidoctor-pdf.
+
+This requires that the AsciiDoc file has primarily to be GitLab compatible
+with the possibility to adjust and style for other media.
+To achieve this we make use of preprocessor directives if possible.
+
+View this file as link:{ci_project_artifacts_view}CheatSheet/CheatSheet.pdf?job=CheatSheetAsciiDoc[PDF output on GitLab].
+
+Download this file as link:{ci_project_artifacts_download}CheatSheet/CheatSheet.pdf?job=CheatSheetAsciiDoc[PDF] and view with local viewer.
+
+== Links to internal end external resources
+
+:linktablesettings: cols="5l,2d"
+
+[caption=]
+.Explicit external reference
+[{linktablesettings}, options="header"]
+|===
+|Syntax |Rendered
+|https://www.pgadmin.org/[pgAdmin]
+|https://www.pgadmin.org/[pgAdmin]
+|===
+
+[caption=]
+.Implicit external reference
+[{linktablesettings}]
+|===
+|https://www.pgadmin.org/
+|https://www.pgadmin.org/
+|===
+
+[caption=]
+.Reference to repository file in current directory
+[{linktablesettings}]
+|===
+|link:{ci_project_fileref}{current_dir_prefix}pandoc_meta.yaml[pandoc metadata yaml]
+|link:{ci_project_fileref}{current_dir_prefix}pandoc_meta.yaml[pandoc metadata yaml]
+|===
+
+[caption=]
+.Relative reference to repository file
+[{linktablesettings}]
+|===
+|link:{ci_project_fileref}{current_dir_prefix}README.adoc[README]
+|link:{ci_project_fileref}{current_dir_prefix}README.adoc[README]
+
+|link:{ci_project_fileref}.gitlab-ci.yml[.gitlab-ci.yml (toplevel dir)]
+|link:{ci_project_fileref}.gitlab-ci.yml[.gitlab-ci.yml (toplevel dir)]
+|===
+
+[caption=]
+.Rewrite file extension depending on output format (pdf/html/...)
+[{linktablesettings}]
+|===
+|link:{ci_project_fileref}{current_dir_prefix}README{outfilesuffix}[README{outfilesuffix}]
+|link:{ci_project_fileref}{current_dir_prefix}README{outfilesuffix}[README{outfilesuffix}]
+|===
+
+[caption=]
+.Reference to file/dir on different branch
+[{linktablesettings}]
+|===
+|link:{ci_project_url}blob/Demo-Solutions/CheatSheet/README.solutions.md[Solutions Readme]
+|link:{ci_project_url}blob/Demo-Solutions/CheatSheet/README.solutions.md[Solutions Readme]
+|===
+
+[caption=]
+.View (`file`) latest artifacts file in GitLab
+[{linktablesettings}]
+|===
+|link:{ci_project_artifacts_view}CheatSheet/CheatSheet.pdf?job=CheatSheet[In-browser PDF]
+|link:{ci_project_artifacts_view}CheatSheet/CheatSheet.pdf?job=CheatSheet[In-browser PDF]
+|===
+
+[caption=]
+.Download (`raw`) latest artifacts file
+[{linktablesettings}]
+|===
+|link:{ci_project_artifacts_download}CheatSheet/CheatSheet.pdf?job=CheatSheet[Download PDF]
+|link:{ci_project_artifacts_download}CheatSheet/CheatSheet.pdf?job=CheatSheet[Download PDF]
+|===
+
+[caption=]
+.Browse latest job artifacts
+[{linktablesettings}]
+|===
+|link:{ci_project_artifacts_browse}?job=CheatSheet[latest artifacts]
+|link:{ci_project_artifacts_browse}?job=CheatSheet[latest artifacts]
+|===
+
+[caption=]
+.Internal reference to heading (anchor)
+[{linktablesettings}]
+|===
+|<<filters,Filters>>
+|<<filters,Filters>>
+|===
+
+=== Hidden content, aka solution filtering
+
+To conditionally hide content from being shown on GitLab and in an
+output file, wrap it inside an `ifdef` block like shown here:
+
+  ifdef::exercise_solution[]
+  endif::exercise_solution[]
+
+To activate solutions rendering, set the attribute `exercise_solution` on the command line.
+
+[source, bash]
+----
+--attribute exercise_solution
+----
+
+ifdef::exercise_solution[]
+- Solutions Entry +
+This content is visible in a generated file when adding `--attribute exercise_solution` to the asciidoctor command line.
+
+See the full PDF output
+link:{ci_project_artifacts_view}CheatSheet/CheatSheet-Solutions_adoc.pdf?job=CheatSheetAsciiDoc[here]
+endif::exercise_solution[]
+
+=== Document metadata from git
+
+To automatically adjust revision related document attributes, I recommend extending the
+asciidoctor command line and pass in attributes based on current git repository settings.
+
+[source, bash]
+----
+--attribute revnumber="$(git describe --abbrev  --tags --always)"
+--attribute revremark="$(git log -1 --pretty=format:%s)"
+--attribute revdate="$(git log -1 --date=short-local --pretty=format:%cd)"
+----
+
+== Formatting options
+
+=== Source Code formatting / Code Blocks
+
+Please stick to the following convention to specify code blocks.
+
+- Multi line blocks should be introduced with a corresponding source block including the language.
++
+....
+[source, sql]
+----
+SELECT
+  *
+FROM
+ angestellter;
+----
+....
++
+results in
++
+[source, sql]
+----
+SELECT
+  *
+FROM
+  angestellter;
+----
+
+- Inline Code blocks use single backticks and can currently not contain language specifiers for GitLab or asciidoctor.
+
+        `int main()`
+
+- If you don't want a code block being wrapped in PDF output, you can use https://asciidoctor.org/docs/asciidoctor-pdf/#autofitting-text[`source%autofit`] and if required append `%nowrap` too.
++
+ [source%autofit%nowrap, xml]
+ ----
+ <!--<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/bank"/> -->
+ ----
++
+results in
++
+[source%autofit%nowrap, xml]
+----
+<!--<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/bank"/> -->
+----
+
+=== Admonitions
+
+Notes, Tips, Warnings etc. can be placed inside special blocks.
+See https://asciidoctor.org/docs/user-manual/#admonition[admonition] for all possible items.
+
+  [NOTE]
+  ====
+  Blub blab
+  ====
+
+[NOTE]
+====
+Blub blab
+====
+
+
+== Tables
+
+Tables in asciidoc are easy but can be configured to be very powerful.
+It would be too much to explain all the details here so I recommend reading through https://asciidoctor.org/docs/user-manual/#tables[this section of the manual].
+
+The following table syntax
+
+....
+[cols="<,^",options="header,autowidth"]
+|=====
+| title      |  bitmap
+| Prof.      |  1000111101
+| Dr.        |  0110000010
+| Dr. habil. |  0001000000
+|=====
+....
+results in:
+
+[cols="<,^",options="header,autowidth"]
+|=====
+| title      |  bitmap
+| Prof.      |  1000111101
+| Dr.        |  0110000010
+| Dr. habil. |  0001000000
+|=====
+
+== Images
+
+It is possible to insert images and figures either _inline_ (`image:...`) or
+_block_ (`image::...`).
+Many link:https://asciidoctor.org/docs/user-manual/#summary-2[attributes] can be set for the image like `title`, `width` etc.
+
+=== inline image
+
+An inline image should render inline with surrounding text
+image:HSR_Logo_trans_56mm_300dpi.png[title="Image title", id="HSRinline", width="20%", pdfwidth="20%"]
+depending on the output format and the layout engine.
+
+To include an _inline_ image, use the following syntax:
+
+----
+image:HSR_Logo_trans_56mm_300dpi.png[title="Image title", id="HSRinline", width="20%", pdfwidth="20%"]
+----
+
+=== block image
+
+A _block_ image will usually be placed after the text but its
+position can be influenced depending on the backend. You can even reference the image
+using a <<blockimageanchor,reference>> (+<<blockimageanchor,reference>>+).
+
+The recommended and explicit syntax is shown first.
+
+----
+image::IFS_Institute_for_Software_trans_56mm_300dpi.png[title="IFS description (title)", alt="Alternate Text",id=blockimageanchor, width="40%", pdfwidth="40%", align=center]
+----
+
+image::IFS_Institute_for_Software_trans_56mm_300dpi.png[title="IFS description (title)", alt="Alternate Text",id=blockimageanchor, width="40%", pdfwidth="40%", align=center]
+
+The following syntax can be used alternatively.
+
+----
+[#idifs]
+.Block image title
+image::IFS_Institute_for_Software_trans_56mm_300dpi.png["Alternate Text", "30%", pdfwidth="40%", align=center]
+----
+
+[#idifs]
+.Block image description (title)
+image::IFS_Institute_for_Software_trans_56mm_300dpi.png["Alternate Text", "30%", pdfwidth="40%", align=center]
+
+== Diagrams
+
+=== Plantuml / Graphviz
+
+http://plantuml.com/[Plantuml] can be used to dynamically render
+images base on text input. Many different
+http://plantuml.com/sitemap-language-specification[languages] are
+supported including http://plantuml.com/dot[`graphviz`/`dot`]
+capabilities.
+
+==== Sequence diagram
+
+.Plantuml examples
+[cols="l,a", options="header"]
+|======
+| Syntax | Rendered
+|
+[plantuml, id="myDiagram"]
+----
+a->b
+----
+|
+[plantuml, id="myDiagram"]
+----
+a->b
+----
+|======
+
+
+== Math
+
+Math _language_ can be either `asciimath` or `latexmath`.
+To simplify switching between the formats the so called `stem` macro/attribute can be used and set accordingly.
+On Gitlab it seems that selecting `latexmath` is the only supported format.
+Therefore we need to set
+....
+:stem: latexmath
+....
+to support math rendering on Gitlab and in other output formats.
+
+:stem: latexmath
+
+.Math examples
+[cols="2", options="header"]
+|=====
+| Syntax | Rendered
+l|
+stem:[a^2+b^2=c^2]
+a|
+stem:[a^2+b^2=c^2]
+
+l|
+[stem]
+++++
+N + M * \frac{N}{(B-2)} = 50 + 1000 * \frac{50}{50} = 1050
+++++
+a|
+[stem]
+++++
+N + M * \frac{N}{(B-2)} = 50 + 1000 * \frac{50}{50} = 1050
+++++
+|=====
+
+== Styling Output
+
+=== Fonts
+
+tbd.
+
+== Cross referencing
+
+tbd.
+
+=== Section numbering
+
+tbd.
+
+=== Figure / Image / Code references
+
+tbd.
+
+== Emoji and Special/Unicode characters
+
+Rendering special characters, like unicode and emoji, require a capable
+font. A font which is partly capable of displaying Unicode characters is
+`DejaVuSerif`. Set `mainfont=DejaVuSerif` to make use of it.
+
+A more capable font is `FreeSerif` as it has more Unicode characters
+available and also supports emojis. It seems to be a bit narrower than
+the default font but its output looks quite nice.
+
+When changing the font is not an option, I recommend using latex Boxes
+for best results in both GitLab and PDF output:
+
+:box_unchecked: &#9744;
+:box_checked: &#9746;
+:box_checkmarked: &#9745;
+:checkedbox: pass:normal[{startsb}&#10004;{endsb}]
+:checkbox: pass:normal[{startsb}&#8195;{endsb}]
+
+....
+:box_unchecked: &#9744;
+:box_checked: &#9746;
+:box_checkmarked: &#9745;
+:checkedbox: pass:normal[{startsb}&#10004;{endsb}]
+:checkbox: pass:normal[{startsb}&#8195;{endsb}]
+....
+
+Some http://unexpected-vortices.com/doc-notes/some-common-unicode-characters.html[common Unicode Chars],
+a list of http://www.sabinanore.com/design/html-special-symbols/[unicode symbol entities]
+and https://unicode-table.com/en/2003/[another site with unicode symbols].
+
+.Checkbox examples
+[cols="l,a", options="header"]
+|=====
+|Syntax | Rendered
+|latexmath:[\Box] | latexmath:[\Box]
+|latexmath:[\boxtimes] | latexmath:[\boxtimes]
+|{box_unchecked} | {box_unchecked}
+|{box_checked} | {box_checked}
+|{box_checkmarked} |{box_checkmarked}
+|{checkedbox} |{checkedbox}
+|{checkbox} |{checkbox}
+|kbd:[{nbsp}] (needs :experimental: attribute)|kbd:[{nbsp}]
+|kbd:[X] (needs :experimental: attribute)|kbd:[X]
+|=====

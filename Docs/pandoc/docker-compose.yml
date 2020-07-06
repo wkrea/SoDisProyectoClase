@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+    pandoc:
+        image: wallaskrea/pandoc
+        build: 
+            # context: ./pandoc
+            context: ./GitlabMarkdownToPDF
+            dockerfile: Dockerfile.pandoc.alpine
+        volumes: 
+            - ./pandoc:/workspace
+            - ./pandoc:/root/.pandoc/templates
+        # command: 
+        # entrypoint: sh -c "pandoc -F pandoc-crossref ./report.md -o report.pdf --pdf-engine=lualatex -N"
+        # entrypoint: sh -c "pandoc --from=markdown --to=latex --template=template.latex -F pandoc-crossref --bibliography=bibliography.bib --csl=bibliography.csl --output=bibliography.pdf bibliography.md"
+        entrypoint: sh -c "ls -l && pandoc --from=markdown --to=latex --template=template.latex --filter=pandoc-crossref --bibliography=bibliography.bib --csl=bibliography.csl --output=bibliography.pdf ./bibliography.md"
+        

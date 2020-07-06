@@ -1,0 +1,9 @@
+FROM asciidoctor/docker-asciidoctor:1.1.0
+
+# update to alpine:edge https://wiki.alpinelinux.org/wiki/Edge
+RUN sed -i -e 's/v[[:digit:]]\..*\//edge\//g' /etc/apk/repositories
+RUN apk --no-cache add git git-lfs \
+      libarchive-tools xz tar p7zip
+
+CMD ["/bin/ash"]
+

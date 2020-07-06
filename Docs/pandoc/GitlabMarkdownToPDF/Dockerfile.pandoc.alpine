@@ -1,0 +1,140 @@
+FROM frolvlad/alpine-glibc:alpine-3.11_glibc-2.30
+
+# this image is a combination of the following:
+# - https://github.com/dc-uba/docker-alpine-texlive
+# - https://github.com/abid-mujtaba/docker-xelatex-urdu
+# - https://github.com/greimel/docker-alpine-texlive-minimal
+# - https://github.com/openscript/docker-alpine-texlive
+#
+# documentation to install-tl can be found here: http://tug.org/texlive/doc/texlive-en/texlive-en.html
+
+ARG PANDOC_RELEASE=2.9.1.1
+ARG PANDOCCROSSREF_RELEASE=v0.3.6.1b
+ARG PANDOCCROSSREF_PANDOCVER=pandoc_2_9_1_1
+ARG PANDOCFILTERS_TAG=1.4.2
+ARG IFSFILTERS_TAG=0.9.4
+ENV EXAMPLEFILTERSDIR=/pandocfilters \
+    IFSFILTERSDIR=/filters \
+    XDG_DATA_HOME=$HOME/.local/share \
+    LOCAL_BINPATH=/usr/local/bin \
+    PLANTUML_JARPATH=/opt/plantuml \
+    TX_BINFLAVOUR=x86_64-linuxmusl \
+    TX_MFHOME=~/texmf \
+    TX_PROFILE=/root/texlive.profile \
+    TX_VERSION=2018 \
+    TX_INSTALLPATH=/usr/local/texlive
+
+ENV PANDOC_HOME=$XDG_DATA_HOME/pandoc
+ENV PANDOC_USER_TEMPLATES=$PANDOC_HOME/templates
+
+# install perl, wget, tar and xz for the building process and other tools too
+RUN apk --no-cache add perl \
+        libarchive-tools xz tar wget gettext p7zip \
+        git-lfs \
+        py2-pip \
+        cmark fontconfig freetype ghostscript graphviz librsvg libxaw \
+        ttf-liberation ttf-freefont ttf-dejavu \
+        openjdk8-jre
+
+# add /etc/mime.types for some utilities relying on it (pandoc and filters)
+# otherwise we could create a symbolic link to /usr/share/mime/types of package shared-mime-info
+RUN MIME_VER=mime-types-9; \
+    wget -q -O - http://mirrors.kernel.org/gentoo/distfiles/${MIME_VER}.tar.bz2 | \
+      tar xjf - -C / --transform="s|${MIME_VER}|etc|" --show-transformed-names
+
+# install python packages used in from pandocfilters
+RUN apk --no-cache add --virtual .build build-base python2-dev && \
+    pip2 --exists-action i install pyaml panflute subprocess32 glob2 && \
+    apk --no-cache del .build
+
+# install plantuml and extensions
+COPY plantuml $LOCAL_BINPATH/plantuml
+RUN mkdir -p $PLANTUML_JARPATH && \
+    wget -q -O $PLANTUML_JARPATH/plantuml.jar http://sourceforge.net/projects/plantuml/files/plantuml.jar/download && \
+    wget -q -O - http://beta.plantuml.net/plantuml-jlatexmath.zip | bsdtar xf - -C $PLANTUML_JARPATH && \
+    chmod +x $LOCAL_BINPATH/plantuml
+
+# Install TeX Live 20xx with some basic collections
+COPY texlive.profile $TX_PROFILE
+
+# to manually explore collections and options based on the provided texlive.profile execute
+# ./install-tl -init-from-profile $TX_PROFILE -no-gui -logfile /tmp/tlinst.log
+RUN for TDIR in $(mktemp -d); do \
+      wget -q -O - http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
+        tar xzf - -C $TDIR; \
+      cat $TX_PROFILE | envsubst | tee $TX_PROFILE; \
+      ( cd $TDIR/install-tl*; ./install-tl --profile=$TX_PROFILE; ); \
+      rm -rf $TDIR; \
+    done
+
+ENV PATH=$TX_INSTALLPATH/$TX_VERSION/bin/$TX_BINFLAVOUR:$PATH
+
+# install texlive packages, example commands
+# tlmgr info csquotes
+# tlmgr search --global collection-
+# tlmgr install collection-latexextra
+RUN tlmgr install latexmk gitinfo2 \
+       csquotes xstring \
+       fontawesome \
+       babel-spanish \
+       sourcecodepro sourcesanspro sourceserifpro \
+       pdfjam tracklang
+
+# add frutiger fonts
+# hints here: http://mrunix.de/forums/showthread.php?66244-Frutiger-in-Latex
+# files from: Microsoft's free e-book reader
+ADD fonts/* /usr/share/fonts/TTF/
+RUN _TEXMFLOCAL=$TX_INSTALLPATH/texmf-local; \
+    wget -q -O - http://mirrors.ctan.org/fonts/truetypemetrics.zip | \
+      bsdtar xf - -C $_TEXMFLOCAL --strip-components 2 truetypemetrics/frutiger/tex truetypemetrics/frutiger/fonts; \
+    fc-cache; \
+    texhash;
+
+# install pandoc and citeproc from binary packages to inhibit ghc installation and minimize image size
+RUN wget -q -O - https://github.com/jgm/pandoc/releases/download/${PANDOC_RELEASE}/pandoc-${PANDOC_RELEASE}-linux-amd64.tar.gz | \
+      tar xzf - -C /usr --strip-components=1 && \
+    mkdir -p /usr/share/pandoc && \
+    wget -q -O - https://github.com/jgm/pandoc/archive/${PANDOC_RELEASE}.tar.gz | \
+      tar xzf - -C /usr/share/pandoc --strip-components=1 --wildcards */data
+
+# install pandoc-crossref from binary package to inhibit ghc installation and minimize image size
+RUN wget -q -O - https://github.com/lierdakil/pandoc-crossref/releases/download/${PANDOCCROSSREF_RELEASE}/linux-${PANDOCCROSSREF_PANDOCVER}.tar.gz | \
+      tar xzf - -C /usr/bin --wildcards *pandoc-crossref
+
+# add upstream pandocfilters (python)
+RUN for TDIR in $(mktemp -d); do \
+      git clone --branch $PANDOCFILTERS_TAG https://github.com/jgm/pandocfilters.git $TDIR; \
+      ( cd $TDIR; \
+        python setup.py install; \
+        mkdir -p $EXAMPLEFILTERSDIR; \
+        cp -p examples/*.py $EXAMPLEFILTERSDIR/ ; \
+        chmod +x $EXAMPLEFILTERSDIR/*.py; \
+      ); \
+      rm -rf $TDIR; \
+    done
+
+# add own pandocfilters (python)
+RUN for TDIR in $(mktemp -d); do \
+      git clone --branch $IFSFILTERS_TAG https://gitlab.dev.ifs.hsr.ch/m1huber/pandocfilters.git $TDIR; \
+      ( cd $TDIR; \
+        mkdir -p $IFSFILTERSDIR; \
+        cp -p *.py $IFSFILTERSDIR/; \
+        rm -f $IFSFILTERSDIR/conftest.py; \
+        chmod +x $IFSFILTERSDIR/*.py; \
+      ); \
+      rm -rf $TDIR; \
+    done
+
+ENV PATH=$IFSFILTERSDIR:$EXAMPLEFILTERSDIR:$PATH
+
+# add modified templates making use of:
+# - gitinfo
+# - fonts
+COPY templates /templates
+COPY hooks /gitinfo-hooks
+COPY tex /root/texmf/tex
+RUN mkdir -p $(dirname ${PANDOC_USER_TEMPLATES}) && ln -s /templates ${PANDOC_USER_TEMPLATES}
+
+VOLUME ["/workspace", "/root/.pandoc/templates"]
+WORKDIR /workspace
+CMD ["/bin/ash"]

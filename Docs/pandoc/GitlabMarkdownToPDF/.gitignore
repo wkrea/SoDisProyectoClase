@@ -1,0 +1,7 @@
+.workspace/
+.settings/
+/img/
+*-images/
+blub*
+*.log
+.asciidoctor/

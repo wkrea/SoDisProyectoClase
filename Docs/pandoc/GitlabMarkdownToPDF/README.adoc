@@ -1,0 +1,83 @@
+= Gitlab-[md|adoc] to pdf conversion
+:author: Marcel Huber
+:email: marcel.huber@hsr.ch
+:revnumber: 00
+:revdate: June 15, 2018
+:revremark: <pass by attribute>
+:description: Exemplary introduction to this project
+:keywords: gitlab, asciidoc, docker
+//include::DocMeta.adoc[]
+:icons: font
+:lang: en
+:experimental:
+:toc:
+//:toclevels: 2
+//:sectnums:
+//:doctype: book
+//:media: screen
+//:pdf-page-size: A4
+//:pdf-page-layout: portrait
+//:imagesdir: images
+//:show-link-uri:
+//:hide-uri-scheme:
+// source-highlighters: highlightjs|rouge|coderay|pygments
+:source-highlighter: rouge
+// pygments-styles: emacs, manni, lovelace, pastie
+:rouge-style: pastie
+//:linkcss:
+:stem: latexmath
+
+This project aims to create Docker images ready to be used for converting either markdown or asciidoc files to an output format like html or pdf.
+
+== Markdown to PDF conversion
+
+TODO:: add little description
+
+== AsciiDoc to PDF conversion
+
+TODO:: add little description
+
+== Markdown to AsciiDoc conversion
+
+There are several possibilities to convert from markdown to asciidoc.
+
+. Use `pandoc` to convert from `markdown` to `asciidoc` like
++
+[source,bash]
+----
+pandoc -f markdown -t asciidoc -o README.adoc README.md
+----
+
+. Use a customized docker image based on https://hub.docker.com/r/asciidoctor/docker-asciidoctor/[`asciidoctor/docker-asciidoctor`]
+.. [[asciidoctor-fixed-image]]Build the image using this
++
+[source,dockerfile]
+.Dockerfile.asciidoctor
+----
+include::Dockerfile.asciidoctor[]
+----
+and this command
++
+`docker build -t asciidoctor-kramdoc:latest -f Dockerfile.asciidoctor .`
+.. Convert your markdown file by issuing
++
+[source,bash]
+----
+docker run -ti --rm --volume $(pwd):/documents asciidoctor-kramdoc:latest kramdoc README.md
+----
++
+which will create an output file ending in `.adoc` instead of `.md` in the same location as the input file, e.g. `/documents`.
+
+== Adapt asciidoctor/docker-asciidoctor for correct stem processing
+
+Due to a bug in version v0.1.0 of https://github.com/asciidoctor/asciidoctor-mathematical/releases/tag/v0.1.0[asciidoctor-mathematical] processing of stem sections lead to warnings and no conversions.
+The corresponding issue has been fixed in the master branch and therefore we can update to the latest version.
+
+Use the <<asciidoctor-fixed-image, fixed and extended Docker image>> built before.
+It contains the steps required to update to the latest version from git.
+
+[source,bash]
+----
+docker run -ti --rm --volume $(pwd):/documents asciidoctor-fixed bash
+docker run -ti --rm --volume $(pwd):/documents --volume /etc/localtime:/etc/localtime:ro asciidoctor-fixed asciidoctor --require asciidoctor-pdf --require asciidoctor-diagram --require asciidoctor-mathematical --backend html README.adoc
+----

@@ -1,0 +1,52 @@
+---
+#title: "gitlab/pandoc markdown CheatSheet"
+subtitle: "GitlabMarkdownToPDF"
+mycopyright: '`\copyright 2018 Marcel~Huber`{=latex}'
+author: "Marcel Huber"
+institute: ["HSR Hochschule für Technik Rapperswil", "IFS", "Oberseestrasse 10", "CH-8640 Rapperswil"]
+contact: ["T +41 55 222 46 30", "F +41 55 222 46 20", "ifs@hsr.ch", "\\url{https://ifs.hsr.ch}"]
+keywords: [pandoc, markdown]
+date: 2017-09-15
+titlepage: True
+# scrreprt scrartcl
+documentclass: scrartcl
+disable-fancy-override: False
+lang: en
+#otherlangs: [de]
+papersize: a4paper
+mainfont: FreeSerif
+fontfamily: sourcecodepro
+fontfamilyoptions: ttdefault,scale=.8
+#fontsize: 10pt
+numbersections: False
+toc: False
+#classoption: aspectratio=43 # 43 (4:3) or 169 (16:9)
+classoption: oneside, parskip
+# other geometry options: includehead=true,includefoot=true
+#geometry: margin=30mm,top=30mm,bottom=35mm,centering
+logo: True
+colorlinks: True
+links-as-notes: True
+lof: False
+listings-disable-line-numbers: True
+# documentation to gitinfo2: https://github.com/Hightor/gitinfo2/raw/CTAN/gitinfo2.pdf
+gitinfo: True
+gitinfo-options:
+# enable mark for non-hsrtemplate template only
+#  - mark
+  - notags={HEAD}
+link-citations: True
+header-includes:
+# override gitMark for non-hsrtemplate template (default: https://github.com/Hightor/gitinfo2/blob/CTAN/gitinfo2.tex#L638)
+  - '`\providecommand\gitMark{}\renewcommand{\gitMark}{\gitFirstTagDescribe}`{=latex}'
+# override myversiontag for hsrtemplate template (default: \gitFirstTagDescribe)
+#  - '`\providecommand\myversiontag{}\renewcommand{\myversiontag}{\gitReln-g\gitAbbrevHash}`{=latex}'
+  - '`\usepackage[default,scale]{sourcesanspro}`{=latex}'
+  - '`\usepackage[scale=.8]{sourcecodepro}`{=latex}'
+  - '`\let\oldlhead\LHeadDefault`{=latex}'
+  - '`\providecommand\LHeadDefault{}\renewcommand{\LHeadDefault}{\begin{minipage}{0.35\textwidth}\raggedright{\oldlhead}\end{minipage}}`{=latex}'
+  - '`\providecommand\CHeadDefault{}\renewcommand{\CHeadDefault}{\begin{minipage}{0.29\textwidth}\centering{\smaller\mysubtitle}\end{minipage}}`{=latex}'
+  - '`\let\oldrhead\RHeadDefault`{=latex}'
+  - '`\providecommand\RHeadDefault{}\renewcommand{\RHeadDefault}{\begin{minipage}{0.35\textwidth}\raggedleft{\oldrhead}\end{minipage}}`{=latex}'
+  - '`\providecommand\CFootDefault{}\renewcommand{\CFootDefault}{\begin{minipage}{0.29\textwidth}\centering{\color{blockquote-text}\tiny\mycopyright}\end{minipage}}`{=latex}'
+---

@@ -1,0 +1,314 @@
+image: docker:latest
+
+variables:
+  DESCRIPTION_PANDOC: "pandoc image with pdflatex and much more"
+  IMAGE_NAME_COMMIT_REF_PANDOC: "$CI_REGISTRY_IMAGE/pandoc:$CI_COMMIT_REF_SLUG"
+  IMAGE_NAME_COMMIT_TAG_PANDOC: "$CI_REGISTRY_IMAGE/pandoc:$CI_COMMIT_TAG"
+  IMAGE_NAME_LATEST_PANDOC: "$CI_REGISTRY_IMAGE/pandoc:latest"
+  IMAGE_NAME_REMOTE_PANDOC: "marcelhuberfoo/pandoc"
+  DESCRIPTION_ASCIIDOC: "AsciiDoctor with fixed stem support"
+  IMAGE_NAME_COMMIT_REF_ASCIIDOC: "$CI_REGISTRY_IMAGE/asciidoctor:$CI_COMMIT_REF_SLUG"
+  IMAGE_NAME_COMMIT_TAG_ASCIIDOC: "$CI_REGISTRY_IMAGE/asciidoctor:$CI_COMMIT_TAG"
+  IMAGE_NAME_LATEST_ASCIIDOC: "$CI_REGISTRY_IMAGE/asciidoctor:latest"
+  IMAGE_NAME_REMOTE_ASCIIDOC: "marcelhuberfoo/asciidoctor"
+
+stages:
+- build
+- test
+- deploy
+
+.Build:
+  stage: build
+  tags:
+  - docker
+  script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - eval docker build
+      --cache-from "$(eval echo ${IMAGE_NAME_LATEST:-docker:latest})"
+      --label maintainer="$GITLAB_USER_EMAIL"
+      --label org.label-schema.build-date="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+      --label org.label-schema.description="\"$DESCRIPTION\""
+      --label org.label-schema.name="$CI_PROJECT_NAME"
+      --label org.label-schema.schema-version="1.0"
+      --label org.label-schema.url="$CI_PROJECT_URL"
+      --label org.label-schema.vcs-ref="$CI_COMMIT_SHA"
+      --label org.label-schema.vcs-url="$(echo $CI_REPOSITORY_URL | sed 's|gitlab-ci-token[^@]*@||')"
+      --label org.label-schema.vendor="$CI_PROJECT_NAMESPACE"
+      --label org.label-schema.version="${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}"
+      --tag=$IMAGE_NAME_COMMIT_REF
+      --file=$DOCKERFILE
+      .
+  - eval docker push $IMAGE_NAME_COMMIT_REF
+
+.Test:
+  stage: test
+  tags:
+  - docker
+  script:
+  - eval docker run --rm $IMAGE_NAME_COMMIT_REF env
+
+.Tag:
+  stage: deploy
+  only:
+  - tags
+  tags:
+  - docker
+  script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - eval docker pull $IMAGE_NAME_COMMIT_REF
+  - eval eval docker image tag $IMAGE_NAME_COMMIT_REF $IMAGE_NAME_COMMIT_TAG
+  - eval docker push $IMAGE_NAME_COMMIT_TAG
+  - test -n "$DOCKER_USER" -a -n "$(eval echo $IMAGE_NAME_REMOTE)" && {
+      docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
+      eval docker tag $IMAGE_NAME_COMMIT_REF $IMAGE_NAME_REMOTE:$CI_COMMIT_TAG;
+      eval docker push $IMAGE_NAME_REMOTE:$CI_COMMIT_TAG;
+    } || true
+  - test -n "$(eval echo $MICROBADGER_UPDATE_HOOK)" && {
+      apk --no-cache add curl;
+      eval curl --silent --request POST $MICROBADGER_UPDATE_HOOK;
+    } || true
+
+.DeployLatest:
+  stage: deploy
+  only:
+  - tags
+  when: manual
+  tags:
+  - docker
+  script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - eval docker pull $IMAGE_NAME_COMMIT_REF
+  - eval docker image tag $IMAGE_NAME_COMMIT_REF $IMAGE_NAME_LATEST
+  - eval docker push $IMAGE_NAME_LATEST
+  - test -n "$DOCKER_USER" -a -n "$(eval echo $IMAGE_NAME_REMOTE)" && {
+      docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
+      eval docker tag $IMAGE_NAME_COMMIT_REF $IMAGE_NAME_REMOTE:latest;
+      eval docker push $IMAGE_NAME_REMOTE:latest;
+    } || true
+  - test -n "$(eval echo $MICROBADGER_UPDATE_HOOK)" && {
+      apk --no-cache add curl;
+      eval curl --silent --request POST $MICROBADGER_UPDATE_HOOK;
+    } || true
+
+Build pandoc:
+  extends: .Build
+  variables:
+    DESCRIPTION: $DESCRIPTION_PANDOC
+    IMAGE_NAME_COMMIT_REF: $IMAGE_NAME_COMMIT_REF_PANDOC
+    IMAGE_NAME_LATEST: $IMAGE_NAME_LATEST_PANDOC
+    DOCKERFILE: Dockerfile.pandoc.alpine
+
+Build asciidoc:
+  extends: .Build
+  variables:
+    DESCRIPTION: $DESCRIPTION_ASCIIDOC
+    IMAGE_NAME_COMMIT_REF: $IMAGE_NAME_COMMIT_REF_ASCIIDOC
+    IMAGE_NAME_LATEST: $IMAGE_NAME_LATEST_ASCIIDOC
+    DOCKERFILE: Dockerfile.asciidoctor
+
+Test pandoc:
+  extends: .Test
+  variables:
+    IMAGE_NAME_COMMIT_REF: $IMAGE_NAME_COMMIT_REF_PANDOC
+  script:
+  - eval docker run --rm $IMAGE_NAME_COMMIT_REF pandoc --version
+
+Test asciidoc:
+  extends: .Test
+  variables:
+    IMAGE_NAME_COMMIT_REF: $IMAGE_NAME_COMMIT_REF_ASCIIDOC
+  script:
+  - eval docker run --rm $IMAGE_NAME_COMMIT_REF asciidoctor-pdf --version
+
+Tag pandoc:
+  extends: .Tag
+  variables:
+    IMAGE_NAME_COMMIT_REF: $IMAGE_NAME_COMMIT_REF_PANDOC
+    IMAGE_NAME_COMMIT_TAG: $IMAGE_NAME_COMMIT_TAG_PANDOC
+    IMAGE_NAME_REMOTE: $IMAGE_NAME_REMOTE_PANDOC
+    MICROBADGER_UPDATE_HOOK: $MICROBADGER_UPDATE_HOOK_PANDOC
+
+Tag asciidoc:
+  extends: .Tag
+  variables:
+    IMAGE_NAME_COMMIT_REF: $IMAGE_NAME_COMMIT_REF_ASCIIDOC
+    IMAGE_NAME_COMMIT_TAG: $IMAGE_NAME_COMMIT_TAG_ASCIIDOC
+    IMAGE_NAME_REMOTE: $IMAGE_NAME_REMOTE_ASCIIDOC
+    MICROBADGER_UPDATE_HOOK: $MICROBADGER_UPDATE_HOOK_ASCIIDOC
+
+Deploy latest pandoc:
+  extends: .DeployLatest
+  variables:
+    IMAGE_NAME_COMMIT_REF: $IMAGE_NAME_COMMIT_REF_PANDOC
+    IMAGE_NAME_LATEST: $IMAGE_NAME_LATEST_PANDOC
+    IMAGE_NAME_REMOTE: $IMAGE_NAME_REMOTE_PANDOC
+    MICROBADGER_UPDATE_HOOK: $MICROBADGER_UPDATE_HOOK_PANDOC
+
+Deploy latest asciidoc:
+  extends: .DeployLatest
+  variables:
+    IMAGE_NAME_COMMIT_REF: $IMAGE_NAME_COMMIT_REF_ASCIIDOC
+    IMAGE_NAME_LATEST: $IMAGE_NAME_LATEST_ASCIIDOC
+    IMAGE_NAME_REMOTE: $IMAGE_NAME_REMOTE_ASCIIDOC
+    MICROBADGER_UPDATE_HOOK: $MICROBADGER_UPDATE_HOOK_ASCIIDOC
+
+.job_template:
+  image: $IMAGE_NAME_COMMIT_REF_PANDOC
+  stage: test
+  variables:
+    LANG: en_US.UTF-8
+  tags:
+  - docker
+  script:
+  # build exercices output
+  - git config core.hooksPath /gitinfo-hooks/
+  # checkout again to execute custom git-hooks
+  - git checkout $CI_COMMIT_SHA
+  # build for all templates
+  - >
+    ( cd $CI_JOB_NAME && for t in $CI_PROJECT_DIR/templates/*.latex; do
+    tn=$(basename ${t/.latex/});
+    echo $tn;
+    pandoc -f markdown+emoji
+    -t latex
+    --pdf-engine=xelatex
+    --template=${tn}
+    --filter=gfm_cleanup.py
+    --filter=gitlab_links.py
+    --filter=plantuml.py
+    --filter=svg_convert.py
+    --listings
+    -Vdate=$(date "+%Y-%m-%d")
+    -o ${CI_JOB_NAME}.${tn}.pdf README.md pandoc_meta.yaml;
+    cp -fp ${CI_JOB_NAME}.${tn}.pdf ${CI_JOB_NAME}.pdf;
+    done
+    )
+  # build exercices solutions output for all templates
+  - >
+    ( cd $CI_JOB_NAME && for t in $CI_PROJECT_DIR/templates/*.latex; do
+    tn=$(basename ${t/.latex/});
+    echo $tn;
+    pandoc -f markdown+emoji
+    -t latex
+    --pdf-engine=xelatex
+    --template=${tn}
+    --filter=inline_solutions.py
+    --filter=gfm_cleanup.py
+    --filter=gitlab_links.py
+    --filter=plantuml.py
+    --filter=svg_convert.py
+    --listings
+    -Vdate=$(date "+%Y-%m-%d")
+    -Vsolution=1
+    -o ${CI_JOB_NAME}-Solutions.${tn}.pdf README.md pandoc_meta.yaml;
+    cp -fp ${CI_JOB_NAME}-Solutions.${tn}.pdf ${CI_JOB_NAME}-Solutions.pdf;
+    done
+    )
+  artifacts:
+    expire_in: 1 week
+    paths:
+    - ${CI_JOB_NAME}/*.pdf
+
+Create-Solutions-And-Cleanup-Markdown:
+  image: $IMAGE_NAME_COMMIT_REF_PANDOC
+  stage: test
+  variables:
+    LANG: en_US.UTF-8
+    LANGUAGE: ''
+    LC_ALL: ''
+    # do not fetch lfs content for docu jobs, change if job requires lfs files
+    GIT_LFS_SKIP_SMUDGE: 1
+  tags:
+  - docker
+  script:
+  - export JOB_DIR=${JOB_DIR:-$CI_JOB_NAME}
+  - >
+    for n in $(find . -mindepth 2 -name README.md -print); do
+    echo $n;
+    fn=$(basename $n);
+    ( cd $(dirname $n) &&
+    cat ${fn} 2>/dev/null | sed -e 's|[„“”]|"|g' -e "s|[’]|'|g" -e "s|[–]|-|g" |
+    pandoc -f markdown+emoji
+    -t markdown+pipe_tables-grid_tables-simple_tables-multiline_tables-header_attributes-fenced_code_attributes-fenced_code_blocks+backtick_code_blocks+emoji
+    --template=$CI_PROJECT_DIR/templates/MetadataAtEOF
+    --atx-headers
+    --standalone
+    -o ${fn} ) &
+    done;
+  - >
+    for n in $(find . -mindepth 2 -name README.md -exec grep -q SOLUTION {} \; -print); do
+    echo ${n/.md/.solutions.md};
+    fn=$(basename $n);
+    ( cd $(dirname $n) &&
+    cat ${fn} 2>/dev/null | sed -e 's|[„“”]|"|g' -e "s|[’]|'|g" -e "s|[–]|-|g" |
+    pandoc -f markdown+emoji
+    -t markdown+pipe_tables-grid_tables-simple_tables-multiline_tables-header_attributes-fenced_code_attributes-fenced_code_blocks+backtick_code_blocks+emoji
+    --template=$CI_PROJECT_DIR/templates/MetadataAtEOF
+    --atx-headers
+    --standalone
+    --filter=inline_solutions.py
+    -o ${fn/.md/.solutions.md} ) &
+    done;
+    wait;
+  artifacts:
+    expire_in: 1 day
+    paths:
+    - ./**/README.solutions.md
+    - ./**/README.md
+
+CheatSheet:
+  extends: .job_template
+
+CheatSheetAsciiDoc:
+  image: $IMAGE_NAME_COMMIT_REF_ASCIIDOC
+  stage: test
+  variables:
+    LANG: en_US.UTF-8
+  tags:
+  - docker
+  script:
+  - asciidoctor
+    --require asciidoctor-pdf
+    --require asciidoctor-diagram
+    --require asciidoctor-mathematical
+    --attribute revnumber="$(git describe --abbrev --tags --always --dirty='-*')"
+    --attribute revremark="$(git log -1 --pretty=format:%s)"
+    --attribute revdate="$(git log -1 --date=short-local --pretty=format:%cd)"
+    --attribute ci_project_namespace@=$CI_PROJECT_NAMESPACE
+    --attribute ci_project_name@=$CI_PROJECT_NAME
+    --attribute ci_project_dir@=$CI_PROJECT_DIR
+    --attribute ci_project_url@=$CI_PROJECT_URL
+    --attribute ci_project_path@=$CI_PROJECT_PATH
+    --attribute ci_commit_ref_name@=$CI_COMMIT_REF_NAME
+    --attribute ci_commit_tag@=$CI_COMMIT_TAG
+    --attribute doctype@=book
+    --attribute pdf-page-size@="A4"
+    --attribute pdf-page-layout@=portrait
+    --backend pdf
+    --out-file CheatSheet/CheatSheet_adoc.pdf
+    CheatSheet/README.adoc
+  - asciidoctor
+    --require asciidoctor-pdf
+    --require asciidoctor-diagram
+    --require asciidoctor-mathematical
+    --attribute revnumber="$(git describe --abbrev --tags --always --dirty='-*')"
+    --attribute revremark="$(git log -1 --pretty=format:%s)"
+    --attribute revdate="$(git log -1 --date=short-local --pretty=format:%cd)"
+    --attribute ci_project_namespace@=$CI_PROJECT_NAMESPACE
+    --attribute ci_project_name@=$CI_PROJECT_NAME
+    --attribute ci_project_dir@=$CI_PROJECT_DIR
+    --attribute ci_project_url@=$CI_PROJECT_URL
+    --attribute ci_project_path@=$CI_PROJECT_PATH
+    --attribute ci_commit_ref_name@=$CI_COMMIT_REF_NAME
+    --attribute ci_commit_tag@=$CI_COMMIT_TAG
+    --attribute doctype@=book
+    --attribute pdf-page-size@="A4"
+    --attribute pdf-page-layout@=portrait
+    --attribute exercise_solution
+    --backend pdf
+    --out-file CheatSheet/CheatSheet-Solutions_adoc.pdf
+    CheatSheet/README.adoc
+  artifacts:
+    expire_in: 15 min
+    paths:
+    - CheatSheet/*_adoc.pdf
