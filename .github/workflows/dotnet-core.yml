@@ -2,9 +2,9 @@ name: Aprendiendo con un web API .NET Core
 
 on:
   push:
-    branches: [ master, wkrea-CICD, BackEnd, FrontEnd, malliwi88 ]
+    branches: [ master, wkrea-CICD, BackEnd, FrontEnd, malliwi88, ApiFull ]
   pull_request:
-    branches: [ master, malliwi88, wkrea-CICD, cortega3, dblanco7, dtorres10, eoviedo1, fsequeda1, hdaza1, hfigueroa1, jduran9, lgomez9, mtarazona5, nmaldonado1, rcarrillo1, svargas4, yaponte ]
+    branches: [ master, malliwi88, wkrea-CICD, ApiFull, cortega3, dblanco7, dtorres10, eoviedo1, fsequeda1, hdaza1, hfigueroa1, jduran9, lgomez9, mtarazona5, nmaldonado1, rcarrillo1, svargas4, yaponte ]
 
 jobs:
   build:
