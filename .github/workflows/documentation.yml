@@ -1,0 +1,31 @@
+name: documentation
+
+on:
+  push:
+    branches:
+      - ApiFull
+      - master
+  pull_request:
+    paths:
+      - '.github/workflows/documentation.yml'
+      - 'Docs/**'
+      - 'Readme.md'
+
+# https://github.com/hubgit/pandoc/blob/master/.github/workflows/main.yml
+# https://github.com/pandoc/pandoc-action-example/blob/master/.github/workflows/advanced.yml
+jobs:
+    convert_via_pandoc:
+        runs-on: ubuntu-18.04
+        steps:
+        - uses: actions/checkout@v2
+        - run: |
+            # mkdir output  # create output dir
+            # this will also include README.md
+            echo "::set-env name=FILELIST::$(printf '"%s" ' *.md)"
+        - uses: docker://pandoc/latex:2.9
+          with:
+              args: "--standalone  --output=Docs/result.pdf ${{ env.FILELIST }}"
+        - uses: actions/upload-artifact@master
+          with:
+              name: output
+              path: Docs

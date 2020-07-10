@@ -1,40 +1,46 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Supermarket.API.Dominio.Persistencia;
 
-using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Dominio.Repositorios;
+using Supermarket.API.Dominio.Servicios;
+using Supermarket.API.Persistencia.Contexto;
+using Supermarket.API.Persistencia.Repositorios;
 
 namespace Supermarket.API
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<SupermarketApiContext>(
-                op => op.UseInMemoryDatabase("SupermarketApi")
-            );
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseInMemoryDatabase("supermarket-api-in-memory");
+            });
 
-            // Declaración para el manejo del patrón inyección de dependencia DI
-            // de el repositorio que maneja la lógica de negocio de categorías
-            services.AddTransient<ICategoriaRepo, CategoriaRepo>();
+            services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+            services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            services.AddScoped<ICategoriaServicio, CategoriaServicio>();
+            services.AddScoped<IProductoServicio, ProductoServicio>();
+
+            services.AddAutoMapper();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
