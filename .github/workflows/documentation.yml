@@ -23,9 +23,9 @@ jobs:
             # this will also include README.md
             echo "::set-env name=FILELIST::$(printf '"%s" ' *.md)"
         - uses: docker://pandoc/latex:2.9
-            with:
+          with:
               args: --output=Docs/result.pdf ${{ env.FILELIST }}
         - uses: actions/upload-artifact@master
-            with:
-            name: output
-            path: Docs
+          with:
+              name: output
+              path: Docs
