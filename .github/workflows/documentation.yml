@@ -24,7 +24,7 @@ jobs:
             echo "::set-env name=FILELIST::$(printf '"%s" ' *.md)"
         - uses: docker://pandoc/latex:2.9
           with:
-              args: --output=Docs/result.pdf ${{ env.FILELIST }}
+              args: -s --output=Docs/result.pdf ${{ env.FILELIST }}
         - uses: actions/upload-artifact@master
           with:
               name: output
